@@ -35,12 +35,33 @@ function buildTables(data) {
   const container = document.getElementById('output');
   container.innerHTML = '';
 
-  // Exemplo simplificado do mapa de áudio para Greetings (complete conforme seus arquivos)
+  let language_selector = document.createElement('div'); // <--- precisa do document
+  language_selector.className = "language-selector";
+
+  createLanguageSelector(language_selector); // adiciona label + select dentro desse div
+  container.appendChild(language_selector);  // insere no container
 
 
   const h1 = document.createElement('h1');
   h1.textContent = '100 Useful Travel Phrases';
   container.appendChild(h1);
+
+  const container_idioma = document.createElement('div');
+  container_idioma.className = 'container_idioma';
+
+  // Criar botão "Teoria" e "Prática"
+  const btn_teoria = document.createElement('button');
+  btn_teoria.textContent = 'Teoria';
+  btn_teoria.className = 'tab-btn active';
+
+  const btn_pratica = document.createElement('button');
+  btn_pratica.textContent = 'Prática';
+  btn_pratica.className = 'tab-btn';
+
+  container_idioma.appendChild(btn_teoria);
+  container_idioma.appendChild(btn_pratica);
+  container.appendChild(container_idioma);
+
 
   for (const categoria in grouped) {
     const frases = grouped[categoria];
@@ -64,6 +85,7 @@ function buildTables(data) {
       th.textContent = h;
       trHead.appendChild(th);
     });
+
     thead.appendChild(trHead);
     table.appendChild(thead);
 
@@ -101,49 +123,21 @@ function buildTables(data) {
       wrapper.style.display = wrapper.style.display === 'none' ? 'block' : 'none';
       h2.classList.toggle('open');
     });
+
+    
   }
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // aqui você pode trocar o conteúdo da interface baseado no btn.dataset.tab
+  });
+});
 }
 
-// Idiomas disponíveis
-const idiomas = ["English", "Portuguese", "Spanish", "French", "German", "Italian"];
-const idiomaNomes = {
-  "English": "English",
-  "Portuguese": "Português",
-  "Spanish": "Español",
-  "French": "Français",
-  "German": "Deutsch",
-  "Italian": "Italiano"
-};
 
-// Criar div do seletor
-const langSelector = document.createElement('div');
-langSelector.id = 'langSelector';
-langSelector.style.marginBottom = '12px';
 
-// Criar botões dinamicamente
-idiomas.forEach(idioma => {
-  const btn = document.createElement('button');
-  btn.dataset.lang = idioma;
-  btn.textContent = idiomaNomes[idioma];
-  btn.style.marginRight = '6px';
-  btn.style.cursor = 'pointer';
-  btn.style.padding = '6px 10px';
-  btn.style.borderRadius = '5px';
-  btn.style.border = '1px solid #ccc';
-  btn.style.background = '#f5f5f5';
-  btn.style.transition = 'background 0.2s';
-  btn.addEventListener('mouseenter', () => btn.style.background = '#e2e2e2');
-  btn.addEventListener('mouseleave', () => btn.style.background = '#f5f5f5');
-
-  // Clique do botão troca idioma
-  btn.addEventListener('click', () => updateCategoryTitles(idioma));
-
-  langSelector.appendChild(btn);
-});
-
-// Inserir acima do container principal
-const container = document.getElementById('output');
-container.parentNode.insertBefore(langSelector, container);
 
 fetch('../dados.csv') // ou 'subpasta/data.csv' se estiver em uma subpasta
   .then(response => {
@@ -155,3 +149,33 @@ fetch('../dados.csv') // ou 'subpasta/data.csv' se estiver em uma subpasta
     buildTables(data);
   })
   .catch(err => console.error('Erro ao carregar CSV:', err));
+
+
+function createLanguageSelector(container) {
+  const label = document.createElement('label');
+  label.setAttribute('for', 'language-select');
+  label.textContent = 'Select your language:';
+
+  const select = document.createElement('select');
+  select.id = 'language-select';
+  select.name = 'language';
+
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'pt', name: 'Português' },
+    { code: 'es', name: 'Español' },
+    { code: 'fr', name: 'Français' },
+    { code: 'de', name: 'Deutsch' },
+    { code: 'it', name: 'Italiano' }
+  ];
+
+  languages.forEach(lang => {
+    const option = document.createElement('option');
+    option.value = lang.code;
+    option.textContent = lang.name;
+    select.appendChild(option);
+  });
+
+  container.appendChild(label);
+  container.appendChild(select);
+}

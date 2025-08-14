@@ -1,34 +1,13 @@
 import { audioMap } from './audio_map.js';
 
 import { traducoesCategoria } from './traducoes_categorias.js'
-import { traducoes_hud } from './traducoes_hud.js'
-import { createLanguageSelector, cria_botoes_abas, traduzir_hud, teorizar, praticar, separar_idiomas_pratica } from './auxiliar.js'
+import { createLanguageSelector, cria_botoes_abas, traduzir_hud, separar_idiomas_pratica } from './auxiliar.js'
+import { parseCSV } from './csv_utils.js';
 
 let currentLanguage = 'en'; // valor padrão
 const caminho = location.hostname === "127.0.0.1" ? "../" : "./";
-let modo = 'teoria'
-
-function parseCSV(text) {
-  const lines = text.trim().split('\n');
-  const result = lines.map(line => {
-    const values = [];
-    let insideQuotes = false;
-    let value = '';
-    for (let char of line) {
-      if (char === '"') insideQuotes = !insideQuotes;
-      else if (char === ',' && !insideQuotes) {
-        values.push(value);
-        value = '';
-      } else {
-        value += char;
-      }
-    }
-    values.push(value);
-    return values;
-  });
-  return result;
-  
-}
+var modo = 'teoria'
+let idioma_praticado = 'pt'
 
 function buildTables(data) {
   const headers = data[0].slice(1);
@@ -46,15 +25,13 @@ function buildTables(data) {
 
   let language_selector = document.createElement('div');
   language_selector.className = "language-selector";
-  language_selector.id = 'language_selector'
+  language_selector.id = 'language-select'
 
   createLanguageSelector(language_selector, currentLanguage, 'padrao') // adiciona label
   container.appendChild(language_selector);  // insere no container
-
+  
   // Cria título principal
-  const h1 = document.createElement('h1');
-
-  // h1.textContent = '100 Useful Travel Phrases';
+  const h1 = document.createElement('h1');  
   h1.textContent = traduzir_hud('100_useful_travel_phrases', currentLanguage)
   container.appendChild(h1);
   
@@ -62,16 +39,20 @@ function buildTables(data) {
   const container_idioma = document.createElement('div');
   container_idioma.className = 'container_idioma'
 
-
   const botao_teoria = cria_botoes_abas(traduzir_hud('botao_teoria', currentLanguage), "ativo")
-  botao_teoria.addEventListener("click", () => teorizar() )
-  const botao_pratica = cria_botoes_abas(traduzir_hud('botao_pratica', currentLanguage), "inativo")  
-  botao_pratica.addEventListener("click", () => praticar() ) // Adiciona função ao clicar
-
-
+  botao_teoria.addEventListener("click", () => {
+    modo = 'teoria'
+    document.getElementById("language_selector_pratica").style.display = 'none'
+    carrega_csv()
+  })
   container_idioma.appendChild(botao_teoria)
-  container_idioma.appendChild(botao_pratica)
 
+  const botao_pratica = cria_botoes_abas(traduzir_hud('botao_pratica', currentLanguage), "inativo")  
+  botao_pratica.addEventListener("click", () => {
+    modo = 'pratica'
+    document.getElementById("language_selector_pratica").style.display = 'flex'
+  })
+  container_idioma.appendChild(botao_pratica)
 
 
   let language_selector_pratica = document.createElement('div');
@@ -79,12 +60,16 @@ function buildTables(data) {
   language_selector_pratica.style.display = "none"
   language_selector_pratica.id = 'language_selector_pratica'
 
-  createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica') // adiciona label + select dentro desse div
+  createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica', idioma_praticado) // adiciona label + select dentro desse div
   container_idioma.appendChild(language_selector_pratica); // insere no container
 
   container.appendChild(container_idioma);
 
-  language_selector_pratica.addEventListener("change", () => altera_idioma_pratica() ) // Adiciona função ao clicar
+    language_selector_pratica.addEventListener("change", (e) => {
+    idioma_praticado = e.target.value
+
+    carrega_csv()
+  }) // Adiciona função ao clicar
 
   document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -92,6 +77,20 @@ function buildTables(data) {
     btn.classList.add('active');
     // aqui você pode trocar o conteúdo da interface baseado no btn.dataset.tab
   });
+
+  // Acho que é aqui.
+  if (modo === 'pratica') {
+    if (btn.textContent === traduzir_hud('botao_pratica', currentLanguage)) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+    
+    document.getElementById("language_selector_pratica").style.display = 'flex'
+    document.getElementById("language_selector_pratica").value = idioma_praticado
+
+    
+  }
 });
   for (const categoria in grouped) {
     const frases = grouped[categoria];
@@ -168,8 +167,7 @@ function buildTables(data) {
 }
 
 
-
-function carrega_csv (modo) {
+function carrega_csv () {
   // body...
   fetch(`${caminho}/dados.csv`) // ou 'subpasta/data.csv' se estiver em uma subpasta
   .then(response => {
@@ -178,18 +176,18 @@ function carrega_csv (modo) {
   })
   .then(csvText => {
     const data = parseCSV(csvText);
-
-    // const resultado_filtrado = separar_idiomas_pratica(data)
-
+    
     if (modo === 'teoria') buildTables(data)
     if (modo === 'pratica') {
-      console.log("vai")
+
+      const resultado_filtrado = separar_idiomas_pratica(data, currentLanguage, idioma_praticado)
+      buildTables(resultado_filtrado)
     }
 
     let select = document.getElementById('language-select')
     select.addEventListener('change', (e) => {
       currentLanguage = e.target.value;
-      updateContentForLanguage(currentLanguage);
+      carrega_csv()
     });
 
 
@@ -199,21 +197,6 @@ function carrega_csv (modo) {
 
 carrega_csv()
 
-function updateContentForLanguage(language) {
-  // Exemplo: recarregar as frases com base no idioma
-  // const data = getDataForLanguage(language); // função que retorna os dados certos
-  // buildTables(data); // reconstrói a interface com os dados atualizados
-
-  // O que muda...
-  // Título.
-  // Select your language.
-  // Botoes prática e teoria
-  // subtitulo. "greetings, etc."
-  carrega_csv()  // alert(currentLanguage)
-
-}
-
 function traduzirCategoria(categoria, idioma) {
   return traducoesCategoria[categoria]?.[idioma] || categoria
 }
-

@@ -9,20 +9,26 @@ import { traducoes_hud } from './traducoes_hud.js'
     { code: 'it', name: 'Italiano', name_ingles: 'Italian' }
   ];
 
-function createLanguageSelector(container, idioma_selecionado, tipo) {
+function createLanguageSelector(container, idioma_selecionado, tipo, idioma_praticado) {
   const label = document.createElement('label');
   label.setAttribute('for', 'language-select');
   
   const traducao_select = (tipo === 'padrao') ? 'label_select_language' : 'label_idioma_praticado'
   label.textContent = traduzir_hud(traducao_select, idioma_selecionado)
 
-  const select = escolhe_idioma_select(idioma_selecionado, tipo)
+  let select
+  if (tipo === 'padrao') {
+    select = idioma_select_padrao(idioma_selecionado, tipo)
+  }
+  if (tipo === 'pratica') {
+    select = idioma_select_praticado(idioma_selecionado, tipo, idioma_praticado)
+  }
   
   container.appendChild(label)
   container.appendChild(select)
 }
 
-function escolhe_idioma_select (idioma_selecionado, tipo) {
+function idioma_select_padrao (idioma_selecionado, tipo) {
 
   const select = document.createElement('select');
   select.id = 'language-select';
@@ -38,20 +44,33 @@ function escolhe_idioma_select (idioma_selecionado, tipo) {
     if (tipo != 'padrao' && lang.code != idioma_selecionado) select.appendChild(option)
   });
 
-  let valor
-  if (tipo === 'padrao') valor = idioma_selecionado
-  if (tipo != 'padrao') {
-    if (idioma_selecionado === 'en') {
-      valor = 'pt'
-    } else {
-      valor = 'en'
-    }    
-  }
-
-  select.value = valor
+  select.value = idioma_selecionado
 
   return select
 }
+
+function idioma_select_praticado (idioma_selecionado, tipo, idioma_praticado) {
+  
+  const select = document.createElement('select');
+  select.id = 'language-select';
+  select.name = 'language';
+
+  languages.forEach(lang => {
+
+    const option = document.createElement('option');
+    option.value = lang.code;
+    option.textContent = lang.name;
+
+    if (tipo === 'padrao') select.appendChild(option);
+    if (tipo != 'padrao' && lang.code != idioma_selecionado) select.appendChild(option)
+  });
+
+  select.value = idioma_praticado
+
+  return select
+}
+
+
 
 function cria_botoes_abas (texto, atividade) {
 
@@ -62,43 +81,6 @@ function cria_botoes_abas (texto, atividade) {
   return botao
 }
 
-function teorizar () {
-  document.getElementById("language_selector_pratica").style.display = 'none'
-}
-
-function praticar () {
-  // Primeiro, selecionar o idioma que quer praticar.
-  document.getElementById("language_selector_pratica").style.display = 'flex'
-  modo = 'pratica'
-  const div_o = document.createElement('div');
-  div_o.innerHTML = ''
-
-  const idioma_selecionado = 'pt'
-
-  const label = document.createElement('label');
-  label.setAttribute('for', 'language-select');
-  
-  label.textContent = traduzir_hud('label_select_language', idioma_selecionado)
-
-  const select = document.createElement('select');
-  select.id = 'language-select';
-  select.name = 'language';
-
-  languages.forEach(lang => {
-    const option = document.createElement('option');
-    option.value = lang.code;
-    option.textContent = lang.name;
-    select.appendChild(option);
-  });
-
-  select.value = idioma_selecionado
-
-  document.getElementById('container_idioma').appendChild(select)
-  // Depois, mostrar o idioma e o praticado, mas o praticado só com inputs
-  // MOstrar um botão de conferencia.
-
-}
-
 function traduzir_hud (item, idioma) {
   return traducoes_hud[item]?.[idioma] || item
 }
@@ -106,15 +88,15 @@ function traduzir_hud (item, idioma) {
 
 function encontra_lang_ingles (codigo) {
   for (let i = 0; i < languages.length; i++) {
-    if (languages[i].code === codigo) return languages.name_ingles
+    if (languages[i].code === codigo) return languages[i].name_ingles
   }
 }
 
-function separar_idiomas_pratica (dados) {
+function separar_idiomas_pratica (dados, selecionado, praticado) {
 
-  const idioma_padrao_ingles = encontra_lang_ingles(document.getElementById('language_selector').value)
-  const idioma_pratica_ingles = encontra_lang_ingles(document.getElementById('language_selector_pratica').value)
-  
+  const idioma_padrao_ingles = encontra_lang_ingles(selecionado)
+  const idioma_pratica_ingles = encontra_lang_ingles(praticado)
+
     // Identificar os índices das colunas que queremos manter
     const header = dados[0];
     const indicesParaManter = [
@@ -134,4 +116,4 @@ function separar_idiomas_pratica (dados) {
 
 
 
-export { createLanguageSelector, cria_botoes_abas, traduzir_hud, teorizar, praticar, separar_idiomas_pratica }
+export { createLanguageSelector, cria_botoes_abas, traduzir_hud, separar_idiomas_pratica }

@@ -4,7 +4,7 @@ import { cria_botoes_abas } from './auxiliar.js'
 import { traducoesCategoria } from './traducoes_categorias.js'
 
 let currentLanguage = 'en'; // valor padrão
-
+const caminho = location.hostname === "127.0.0.1" ? "../" : "./";
 function parseCSV(text) {
   const lines = text.trim().split('\n');
   const result = lines.map(line => {
@@ -106,7 +106,7 @@ function buildTables(data) {
             alert('Áudio não encontrado para esta frase.');
             return;
           }
-          const audioPath = `../${idioma}/${arquivoAudio}`;
+          const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
           const audio = new Audio(audioPath);
           audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
         });
@@ -138,9 +138,10 @@ function buildTables(data) {
 }
 
 
+
 function carrega_csv () {
   // body...
-  fetch('./dados.csv') // ou 'subpasta/data.csv' se estiver em uma subpasta
+  fetch(`${caminho}/dados.csv`) // ou 'subpasta/data.csv' se estiver em uma subpasta
   .then(response => {
     if (!response.ok) throw new Error('CSV não encontrado');
     return response.text();

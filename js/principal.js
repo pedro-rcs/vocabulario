@@ -140,7 +140,7 @@ function buildTables(data) {
 
 function carrega_csv () {
   // body...
-  fetch('../dados.csv') // ou 'subpasta/data.csv' se estiver em uma subpasta
+  fetch('./dados.csv') // ou 'subpasta/data.csv' se estiver em uma subpasta
   .then(response => {
     if (!response.ok) throw new Error('CSV não encontrado');
     return response.text();

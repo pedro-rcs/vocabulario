@@ -1,6 +1,8 @@
 function createLanguageSelector(container, idioma_selecionado) {
   const label = document.createElement('label');
   label.setAttribute('for', 'language-select');
+  label.id = 'label_select_language'
+
   label.textContent = 'Select your language:';
 
   const select = document.createElement('select');

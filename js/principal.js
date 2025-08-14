@@ -2,9 +2,11 @@ import { audioMap } from './audio_map.js';
 import { createLanguageSelector } from './auxiliar.js';
 import { cria_botoes_abas } from './auxiliar.js'
 import { traducoesCategoria } from './traducoes_categorias.js'
+import { traducoes_hud } from './traducoes_hud.js'
 
 let currentLanguage = 'en'; // valor padrão
 const caminho = location.hostname === "127.0.0.1" ? "../" : "./";
+
 function parseCSV(text) {
   const lines = text.trim().split('\n');
   const result = lines.map(line => {
@@ -48,9 +50,11 @@ function buildTables(data) {
 
   // Cria título principal
   const h1 = document.createElement('h1');
-  h1.textContent = '100 Useful Travel Phrases';
-  container.appendChild(h1);
 
+  // h1.textContent = '100 Useful Travel Phrases';
+  h1.textContent = traduzir_hud('100_useful_travel_phrases', currentLanguage)
+  container.appendChild(h1);
+  
   // Criar botão "Teoria" e "Prática"
   const container_idioma = document.createElement('div');
   container_idioma.className = 'container_idioma'
@@ -173,10 +177,14 @@ function updateContentForLanguage(language) {
   // Select your language.
   // Botoes prática e teoria
   // subtitulo. "greetings, etc."
-carrega_csv()  // alert(currentLanguage)
+  carrega_csv()  // alert(currentLanguage)
+
 }
 
 function traduzirCategoria(categoria, idioma) {
   return traducoesCategoria[categoria]?.[idioma] || categoria
 }
 
+function traduzir_hud (item, idioma) {
+  return traducoes_hud[item]?.[idioma] || item
+}

@@ -178,3 +178,4 @@ carrega_csv()  // alert(currentLanguage)
 function traduzirCategoria(categoria, idioma) {
   return traducoesCategoria[categoria]?.[idioma] || categoria
 }
+

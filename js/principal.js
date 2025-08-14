@@ -1,8 +1,8 @@
 import { audioMap } from './audio_map.js';
-import { createLanguageSelector } from './auxiliar.js';
-import { cria_botoes_abas } from './auxiliar.js'
+
 import { traducoesCategoria } from './traducoes_categorias.js'
 import { traducoes_hud } from './traducoes_hud.js'
+import { createLanguageSelector, cria_botoes_abas, traduzir_hud, praticar } from './auxiliar.js'
 
 let currentLanguage = 'en'; // valor padrão
 const caminho = location.hostname === "127.0.0.1" ? "../" : "./";
@@ -45,7 +45,7 @@ function buildTables(data) {
   let language_selector = document.createElement('div');
   language_selector.className = "language-selector";
 
-  createLanguageSelector(language_selector, currentLanguage); // adiciona label + select dentro desse div
+  createLanguageSelector(language_selector, currentLanguage, 'padrao') // adiciona label
   container.appendChild(language_selector);  // insere no container
 
   // Cria título principal
@@ -60,13 +60,33 @@ function buildTables(data) {
   container_idioma.className = 'container_idioma'
 
   const botao_teoria = cria_botoes_abas("Teoria", "ativo")
-  const botao_pratica = cria_botoes_abas("Prática", "inativo")
+  const botao_pratica = cria_botoes_abas("Prática", "inativo")  
+  botao_pratica.addEventListener("click", () => praticar() ) // Adiciona função ao clicar
 
-  container_idioma.appendChild(botao_teoria);
-  container_idioma.appendChild(botao_pratica);
+
+  container_idioma.appendChild(botao_teoria)
+  container_idioma.appendChild(botao_pratica)
+
+
+
+  let language_selector_pratica = document.createElement('div');
+  language_selector_pratica.className = "language-selector";
+
+  createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica') // adiciona label + select dentro desse div
+  container_idioma.appendChild(language_selector_pratica); // insere no container
+
+
+
   container.appendChild(container_idioma);
 
 
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // aqui você pode trocar o conteúdo da interface baseado no btn.dataset.tab
+  });
+});
   for (const categoria in grouped) {
     const frases = grouped[categoria];
 
@@ -185,6 +205,3 @@ function traduzirCategoria(categoria, idioma) {
   return traducoesCategoria[categoria]?.[idioma] || categoria
 }
 
-function traduzir_hud (item, idioma) {
-  return traducoes_hud[item]?.[idioma] || item
-}

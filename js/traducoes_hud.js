@@ -7,6 +7,15 @@ const traducoes_hud = {
     fr: 'Choisissez votre langue :',
     de: 'Wähle deine Sprache:'
   },
+  'label_idioma_praticado': {
+    en: 'Select a language to practice:',
+    pt: 'Selecione um idioma para praticar:',
+    es: 'Selecciona un idioma para practicar:',
+    it: 'Seleziona una lingua da praticare:',
+    fr: 'Sélectionnez une langue à pratiquer :',
+    de: 'Wähle eine Sprache zum Üben aus:'
+  },
+
   '100_useful_travel_phrases': {
     en: '100 Useful Travel Phrases',
     pt: '100 Frases Úteis para Viagem',

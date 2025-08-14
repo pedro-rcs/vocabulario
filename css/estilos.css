@@ -114,6 +114,7 @@ h2.open::after {
 
 /* Select */
 .language-selector select {
+  min-width: 150px;
   padding: 10px 14px; /* padding maior */
   border-radius: 6px;
   border: 1px solid #c9eacc;
@@ -139,4 +140,33 @@ h2.open::after {
   outline: none;
   border-color: #3a7d44;
   box-shadow: 0 0 6px rgba(58, 125, 68, 0.35);
+}
+
+
+
+.container_idioma {
+  display: flex;
+  gap: 10px;
+}
+
+.tab-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #a6d785; /* verde claro */
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  transition: background 0.2s, transform 0.1s;
+  margin-bottom: 25px;
+}
+
+.tab-btn:hover {
+  background-color: #8acb68;
+  transform: scale(1.03);
+}
+
+.tab-btn.active {
+  background-color: #5ea43b; /* verde mais escuro para destaque */
 }

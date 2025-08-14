@@ -2,10 +2,11 @@ import { audioMap } from './audio_map.js';
 
 import { traducoesCategoria } from './traducoes_categorias.js'
 import { traducoes_hud } from './traducoes_hud.js'
-import { createLanguageSelector, cria_botoes_abas, traduzir_hud, praticar } from './auxiliar.js'
+import { createLanguageSelector, cria_botoes_abas, traduzir_hud, teorizar, praticar, separar_idiomas_pratica } from './auxiliar.js'
 
 let currentLanguage = 'en'; // valor padrão
 const caminho = location.hostname === "127.0.0.1" ? "../" : "./";
+let modo = 'teoria'
 
 function parseCSV(text) {
   const lines = text.trim().split('\n');
@@ -26,6 +27,7 @@ function parseCSV(text) {
     return values;
   });
   return result;
+  
 }
 
 function buildTables(data) {
@@ -44,6 +46,7 @@ function buildTables(data) {
 
   let language_selector = document.createElement('div');
   language_selector.className = "language-selector";
+  language_selector.id = 'language_selector'
 
   createLanguageSelector(language_selector, currentLanguage, 'padrao') // adiciona label
   container.appendChild(language_selector);  // insere no container
@@ -59,8 +62,10 @@ function buildTables(data) {
   const container_idioma = document.createElement('div');
   container_idioma.className = 'container_idioma'
 
-  const botao_teoria = cria_botoes_abas("Teoria", "ativo")
-  const botao_pratica = cria_botoes_abas("Prática", "inativo")  
+
+  const botao_teoria = cria_botoes_abas(traduzir_hud('botao_teoria', currentLanguage), "ativo")
+  botao_teoria.addEventListener("click", () => teorizar() )
+  const botao_pratica = cria_botoes_abas(traduzir_hud('botao_pratica', currentLanguage), "inativo")  
   botao_pratica.addEventListener("click", () => praticar() ) // Adiciona função ao clicar
 
 
@@ -71,14 +76,15 @@ function buildTables(data) {
 
   let language_selector_pratica = document.createElement('div');
   language_selector_pratica.className = "language-selector";
+  language_selector_pratica.style.display = "none"
+  language_selector_pratica.id = 'language_selector_pratica'
 
   createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica') // adiciona label + select dentro desse div
   container_idioma.appendChild(language_selector_pratica); // insere no container
 
-
-
   container.appendChild(container_idioma);
 
+  language_selector_pratica.addEventListener("change", () => altera_idioma_pratica() ) // Adiciona função ao clicar
 
   document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -163,7 +169,7 @@ function buildTables(data) {
 
 
 
-function carrega_csv () {
+function carrega_csv (modo) {
   // body...
   fetch(`${caminho}/dados.csv`) // ou 'subpasta/data.csv' se estiver em uma subpasta
   .then(response => {
@@ -172,7 +178,13 @@ function carrega_csv () {
   })
   .then(csvText => {
     const data = parseCSV(csvText);
-    buildTables(data);
+
+    // const resultado_filtrado = separar_idiomas_pratica(data)
+
+    if (modo === 'teoria') buildTables(data)
+    if (modo === 'pratica') {
+      console.log("vai")
+    }
 
     let select = document.getElementById('language-select')
     select.addEventListener('change', (e) => {

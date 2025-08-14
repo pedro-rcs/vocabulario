@@ -23,7 +23,25 @@ const traducoes_hud = {
     it: '100 Frasi Utili per Viaggiare',
     fr: '100 Phrases Utiles pour Voyager',
     de: '100 Nützliche Reiseausdrücke'
+  },
+
+  'botao_teoria': {
+    en: 'Theory',
+    pt: 'Teoria',
+    es: 'Teoría',
+    it: 'Teoria',
+    fr: 'Théorie',
+    de: 'Theorie'
+  },
+  'botao_pratica': {
+    en: 'Practice',
+    pt: 'Prática',
+    es: 'Práctica',
+    it: 'Pratica',
+    fr: 'Pratique',
+    de: 'Praxis'
   }
+
 }
 
 export { traducoes_hud }

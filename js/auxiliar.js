@@ -85,6 +85,12 @@ function traduzir_hud (item, idioma) {
   return traducoes_hud[item]?.[idioma] || item
 }
 
+function traduzir_idioma_ingles(codigo_idioma_h, currentLanguage) {
+  const langObj = traducoes_hud.idiomas.find(lang => lang.idioma === currentLanguage);
+  console.log('langObj:', langObj, 'codigo_idioma_h:', codigo_idioma_h);
+  return langObj?.[codigo_idioma_h] || 'Unknown Language';
+}
+
 
 function encontra_lang_ingles (codigo) {
   for (let i = 0; i < languages.length; i++) {
@@ -115,4 +121,4 @@ function separar_idiomas_pratica(dados, selecionado, praticado) {
 
 
 
-export { createLanguageSelector, cria_botoes_abas, traduzir_hud, separar_idiomas_pratica }
+export { createLanguageSelector, cria_botoes_abas, traduzir_hud, traduzir_idioma_ingles, separar_idiomas_pratica }

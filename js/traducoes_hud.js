@@ -40,7 +40,63 @@ const traducoes_hud = {
     it: 'Pratica',
     fr: 'Pratique',
     de: 'Praxis'
+  },
+'idiomas': [
+  {
+    idioma: 'en',
+    en: 'English',
+    pt: 'Portuguese',
+    es: 'Spanish',
+    fr: 'French',
+    it: 'Italian',
+    de: 'German'
+  },
+  {
+    idioma: 'pt',
+    en: 'Inglês',
+    pt: 'Português',
+    es: 'Espanhol',
+    fr: 'Francês',
+    it: 'Italiano',
+    de: 'Alemão'
+  },
+  {
+    idioma: 'es',
+    en: 'Inglés',
+    pt: 'Portugués',
+    es: 'Español',
+    fr: 'Francés',
+    it: 'Italiano',
+    de: 'Alemán'
+  },
+  {
+    idioma: 'fr',
+    en: 'Anglais',
+    pt: 'Portugais',
+    sp: 'Espagnol',
+    fr: 'Français',
+    it: 'Italien',
+    de: 'Allemand'
+  },
+  {
+    idioma: 'it',
+    en: 'Inglese',
+    pt: 'Portoghese',
+    es: 'Spagnolo',
+    fr: 'Francese',
+    it: 'Italiano',
+    de: 'Tedesco'
+  },
+  {
+    idioma: 'de',
+    en: 'Englisch',
+    pt: 'Portugiesisch',
+    es: 'Spanisch',
+    fr: 'Französisch',
+    it: 'Italienisch',
+    de: 'Deutsch'
   }
+]
 
 }
 

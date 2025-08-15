@@ -170,3 +170,26 @@ h2.open::after {
 .tab-btn.active {
   background-color: #5ea43b; /* verde mais escuro para destaque */
 }
+
+/* Centraliza o botão dentro do container */
+.container_bot_terminei {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0;
+}
+.container_bot_terminei button {
+  margin: 0 auto;
+  display: block;
+}
+
+/* Só aplica no modo prática */
+body.pratica .table-wrapper table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+body.pratica .table-wrapper th,
+body.pratica .table-wrapper td {
+  width: 50%;
+}

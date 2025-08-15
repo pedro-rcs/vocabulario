@@ -1,7 +1,7 @@
 import { audioMap } from './audio_map.js';
 
 import { traducoesCategoria } from './traducoes_categorias.js'
-import { createLanguageSelector, cria_botoes_abas, traduzir_hud, separar_idiomas_pratica } from './auxiliar.js'
+import { createLanguageSelector, cria_botoes_abas, traduzir_hud, traduzir_idioma_ingles, separar_idiomas_pratica } from './auxiliar.js'
 import { parseCSV } from './csv_utils.js';
 
 let currentLanguage = 'en'; // valor padrão
@@ -13,6 +13,7 @@ function buildTables(data) {
   const headers = data[0].slice(1);
   const grouped = {};
 
+  
   for (let i = 1; i < data.length; i++) {
     const row = data[i];
     const categoria = row[0];
@@ -111,9 +112,34 @@ function buildTables(data) {
     const thead = document.createElement('thead');
     const trHead = document.createElement('tr');
 
-    headers.forEach(h => {
+      const languages = [
+    { code: 'en', name: 'English', name_ingles: 'English' },
+    { code: 'pt', name: 'Português', name_ingles: 'Portuguese' },
+    { code: 'es', name: 'Español', name_ingles: 'Spanish' },
+    { code: 'fr', name: 'Français', name_ingles: 'French' },
+    { code: 'it', name: 'Italiano', name_ingles: 'Italian' },
+    { code: 'de', name: 'Deutsch', name_ingles: 'German' }
+    
+  ];
+
+
+    headers.forEach((h, idx) => {
       const th = document.createElement('th');
-      th.textContent = h;
+      let codigo_idioma_h
+      for (let i = 0; i < languages.length; i++) {
+        // Aqui, precisa desses trim e toLowerCase para evitar problemas com espaços ou maiúsculas/minúsculas
+        if (languages[i].name_ingles.trim().toLowerCase() === h.trim().toLowerCase()) {
+          codigo_idioma_h = languages[i].code;
+          break;
+        }
+      }
+            console.log(`${codigo_idioma_h} ESSE É O H`);
+
+      th.textContent = traduzir_idioma_ingles(codigo_idioma_h, currentLanguage);
+      // th.textContent = h;
+      if (modo === 'pratica' && idx === 0) {
+        th.style.textAlign = 'right'; // só a primeira coluna
+      }
       trHead.appendChild(th);
     });
 
@@ -123,31 +149,59 @@ function buildTables(data) {
     const tbody = document.createElement('tbody');
     frases.forEach((frase, fraseIndex) => {
       const tr = document.createElement('tr');
+      
       frase.forEach((texto, idx) => {
         const td = document.createElement('td');
-        td.textContent = texto;
-        td.style.cursor = 'pointer';
 
-        td.addEventListener('click', () => {
-          const idioma = headers[idx];
-          const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
-          if (!arquivoAudio) {
-            alert('Áudio não encontrado para esta frase.');
-            return;
-          }
-          const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
-          const audio = new Audio(audioPath);
-          audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
-        });
+        if (modo === 'pratica' && idx === 0) {
+          td.style.textAlign = 'right'; // texto alinhado à direita
+        }
+
+        if (modo === 'pratica' && idx === 1) {
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.id = `input_${categoria}_${fraseIndex}`;
+          input.name = `input_${categoria}_${fraseIndex}`;
+          td.appendChild(input);
+        } else {
+          td.textContent = texto;
+          td.style.cursor = 'pointer';
+        
+          td.addEventListener('click', () => {
+            const idioma = headers[idx];
+            const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
+            if (!arquivoAudio) {
+              alert('Áudio não encontrado para esta frase.');
+              return;
+            }
+            const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
+            const audio = new Audio(audioPath);
+            audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
+          });
+        }
 
         tr.appendChild(td);
       });
+
       tbody.appendChild(tr);
     });
-    table.appendChild(tbody);
 
+    table.appendChild(tbody);
     wrapper.appendChild(table);
     container.appendChild(wrapper);
+
+    // Botão Terminei!
+    if (modo === 'pratica') {
+
+      const container_bot_terminei = document.createElement('div');
+      container_bot_terminei.className = 'container_bot_terminei';
+
+      const botao_terminei = document.createElement('button')
+      botao_terminei.textContent = "Terminei!"
+      container_bot_terminei.appendChild(botao_terminei);
+
+      wrapper.appendChild(container_bot_terminei);
+    }
 
     // Toggle de exibição
     h2.addEventListener('click', () => {
@@ -167,6 +221,7 @@ function buildTables(data) {
 }
 
 function carrega_csv () {
+
   // body...
   fetch(`${caminho}/dados.csv`) // ou 'subpasta/data.csv' se estiver em uma subpasta
   .then(response => {
@@ -181,6 +236,13 @@ function carrega_csv () {
 
       const resultado_filtrado = separar_idiomas_pratica(data, currentLanguage, idioma_praticado)
       buildTables(resultado_filtrado)
+    }
+
+    // ...dentro de carrega_csv() ou logo após definir o modo...
+    if (modo === 'pratica') {
+      document.body.classList.add('pratica');
+    } else {
+      document.body.classList.remove('pratica');
     }
 
     let select = document.getElementById('language-select')

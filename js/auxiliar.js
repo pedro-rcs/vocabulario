@@ -18,7 +18,7 @@ function createLanguageSelector(container, idioma_selecionado, tipo, idioma_prat
 
   let select
   if (tipo === 'padrao') {
-    select = idioma_select_padrao(idioma_selecionado, tipo)
+    select = idioma_select_padrao(idioma_selecionado, tipo, idioma_praticado)
   }
   if (tipo === 'pratica') {
     select = idioma_select_praticado(idioma_selecionado, tipo, idioma_praticado)
@@ -28,7 +28,7 @@ function createLanguageSelector(container, idioma_selecionado, tipo, idioma_prat
   container.appendChild(select)
 }
 
-function idioma_select_padrao (idioma_selecionado, tipo) {
+function idioma_select_padrao (idioma_selecionado, tipo, idioma_praticado) {
 
   const select = document.createElement('select');
   select.id = 'language-select';
@@ -92,26 +92,25 @@ function encontra_lang_ingles (codigo) {
   }
 }
 
-function separar_idiomas_pratica (dados, selecionado, praticado) {
+function separar_idiomas_pratica(dados, selecionado, praticado) {
+  const idioma_padrao_ingles = encontra_lang_ingles(selecionado).trim();
+  const idioma_pratica_ingles = encontra_lang_ingles(praticado).trim();
 
-  const idioma_padrao_ingles = encontra_lang_ingles(selecionado)
-  const idioma_pratica_ingles = encontra_lang_ingles(praticado)
+  const header = dados[0].map(h => h.trim());
+  const idx_padrao = header.findIndex(h => h.toLowerCase() === idioma_padrao_ingles.toLowerCase());
+  const idx_pratica = header.findIndex(h => h.toLowerCase() === idioma_pratica_ingles.toLowerCase());
 
-    // Identificar os índices das colunas que queremos manter
-    const header = dados[0];
-    const indicesParaManter = [
-      0, // primeira coluna
-      header.indexOf(idioma_padrao_ingles),
-      header.indexOf(idioma_pratica_ingles)
-    ];
+  console.log('Header:', header);
+  console.log('Procurando:', idioma_padrao_ingles, idioma_pratica_ingles);
+  console.log('Índices:', idx_padrao, idx_pratica);
 
-    // Filtrar cada linha para manter apenas essas colunas
-    const resultadoFiltrado = dados.map(row =>
-      indicesParaManter.map(index => row[index])
-    );
+  const indicesParaManter = [0, idx_padrao, idx_pratica];
 
-    return resultadoFiltrado
+  const resultadoFiltrado = dados.map(row =>
+    indicesParaManter.map(index => row[index])
+  );
 
+  return resultadoFiltrado;
 }
 
 

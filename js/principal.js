@@ -29,7 +29,8 @@ function buildTables(data) {
 
   createLanguageSelector(language_selector, currentLanguage, 'padrao') // adiciona label
   container.appendChild(language_selector);  // insere no container
-  
+
+
   // Cria título principal
   const h1 = document.createElement('h1');  
   h1.textContent = traduzir_hud('100_useful_travel_phrases', currentLanguage)
@@ -51,6 +52,7 @@ function buildTables(data) {
   botao_pratica.addEventListener("click", () => {
     modo = 'pratica'
     document.getElementById("language_selector_pratica").style.display = 'flex'
+    carrega_csv()
   })
   container_idioma.appendChild(botao_pratica)
 
@@ -88,8 +90,6 @@ function buildTables(data) {
     
     document.getElementById("language_selector_pratica").style.display = 'flex'
     document.getElementById("language_selector_pratica").value = idioma_praticado
-
-    
   }
 });
   for (const categoria in grouped) {
@@ -166,7 +166,6 @@ function buildTables(data) {
 });
 }
 
-
 function carrega_csv () {
   // body...
   fetch(`${caminho}/dados.csv`) // ou 'subpasta/data.csv' se estiver em uma subpasta
@@ -187,6 +186,15 @@ function carrega_csv () {
     let select = document.getElementById('language-select')
     select.addEventListener('change', (e) => {
       currentLanguage = e.target.value;
+
+      if (currentLanguage === idioma_praticado) {
+        
+        if (currentLanguage === 'en') {
+          idioma_praticado = 'pt'
+        } else {
+          idioma_praticado = 'en'
+        }
+      }
       carrega_csv()
     });
 

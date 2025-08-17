@@ -204,6 +204,52 @@ function buildTables(data) {
       container_bot_terminei.appendChild(botao_terminei);
 
       wrapper.appendChild(container_bot_terminei);
+
+      botao_terminei.addEventListener('click', () => {
+        let acertos = 0;
+        let total = frases.length;
+        frases.forEach((frase, fraseIndex) => {
+          const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
+          if (!input) return;
+          if (input.value.trim().toLowerCase() === frase[1].trim().toLowerCase()) {
+            input.disabled = true;
+            acertos++;
+          } else {
+            input.value = '';
+          }
+        });
+
+        // Mostra popup estilizado
+        let msg;
+        if (acertos === total) {
+          msg = `<b>${acertos}/${total}</b> 🎉<br>Parabéns, você acertou tudo!`;
+        } else {
+          msg = `<b>${acertos}/${total}</b> acertos.<br>Tente novamente!`;
+        }
+        showCustomModal(msg, () => {
+          // Após fechar o modal, foca no primeiro input vazio e habilitado
+          for (let fraseIndex = 0; fraseIndex < frases.length; fraseIndex++) {
+            const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
+            if (input && !input.disabled && input.value === '') {
+              input.focus();
+              break;
+            }
+          }
+        });
+      });
+
+      // Permite Enter para simular clique no Terminei
+      for (let fraseIndex = 0; fraseIndex < frases.length; fraseIndex++) {
+        const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
+        if (input) {
+          input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              botao_terminei.click();
+            }
+          });
+        }
+      }
     }
 
     // Toggle de exibição
@@ -272,4 +318,24 @@ carrega_csv()
 
 function traduzirCategoria(categoria, idioma) {
   return traducoesCategoria[categoria]?.[idioma] || categoria
+}
+
+function showCustomModal(message, callback) {
+  const modal = document.getElementById('custom-modal');
+  const msgDiv = document.getElementById('custom-modal-message');
+  const closeBtn = document.getElementById('custom-modal-close');
+  msgDiv.innerHTML = message;
+  modal.style.display = 'flex';
+
+  function closeModal() {
+    modal.style.display = 'none';
+    closeBtn.removeEventListener('click', closeModal);
+    modal.removeEventListener('click', outsideClick);
+    if (callback) callback();
+  }
+  function outsideClick(e) {
+    if (e.target === modal) closeModal();
+  }
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', outsideClick);
 }

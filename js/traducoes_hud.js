@@ -1,4 +1,20 @@
 const traducoes_hud = {
+  'ola': {
+    en: 'Hello',
+    pt: 'Olá',
+    es: 'Hola',
+    it: 'Ciao',
+    fr: 'Bonjour',
+    de: 'Hallo'
+  },
+  'estatisticas': {
+    en: 'Statistics',
+    pt: 'Estatísticas',
+    es: 'Estadísticas',
+    it: 'Statistiche',
+    fr: 'Statistiques',
+    de: 'Statistiken'
+  },
   'label_select_language': {
     en: 'Select your language:',
     pt: 'Escolha seu idioma:',

@@ -300,6 +300,8 @@ body.pratica .table-wrapper td {
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
   max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
   text-align: center;
   position: relative;
   font-size: 1.2em;
@@ -345,4 +347,25 @@ body.pratica .table-wrapper td {
 }
 .input-audio:hover {
   background-color: #e0e0e0;
+}
+
+.stats-btn {
+  background: linear-gradient(90deg, #a4d4ae 0%, #5ea43b 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5em 1.3em;
+  cursor: pointer;
+  font-size: 1.08em;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(58, 125, 68, 0.13);
+  margin-left: 1em;
+  transition: background 0.2s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.stats-btn:hover {
+  background: linear-gradient(90deg, #8acb68 0%, #4c8c32 100%);
+  transform: scale(1.04);
 }

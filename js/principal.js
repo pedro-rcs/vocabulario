@@ -164,6 +164,27 @@ function buildTables(data) {
           input.type = 'text';
           input.id = `input_${categoria}_${fraseIndex}`;
           input.name = `input_${categoria}_${fraseIndex}`;
+
+          // Recupera progresso salvo
+          const acertadas = getProgress(userName, idioma_praticado, categoria);
+          if (acertadas.includes(fraseIndex)) {
+            input.value = frase[1];
+            input.readOnly = true;
+            input.classList.add('input-audio');
+            input.title = 'Clique para ouvir o áudio';
+            input.onclick = () => {
+              const idioma = headers[1];
+              const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
+              if (!arquivoAudio) {
+                showCustomModal('Áudio não encontrado para esta palavra.');
+                return;
+              }
+              const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
+              const audio = new Audio(audioPath);
+              audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
+            };
+          }
+
           td.appendChild(input);
         } else {
           td.textContent = texto;
@@ -239,6 +260,8 @@ function buildTables(data) {
               audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
             };
 
+            // Salva progresso aqui:
+saveProgress(userName, idioma_praticado, categoria, fraseIndex);
           } else {
             input.value = '';
           }
@@ -292,6 +315,7 @@ function buildTables(data) {
     // aqui você pode trocar o conteúdo da interface baseado no btn.dataset.tab
   });
 });
+window.groupedCategorias = grouped;
 }
 
 function carrega_csv () {
@@ -324,14 +348,14 @@ function carrega_csv () {
       currentLanguage = e.target.value;
 
       if (currentLanguage === idioma_praticado) {
-        
         if (currentLanguage === 'en') {
           idioma_praticado = 'pt'
         } else {
           idioma_praticado = 'en'
         }
       }
-      carrega_csv()
+      updateUserInfo(); // <-- Atualiza o "Olá, ..."
+      carrega_csv();
     });
 
 
@@ -363,4 +387,110 @@ function showCustomModal(message, callback) {
   }
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', outsideClick);
+}
+
+function setCookie(name, value, days) {
+  const expires = new Date(Date.now() + days*24*60*60*1000).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+}
+function getCookie(name) {
+  const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  return v ? decodeURIComponent(v[2]) : null;
+}
+
+let userName = getCookie('userName');
+if (!userName) {
+  userName = prompt('Qual é o seu nome?');
+  if (userName) setCookie('userName', userName, 365);
+}
+function updateUserInfo() {
+  const ola = traduzir_hud('ola', currentLanguage);
+  const statsLabel = traduzir_hud('estatisticas', currentLanguage) || 'Estatísticas';
+  const userInfoDiv = document.getElementById('user-info');
+  if (userInfoDiv && userName) {
+    userInfoDiv.innerHTML = `${ola}, ${userName}!`;
+
+    // Remove botão antigo se existir
+    const oldBtn = document.getElementById('stats-btn');
+    if (oldBtn) oldBtn.remove();
+
+    // Cria botão estilizado
+    let statsBtn = document.createElement('button');
+    statsBtn.textContent = `📊 ${statsLabel}`;
+    statsBtn.className = 'stats-btn';
+    statsBtn.id = 'stats-btn';
+    statsBtn.type = 'button';
+    statsBtn.style.marginLeft = '1em';
+    userInfoDiv.appendChild(statsBtn);
+
+    statsBtn.addEventListener('click', showStatsModal);
+  }
+}
+
+// No carregamento inicial
+if (userName) {
+  document.addEventListener('DOMContentLoaded', updateUserInfo);
+}
+
+
+
+function saveProgress(user, idioma, categoria, fraseIndex) {
+  let progresso = {};
+  const cookie = getCookie('progresso');
+  if (cookie) progresso = JSON.parse(cookie);
+
+  if (!progresso[user]) progresso[user] = {};
+  if (!progresso[user][idioma]) progresso[user][idioma] = {};
+  if (!progresso[user][idioma][categoria]) progresso[user][idioma][categoria] = [];
+  if (!progresso[user][idioma][categoria].includes(fraseIndex)) {
+    progresso[user][idioma][categoria].push(fraseIndex);
+  }
+  setCookie('progresso', JSON.stringify(progresso), 365);
+}
+
+function getProgress(user, idioma, categoria) {
+  try {
+    const cookie = getCookie('progresso');
+    if (!cookie) return [];
+    const progresso = JSON.parse(cookie);
+    return progresso[user]?.[idioma]?.[categoria] || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function showStatsModal() {
+  const progresso = getCookie('progresso');
+  let stats = progresso ? JSON.parse(progresso) : {};
+  let userStats = stats[userName] && stats[userName][idioma_praticado] ? stats[userName][idioma_praticado] : {};
+
+  // Descubra todas as categorias e quantas frases existem em cada uma
+  // Supondo que você tem acesso ao objeto 'grouped' ou similar
+  // Se não, salve o grouped globalmente ao montar as tabelas
+  let grouped = window.groupedCategorias || {};
+  if (!Object.keys(grouped).length && window.ultimaTabelaGrouped) {
+    grouped = window.ultimaTabelaGrouped;
+  }
+
+  let totalAcertos = 0;
+  let totalFrases = 0;
+  let html = `<h3>Estatísticas (${idioma_praticado.toUpperCase()})</h3><table style="margin:auto;"><tr><th>Categoria</th><th>Acertos</th></tr>`;
+
+  for (const categoria in grouped) {
+    const total = grouped[categoria].length;
+    const acertos = (userStats[categoria] || []).length;
+    totalAcertos += acertos;
+    totalFrases += total;
+    html += `<tr>
+      <td>${traduzirCategoria(categoria, currentLanguage)}</td>
+      <td style="text-align:center;">${acertos}/${total}</td>
+    </tr>`;
+  }
+
+  html += `<tr style="font-weight:bold;">
+    <td>Total</td>
+    <td style="text-align:center;">${totalAcertos}/${totalFrases}</td>
+  </tr></table>`;
+
+  showCustomModal(html);
 }

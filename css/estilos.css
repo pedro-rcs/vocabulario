@@ -5,6 +5,11 @@ body {
     padding: 1rem 2rem;
   }
 
+  .h1_titulo {
+    margin-top: 35px;
+    margin-bottom: 35px;
+  }
+
   h2 {
     margin-top: 2.5rem;
     margin-bottom: 1rem;
@@ -47,7 +52,7 @@ h2.open::after {
 
   table {
     width: 100%;
-    min-width: 700px; /* força scroll horizontal se viewport menor */
+    // min-width: 700px; /* força scroll horizontal se viewport menor */
     border-collapse: separate;
     border-spacing: 0;
     box-shadow: 0 2px 8px rgba(58, 125, 68, 0.15);
@@ -70,6 +75,7 @@ h2.open::after {
   }
 
   td {
+
     cursor: pointer;
     transition: background-color 0.3s ease;
     background-color: #ffffff; /* fundo branco */
@@ -83,15 +89,52 @@ h2.open::after {
     border-bottom: none;
   }
 
+  td > input {
+    box-sizing: border-box;
+
+    border-radius: 5px;
+    border: solid lightgrey 1px;
+    height: 35px;
+    padding: 10px;
+    font-size: 17px;
+    width: 100%;
+    color: #2b2b2b;
+  }
 
 
+
+.botao_terminei {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #5ea43b; /* verde médio */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+  box-shadow: 0 2px 6px rgba(58, 125, 68, 0.2);
+  display: inline-block;
+  text-align: center;
+}
+
+.botao_terminei:hover {
+  background-color: #4c8c32; /* verde mais escuro no hover */
+  transform: scale(1.03);
+}
+
+.botao_terminei:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 4px rgba(58, 125, 68, 0.3);
+}
 
   /* Container do seletor */
+
 .language-selector {
   display: flex;
   align-items: center;
   gap: 1rem; /* um pouco mais de espaço entre label e select */
-  margin: 2rem 0; /* aumenta espaço acima e abaixo */
+ // margin: 2rem 0; /* aumenta espaço acima e abaixo */
   font-size: 1.1rem; /* fonte um pouco maior */
   font-weight: 500;
   color: #264d26;
@@ -147,9 +190,14 @@ h2.open::after {
 .container_idioma {
   display: flex;
   gap: 10px;
+  // background-color: red;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 35px;
 }
 
 .tab-btn {
+  max-height: 40px;
   padding: 8px 16px;
   border: none;
   border-radius: 6px;
@@ -159,7 +207,7 @@ h2.open::after {
   font-size: 20px;
   font-weight: bold;
   transition: background 0.2s, transform 0.1s;
-  margin-bottom: 25px;
+  // margin-bottom: 25px;
 }
 
 .tab-btn:hover {
@@ -193,3 +241,44 @@ body.pratica .table-wrapper th,
 body.pratica .table-wrapper td {
   width: 50%;
 }
+
+.container_idioma {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start; /* deixa alinhado no início */
+}
+
+.tab-btn {
+  flex: 0 0 auto; /* NÃO cresce no desktop */
+  min-width: 120px;
+  text-align: center;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  body {
+    padding: 0.5rem 1rem;
+  }
+  .container_idioma {
+    justify-content: center; /* no mobile centraliza */
+  }
+
+  .tab-btn {
+    flex: 1 1 auto; /* aqui sim, deixam crescer */
+    width: 100%;    /* opcional: ocupa largura toda */
+  }
+
+  .language-selector {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .language-selector select {
+    width: 100%;
+    min-width: unset;
+  }
+}
+

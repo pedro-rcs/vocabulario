@@ -34,6 +34,7 @@ function buildTables(data) {
 
   // Cria título principal
   const h1 = document.createElement('h1');  
+  h1.className = 'h1_titulo'
   h1.textContent = traduzir_hud('100_useful_travel_phrases', currentLanguage)
   container.appendChild(h1);
   
@@ -78,6 +79,7 @@ function buildTables(data) {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+
     // aqui você pode trocar o conteúdo da interface baseado no btn.dataset.tab
   });
 
@@ -198,6 +200,7 @@ function buildTables(data) {
 
       const botao_terminei = document.createElement('button')
       botao_terminei.textContent = "Terminei!"
+      botao_terminei.className = "botao_terminei"
       container_bot_terminei.appendChild(botao_terminei);
 
       wrapper.appendChild(container_bot_terminei);

@@ -211,9 +211,34 @@ function buildTables(data) {
         frases.forEach((frase, fraseIndex) => {
           const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
           if (!input) return;
+          // Remove botão de som antigo, se existir
+          const oldBtn = document.getElementById(`audio-btn-${categoria}-${fraseIndex}`);
+          if (oldBtn) oldBtn.remove();
+
+          // Remove event listener antigo, se houver
+          input.onclick = null;
+          input.classList.remove('input-audio');
+
           if (input.value.trim().toLowerCase() === frase[1].trim().toLowerCase()) {
-            input.disabled = true;
+            input.readOnly = true;
             acertos++;
+
+            // Adiciona classe visual e evento de áudio ao input
+            input.classList.add('input-audio');
+            input.title = 'Clique para ouvir o áudio';
+
+            input.onclick = () => {
+              const idioma = headers[1]; // coluna do input praticado
+              const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
+              if (!arquivoAudio) {
+                showCustomModal('Áudio não encontrado para esta palavra.');
+                return;
+              }
+              const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
+              const audio = new Audio(audioPath);
+              audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
+            };
+
           } else {
             input.value = '';
           }
@@ -230,7 +255,7 @@ function buildTables(data) {
           // Após fechar o modal, foca no primeiro input vazio e habilitado
           for (let fraseIndex = 0; fraseIndex < frases.length; fraseIndex++) {
             const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
-            if (input && !input.disabled && input.value === '') {
+            if (input && !input.readOnly && input.value === '') {
               input.focus();
               break;
             }

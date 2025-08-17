@@ -315,3 +315,34 @@ body.pratica .table-wrapper td {
 .custom-modal-close:hover {
   color: #222;
 }
+
+
+/* botãozinho de audio, no input */
+.audio-btn {
+  margin-left: 8px;
+  background: #f3f3f3;
+  border: none;
+  border-radius: 50%;
+  padding: 0.3em 0.5em;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background 0.2s;
+}
+.audio-btn:hover {
+  background: #e0e0e0;
+}
+/* Adicione ao seu estilos.css */
+.input-audio {
+  background: #f3f3f3 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="gray"><text x="0" y="15" font-size="18">🔊</text></svg>') no-repeat right 8px center;
+  cursor: pointer;
+  color: #222;
+  font-weight: bold;
+  border: 1.5px solid #bdbdbd;
+  transition: background 0.2s;
+}
+.input-audio:disabled {
+  opacity: 1;
+}
+.input-audio:hover {
+  background-color: #e0e0e0;
+}

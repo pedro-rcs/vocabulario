@@ -57,6 +57,14 @@ const traducoes_hud = {
     fr: 'Pratique',
     de: 'Praxis'
   },
+  'botao_conjugacao': {
+    en: "Verb Conjugation",
+    pt: "Conjugações Verbais",
+    es: "Conjugaciones Verbales",
+    fr: "Conjugaisons Verbales",
+    it: "Coniugazioni Verbali",
+    de: "Verbkonjugationen"
+  },
 'idiomas': [
   {
     idioma: 'en',

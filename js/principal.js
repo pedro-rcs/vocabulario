@@ -13,7 +13,6 @@ function buildTables(data) {
   const headers = data[0].slice(1);
   const grouped = {};
 
-  
   for (let i = 1; i < data.length; i++) {
     const row = data[i];
     const categoria = row[0];
@@ -45,7 +44,7 @@ function buildTables(data) {
   const botao_teoria = cria_botoes_abas(traduzir_hud('botao_teoria', currentLanguage), "ativo")
   botao_teoria.addEventListener("click", () => {
     modo = 'teoria'
-    document.getElementById("language_selector_pratica").style.display = 'none'
+    // document.getElementById("language_selector_pratica").style.display = 'none'
     carrega_csv()
   })
   container_idioma.appendChild(botao_teoria)
@@ -58,10 +57,19 @@ function buildTables(data) {
   })
   container_idioma.appendChild(botao_pratica)
 
+  const botao_conjugacao = cria_botoes_abas(traduzir_hud('botao_conjugacao', currentLanguage), "inativo");
+  botao_conjugacao.id = "botao_conjugacao";
+  botao_conjugacao.addEventListener("click", () => {
+    // Redireciona para uma página de conjugação ou chama uma função/modal
+    window.location.href = "conjugacao.html";
+    // ou: abrirModalConjugacao();
+  });
+  container_idioma.appendChild(botao_conjugacao)
+
 
   let language_selector_pratica = document.createElement('div');
   language_selector_pratica.className = "language-selector";
-  language_selector_pratica.style.display = "none"
+  // language_selector_pratica.style.display = "none"
   language_selector_pratica.id = 'language_selector_pratica'
 
   createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica', idioma_praticado) // adiciona label + select dentro desse div
@@ -91,7 +99,7 @@ function buildTables(data) {
       btn.classList.remove('active');
     }
     
-    document.getElementById("language_selector_pratica").style.display = 'flex'
+    // document.getElementById("language_selector_pratica").style.display = 'flex'
     document.getElementById("language_selector_pratica").value = idioma_praticado
   }
 });
@@ -494,3 +502,12 @@ function showStatsModal() {
 
   showCustomModal(html);
 }
+
+// Descubra os índices das colunas dos idiomas selecionados
+const idxIdiomaGeral = headers.findIndex(h => {
+  // Use seu array languages para comparar código
+  return languages.find(l => l.code === currentLanguage && l.name_ingles.trim().toLowerCase() === h.trim().toLowerCase());
+});
+const idxIdiomaPraticado = headers.findIndex(h => {
+  return languages.find(l => l.code === idioma_praticado && l.name_ingles.trim().toLowerCase() === h.trim().toLowerCase());
+});

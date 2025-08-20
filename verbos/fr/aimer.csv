@@ -1,0 +1,102 @@
+modo,tempo,pessoa,aux,conjugado
+indicatif,présent,je,,aime
+indicatif,présent,tu,,aimes
+indicatif,présent,il/elle,,aime
+indicatif,présent,nous,,aimons
+indicatif,présent,vous,,aimez
+indicatif,présent,ils/elles,,aiment
+
+indicatif,passé composé,je,ai,aimé
+indicatif,passé composé,tu,as,aimé
+indicatif,passé composé,il/elle,a,aimé
+indicatif,passé composé,nous,avons,aimé
+indicatif,passé composé,vous,avez,aimé
+indicatif,passé composé,ils/elles,ont,aimé
+
+indicatif,imparfait,je,,aimais
+indicatif,imparfait,tu,,aimais
+indicatif,imparfait,il/elle,,aimait
+indicatif,imparfait,nous,,aimions
+indicatif,imparfait,vous,,aimiez
+indicatif,imparfait,ils/elles,,aimaient
+
+indicatif,plus-que-parfait,je,avais,aimé
+indicatif,plus-que-parfait,tu,avais,aimé
+indicatif,plus-que-parfait,il/elle,avait,aimé
+indicatif,plus-que-parfait,nous,avions,aimé
+indicatif,plus-que-parfait,vous,aviez,aimé
+indicatif,plus-que-parfait,ils/elles,avaient,aimé
+
+indicatif,passé simple,je,,aimai
+indicatif,passé simple,tu,,aimas
+indicatif,passé simple,il/elle,,aima
+indicatif,passé simple,nous,,aimâmes
+indicatif,passé simple,vous,,aimâtes
+indicatif,passé simple,ils/elles,,aimèrent
+
+indicatif,passé antérieur,je,eus,aimé
+indicatif,passé antérieur,tu,eus,aimé
+indicatif,passé antérieur,il/elle,eut,aimé
+indicatif,passé antérieur,nous,eûmes,aimé
+indicatif,passé antérieur,vous,eûtes,aimé
+indicatif,passé antérieur,ils/elles,eurent,aimé
+
+indicatif,futur simple,je,,aimerai
+indicatif,futur simple,tu,,aimeras
+indicatif,futur simple,il/elle,,aimera
+indicatif,futur simple,nous,,aimerons
+indicatif,futur simple,vous,,aimerez
+indicatif,futur simple,ils/elles,,aimeront
+
+indicatif,futur antérieur,je,aurai,aimé
+indicatif,futur antérieur,tu,auras,aimé
+indicatif,futur antérieur,il/elle,aura,aimé
+indicatif,futur antérieur,nous,aurons,aimé
+indicatif,futur antérieur,vous,aurez,aimé
+indicatif,futur antérieur,ils/elles,auront,aimé
+
+subjonctif,présent,je,,aime
+subjonctif,présent,tu,,aimes
+subjonctif,présent,il/elle,,aime
+subjonctif,présent,nous,,aimions
+subjonctif,présent,vous,,aimiez
+subjonctif,présent,ils/elles,,aiment
+
+subjonctif,passé,je,aie,aimé
+subjonctif,passé,tu,aies,aimé
+subjonctif,passé,il/elle,ait,aimé
+subjonctif,passé,nous,ayons,aimé
+subjonctif,passé,vous,ayez,aimé
+subjonctif,passé,ils/elles,aient,aimé
+
+subjonctif,imparfait,je,,aimasse
+subjonctif,imparfait,tu,,aimasses
+subjonctif,imparfait,il/elle,,aimât
+subjonctif,imparfait,nous,,aimassions
+subjonctif,imparfait,vous,,aimassiez
+subjonctif,imparfait,ils/elles,,aimassent
+
+subjonctif,plus-que-parfait,je,eusse,aimé
+subjonctif,plus-que-parfait,tu,eusses,aimé
+subjonctif,plus-que-parfait,il/elle,eût,aimé
+subjonctif,plus-que-parfait,nous,eussions,aimé
+subjonctif,plus-que-parfait,vous,eussiez,aimé
+subjonctif,plus-que-parfait,ils/elles,eussent,aimé
+
+conditionnel,présent,je,,aimerais
+conditionnel,présent,tu,,aimerais
+conditionnel,présent,il/elle,,aimerait
+conditionnel,présent,nous,,aimerions
+conditionnel,présent,vous,,aimeriez
+conditionnel,présent,ils/elles,,aimeraient
+
+conditionnel,passé 1ère forme,je,aurais,aimé
+conditionnel,passé 1ère forme,tu,aurais,aimé
+conditionnel,passé 1ère forme,il/elle,aurait,aimé
+conditionnel,passé 1ère forme,nous,aurions,aimé
+conditionnel,passé 1ère forme,vous,auriez,aimé
+conditionnel,passé 1ère forme,ils/elles,auraient,aimé
+
+impératif,présent,tu,,aime
+impératif,présent,nous,,aimons
+impératif,présent,vous,,aimez

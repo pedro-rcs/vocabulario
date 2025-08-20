@@ -105,7 +105,7 @@ const traducoes_hud = {
     idioma: 'fr',
     en: 'Anglais',
     pt: 'Portugais',
-    sp: 'Espagnol',
+    es: 'Espagnol',
     fr: 'Français',
     it: 'Italien',
     de: 'Allemand'

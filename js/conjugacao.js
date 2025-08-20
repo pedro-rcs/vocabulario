@@ -27,25 +27,7 @@ const verbos = {
   de: ['sprechen', 'essen', 'verlassen']
 };
 
-// Renderiza lista de verbos como links
-function renderTreino() {
-  const idioma = document.getElementById('idioma_praticado').value;
-  const area = document.getElementById('treino-area');
-  area.innerHTML = '<b>Verbos para treinar:</b><ul id="lista-verbos"></ul><div id="conjuga-div" style="display:none;margin-top:1em;"></div>';
-  const ul = document.getElementById('lista-verbos');
-  verbos[idioma].forEach(verb => {
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = "#";
-    a.textContent = verb;
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      mostrarConjugacao(verb, idioma);
-    });
-    li.appendChild(a);
-    ul.appendChild(li);
-  });
-}
+
 
 // Mostra o div de conjugação para o verbo escolhido
 function mostrarConjugacao(verbo, idioma) {
@@ -142,16 +124,7 @@ const container_escolha_idiomas = document.getElementById('container_escolha_idi
 container_escolha_idiomas.appendChild(container);
 
 // Eventos de troca de idioma
-document.getElementById('idioma_praticado').addEventListener('change', renderTreino);
-
 document.getElementById('h2_treino_conjugacao').innerHTML = traduzir_hud('treino_conjugacao', currentLanguage)
-renderTreino();
-
-
-
-
-
-
 
 
 
@@ -249,7 +222,8 @@ renderTreino();
   }
 
 
-    const app = document.getElementById("app");
+function cria_tabela_verbos () {
+      const app = document.getElementById("app");
 
     dados.modos.forEach(modo => {
       const divModo = document.createElement("div");
@@ -302,6 +276,10 @@ renderTreino();
     });
 
 
+}
+
+
+
 
 
 
@@ -314,6 +292,7 @@ renderTreino();
 
 let conjDados = {};
 
+/*
 function carregarCSV(file) {
   Papa.parse(file, {
     header: true,
@@ -326,6 +305,26 @@ function carregarCSV(file) {
         };
       });
       alert("CSV carregado!");
+    }
+  });
+}
+*/
+
+function carregarCSV(arquivo) {
+
+  Papa.parse(`../verbos/${currentLanguage}/${arquivo}.csv`, {
+  download: true, // <- importante!
+    header: true,
+    complete: function(results) {
+      results.data.forEach(row => {
+        const key = `${row.modo}-${row.tempo}-${row.pessoa}`;
+        conjDados[key] = {
+          aux: row.aux || "",
+          conjugado: row.conjugado || ""
+        };
+      });
+      // alert("CSV carregado!");
+      cria_tabela_verbos()
     }
   });
 }
@@ -434,7 +433,7 @@ document.getElementById("botao_teoria").addEventListener("click", () => {
 
 // --- Botão PRÁTICA (esvaziar tudo)
 document.getElementById("botao_pratica").addEventListener("click", () => {
-  document.querySelectorAll("input").forEach(inp => inp.value = "");
+document.querySelectorAll("input").forEach(inp => inp.value = "");
   
   // foca já no primeiro input vazio
   const vazio = document.querySelector("input");
@@ -444,6 +443,30 @@ document.getElementById("botao_pratica").addEventListener("click", () => {
 
 
 document.getElementById('botao_verificar').addEventListener('click', () => verificar())
-  document.getElementById("csvFile").addEventListener("change", function(e) {
-    carregarCSV(e.target.files[0]);
-  });
+
+
+const verbos_infinitivo = [
+  {
+    idioma: "fr",
+    verbos: ["aimer", "parler"]
+  }
+]
+
+function faz_botoes_verbos () {
+
+  for (let i = 0; i < verbos_infinitivo.length; i++) {
+
+    if (verbos_infinitivo[i].idioma === idioma_praticado) {
+      for (let j = 0; j < verbos_infinitivo[i].verbos.length; j++) {
+
+        const span = document.createElement("span");
+        span.className = "link-botao";
+        span.textContent = verbos_infinitivo[i].verbos[j];
+        span.onclick = () => {carregarCSV(verbos_infinitivo[i].verbos[j]);}
+        document.getElementById("links").appendChild(span);
+      }
+    }
+  }
+}
+
+faz_botoes_verbos()

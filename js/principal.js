@@ -103,6 +103,7 @@ function buildTables(data) {
     document.getElementById("language_selector_pratica").value = idioma_praticado
   }
 });
+  
   for (const categoria in grouped) {
     const frases = grouped[categoria];
 

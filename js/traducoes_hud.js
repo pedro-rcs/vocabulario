@@ -73,6 +73,15 @@ const traducoes_hud = {
     it: "Esercizi di Coniugazioni Verbali",
     de: "Übung zur Verbkonjugation"
   },
+  'escolha_verbo': {
+    pt: "Escolha um dos verbos abaixo para praticar.",
+    en: "Choose one of the verbs below to practice.",
+    es: "Elige uno de los verbos de abajo para practicar.",
+    de: "Wähle eines der unten stehenden Verben zum Üben.",
+    it: "Scegli uno dei verbi qui sotto per esercitarti.",
+    fr: "Choisis l'un des verbes ci-dessous pour t'exercer."
+  },
+
 'idiomas': [
   {
     idioma: 'en',

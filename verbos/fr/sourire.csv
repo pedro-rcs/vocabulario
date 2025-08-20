@@ -1,0 +1,102 @@
+modo,tempo,pessoa,aux,conjugado
+indicatif,présent,je,,souris
+indicatif,présent,tu,,souris
+indicatif,présent,il/elle,,sourit
+indicatif,présent,nous,,sourions
+indicatif,présent,vous,,souriez
+indicatif,présent,ils/elles,,sourient
+
+indicatif,passé composé,je,ai,souri
+indicatif,passé composé,tu,as,souri
+indicatif,passé composé,il/elle,a,souri
+indicatif,passé composé,nous,avons,souri
+indicatif,passé composé,vous,avez,souri
+indicatif,passé composé,ils/elles,ont,souri
+
+indicatif,imparfait,je,,souriais
+indicatif,imparfait,tu,,souriais
+indicatif,imparfait,il/elle,,souriait
+indicatif,imparfait,nous,,sourions
+indicatif,imparfait,vous,,souriez
+indicatif,imparfait,ils/elles,,souriaient
+
+indicatif,plus-que-parfait,je,avais,souri
+indicatif,plus-que-parfait,tu,avais,souri
+indicatif,plus-que-parfait,il/elle,avait,souri
+indicatif,plus-que-parfait,nous,avions,souri
+indicatif,plus-que-parfait,vous,aviez,souri
+indicatif,plus-que-parfait,ils/elles,avaient,souri
+
+indicatif,passé simple,je,,souris
+indicatif,passé simple,tu,,souris
+indicatif,passé simple,il/elle,,sourit
+indicatif,passé simple,nous,,sourîmes
+indicatif,passé simple,vous,,sourîtes
+indicatif,passé simple,ils/elles,,sourirent
+
+indicatif,passé antérieur,je,eus,souri
+indicatif,passé antérieur,tu,eus,souri
+indicatif,passé antérieur,il/elle,eut,souri
+indicatif,passé antérieur,nous,eûmes,souri
+indicatif,passé antérieur,vous,eûtes,souri
+indicatif,passé antérieur,ils/elles,eurent,souri
+
+indicatif,futur simple,je,,sourirai
+indicatif,futur simple,tu,,souriras
+indicatif,futur simple,il/elle,,sourira
+indicatif,futur simple,nous,,sourirons
+indicatif,futur simple,vous,,sourirez
+indicatif,futur simple,ils/elles,,souriront
+
+indicatif,futur antérieur,je,aurai,souri
+indicatif,futur antérieur,tu,auras,souri
+indicatif,futur antérieur,il/elle,aura,souri
+indicatif,futur antérieur,nous,aurons,souri
+indicatif,futur antérieur,vous,aurez,souri
+indicatif,futur antérieur,ils/elles,auront,souri
+
+subjonctif,présent,je,,sourie
+subjonctif,présent,tu,,souries
+subjonctif,présent,il/elle,,sourie
+subjonctif,présent,nous,,sourions
+subjonctif,présent,vous,,souriez
+subjonctif,présent,ils/elles,,sourient
+
+subjonctif,passé,je,aie,souri
+subjonctif,passé,tu,aies,souri
+subjonctif,passé,il/elle,ait,souri
+subjonctif,passé,nous,ayons,souri
+subjonctif,passé,vous,ayez,souri
+subjonctif,passé,ils/elles,aient,souri
+
+subjonctif,imparfait,je,,sourisse
+subjonctif,imparfait,tu,,sourisses
+subjonctif,imparfait,il/elle,,sourît
+subjonctif,imparfait,nous,,sourissions
+subjonctif,imparfait,vous,,sourissiez
+subjonctif,imparfait,ils/elles,,sourissent
+
+subjonctif,plus-que-parfait,je,eusse,souri
+subjonctif,plus-que-parfait,tu,eusses,souri
+subjonctif,plus-que-parfait,il/elle,eût,souri
+subjonctif,plus-que-parfait,nous,eussions,souri
+subjonctif,plus-que-parfait,vous,eussiez,souri
+subjonctif,plus-que-parfait,ils/elles,eussent,souri
+
+conditionnel,présent,je,,sourirais
+conditionnel,présent,tu,,sourirais
+conditionnel,présent,il/elle,,sourirait
+conditionnel,présent,nous,,souririons
+conditionnel,présent,vous,,souririez
+conditionnel,présent,ils/elles,,souriraient
+
+conditionnel,passé 1ère forme,je,aurais,souri
+conditionnel,passé 1ère forme,tu,aurais,souri
+conditionnel,passé 1ère forme,il/elle,aurait,souri
+conditionnel,passé 1ère forme,nous,aurions,souri
+conditionnel,passé 1ère forme,vous,auriez,souri
+conditionnel,passé 1ère forme,ils/elles,auraient,souri
+
+impératif,présent,tu,,souris
+impératif,présent,nous,,sourions
+impératif,présent,vous,,souriez

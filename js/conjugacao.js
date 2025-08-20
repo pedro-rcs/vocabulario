@@ -1,6 +1,7 @@
 import { createLanguageSelector, cria_botoes_abas, traduzir_hud, traduzir_idioma_ingles, separar_idiomas_pratica } from './auxiliar.js'
 // import {  currentLanguage, idioma_praticado } from './principal.js'
 
+var modo = 'teoria'
 // Utilitário para cookie
 function getCookie(name) {
   const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
@@ -81,8 +82,6 @@ function criarSeletorIdioma(id, labelText, selectId) {
 
   const select = document.createElement('select');
   select.id = selectId;
-
-
 
   const idiomas = [
     { value: 'pt', text: traduzir_idioma_ingles('pt', currentLanguage) },
@@ -274,8 +273,6 @@ function cria_tabela_verbos () {
       divModo.appendChild(temposContainer);
       app.appendChild(divModo);
     });
-
-
 }
 
 
@@ -292,27 +289,11 @@ function cria_tabela_verbos () {
 
 let conjDados = {};
 
-/*
-function carregarCSV(file) {
-  Papa.parse(file, {
-    header: true,
-    complete: function(results) {
-      results.data.forEach(row => {
-        const key = `${row.modo}-${row.tempo}-${row.pessoa}`;
-        conjDados[key] = {
-          aux: row.aux || "",
-          conjugado: row.conjugado || ""
-        };
-      });
-      alert("CSV carregado!");
-    }
-  });
-}
-*/
+
 
 function carregarCSV(arquivo) {
 
-  Papa.parse(`../verbos/${currentLanguage}/${arquivo}.csv`, {
+  Papa.parse(`../verbos/${idioma_praticado}/${arquivo}.csv`, {
   download: true, // <- importante!
     header: true,
     complete: function(results) {
@@ -411,6 +392,8 @@ document.getElementById("fecharModal").addEventListener("click", () => {
 // --- Botão TEORIA (preencher com os corretos do CSV)
 document.getElementById("botao_teoria").addEventListener("click", () => {
 
+  document.getElementById('botao_verificar').style.display = 'none'
+
   document.querySelectorAll(".tempo").forEach(divTempo => {
     const modo = divTempo.closest(".modo").querySelector("h2").textContent;
     const tempo = divTempo.querySelector("h3").textContent;
@@ -433,12 +416,17 @@ document.getElementById("botao_teoria").addEventListener("click", () => {
 
 // --- Botão PRÁTICA (esvaziar tudo)
 document.getElementById("botao_pratica").addEventListener("click", () => {
-document.querySelectorAll("input").forEach(inp => inp.value = "");
   
+  document.querySelectorAll("input").forEach(inp => inp.value = "");
+  
+  document.getElementById('botao_verificar').style.display = 'inline'
+
   // foca já no primeiro input vazio
   const vazio = document.querySelector("input");
   if (vazio) vazio.focus();
 });
+
+
 
 
 
@@ -447,10 +435,31 @@ document.getElementById('botao_verificar').addEventListener('click', () => verif
 
 const verbos_infinitivo = [
   {
+    idioma: "pt",
+    verbos: ["amar", "falar", "sorrir"]
+  },
+  {
+    idioma: "en",
+    verbos: ["love", "speak", "smile"]
+  },
+  {
+    idioma: "es",
+    verbos: ["amar", "hablar", "sonreír"]
+  },
+  {
     idioma: "fr",
-    verbos: ["aimer", "parler"]
+    verbos: ["aimer", "parler", "sourire"]
+  },
+  {
+    idioma: "it",
+    verbos: ["amare", "parlare", "sorridere"]
+  },
+  {
+    idioma: "de",
+    verbos: ["lieben", "sprechen", "lächeln"]
   }
 ]
+
 
 function faz_botoes_verbos () {
 
@@ -462,11 +471,40 @@ function faz_botoes_verbos () {
         const span = document.createElement("span");
         span.className = "link-botao";
         span.textContent = verbos_infinitivo[i].verbos[j];
-        span.onclick = () => {carregarCSV(verbos_infinitivo[i].verbos[j]);}
+        span.onclick = function () { clicou_link(this, verbos_infinitivo[i].verbos[j]) }
         document.getElementById("links").appendChild(span);
       }
     }
   }
 }
 
+function clicou_link (botao, verbo) {
+  document.querySelectorAll('.link-botao').forEach(b => b.classList.remove('link_ativo'));
+  botao.classList.add("link_ativo")
+  carregarCSV(verbo)
+}
+
+    // aqui você pode trocar o conteúdo da interface baseado no btn.dataset.tab
+
 faz_botoes_verbos()
+
+
+const botaoTeoria = document.getElementById("botao_teoria");
+const botaoPratica = document.getElementById("botao_pratica");
+
+function ativarBotao(botaoAtivo) {
+  // Remove 'active' de ambos
+  botaoTeoria.classList.remove("active");
+  botaoPratica.classList.remove("active");
+
+  // Adiciona 'active' no botão clicado
+  botaoAtivo.classList.add("active");
+}
+
+// Eventos de clique
+botaoTeoria.addEventListener("click", () => ativarBotao(botaoTeoria));
+botaoPratica.addEventListener("click", () => ativarBotao(botaoPratica));
+
+document.getElementById('escolha_verbo_abaixo').innerHTML = traduzir_hud('escolha_verbo', currentLanguage)
+document.getElementById('botao_teoria').innerHTML = traduzir_hud('botao_teoria', currentLanguage)
+document.getElementById('botao_pratica').innerHTML = traduzir_hud('botao_pratica', currentLanguage)

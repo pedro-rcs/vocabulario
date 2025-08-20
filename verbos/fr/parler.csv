@@ -1,0 +1,102 @@
+modo,tempo,pessoa,aux,conjugado
+indicatif,présent,je,,parle
+indicatif,présent,tu,,parles
+indicatif,présent,il/elle,,parle
+indicatif,présent,nous,,parlons
+indicatif,présent,vous,,parlez
+indicatif,présent,ils/elles,,parlent
+
+indicatif,passé composé,je,ai,parlé
+indicatif,passé composé,tu,as,parlé
+indicatif,passé composé,il/elle,a,parlé
+indicatif,passé composé,nous,avons,parlé
+indicatif,passé composé,vous,avez,parlé
+indicatif,passé composé,ils/elles,ont,parlé
+
+indicatif,imparfait,je,,parlais
+indicatif,imparfait,tu,,parlais
+indicatif,imparfait,il/elle,,parlait
+indicatif,imparfait,nous,,parlions
+indicatif,imparfait,vous,,parliez
+indicatif,imparfait,ils/elles,,parlaient
+
+indicatif,plus-que-parfait,je,avais,parlé
+indicatif,plus-que-parfait,tu,avais,parlé
+indicatif,plus-que-parfait,il/elle,avait,parlé
+indicatif,plus-que-parfait,nous,avions,parlé
+indicatif,plus-que-parfait,vous,aviez,parlé
+indicatif,plus-que-parfait,ils/elles,avaient,parlé
+
+indicatif,passé simple,je,,parlai
+indicatif,passé simple,tu,,parlas
+indicatif,passé simple,il/elle,,parla
+indicatif,passé simple,nous,,parlâmes
+indicatif,passé simple,vous,,parlâtes
+indicatif,passé simple,ils/elles,,parlèrent
+
+indicatif,passé antérieur,je,eus,parlé
+indicatif,passé antérieur,tu,eus,parlé
+indicatif,passé antérieur,il/elle,eut,parlé
+indicatif,passé antérieur,nous,eûmes,parlé
+indicatif,passé antérieur,vous,eûtes,parlé
+indicatif,passé antérieur,ils/elles,eurent,parlé
+
+indicatif,futur simple,je,,parlerai
+indicatif,futur simple,tu,,parleras
+indicatif,futur simple,il/elle,,parlera
+indicatif,futur simple,nous,,parlerons
+indicatif,futur simple,vous,,parlerez
+indicatif,futur simple,ils/elles,,parleront
+
+indicatif,futur antérieur,je,aurai,parlé
+indicatif,futur antérieur,tu,auras,parlé
+indicatif,futur antérieur,il/elle,aura,parlé
+indicatif,futur antérieur,nous,aurons,parlé
+indicatif,futur antérieur,vous,aurez,parlé
+indicatif,futur antérieur,ils/elles,auront,parlé
+
+subjonctif,présent,je,,parle
+subjonctif,présent,tu,,parles
+subjonctif,présent,il/elle,,parle
+subjonctif,présent,nous,,parlions
+subjonctif,présent,vous,,parliez
+subjonctif,présent,ils/elles,,parlent
+
+subjonctif,passé,je,aie,parlé
+subjonctif,passé,tu,aies,parlé
+subjonctif,passé,il/elle,ait,parlé
+subjonctif,passé,nous,ayons,parlé
+subjonctif,passé,vous,ayez,parlé
+subjonctif,passé,ils/elles,aient,parlé
+
+subjonctif,imparfait,je,,parlasse
+subjonctif,imparfait,tu,,parlasses
+subjonctif,imparfait,il/elle,,parlât
+subjonctif,imparfait,nous,,parlassions
+subjonctif,imparfait,vous,,parlassiez
+subjonctif,imparfait,ils/elles,,parlassent
+
+subjonctif,plus-que-parfait,je,eusse,parlé
+subjonctif,plus-que-parfait,tu,eusses,parlé
+subjonctif,plus-que-parfait,il/elle,eût,parlé
+subjonctif,plus-que-parfait,nous,eussions,parlé
+subjonctif,plus-que-parfait,vous,eussiez,parlé
+subjonctif,plus-que-parfait,ils/elles,eussent,parlé
+
+conditionnel,présent,je,,parlerais
+conditionnel,présent,tu,,parlerais
+conditionnel,présent,il/elle,,parlerait
+conditionnel,présent,nous,,parlerions
+conditionnel,présent,vous,,parleriez
+conditionnel,présent,ils/elles,,parleraient
+
+conditionnel,passé 1ère forme,je,aurais,parlé
+conditionnel,passé 1ère forme,tu,aurais,parlé
+conditionnel,passé 1ère forme,il/elle,aurait,parlé
+conditionnel,passé 1ère forme,nous,aurions,parlé
+conditionnel,passé 1ère forme,vous,auriez,parlé
+conditionnel,passé 1ère forme,ils/elles,auraient,parlé
+
+impératif,présent,tu,,parle
+impératif,présent,nous,,parlons
+impératif,présent,vous,,parlez

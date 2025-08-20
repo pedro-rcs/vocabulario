@@ -367,3 +367,117 @@ body.pratica .table-wrapper td {
   background: linear-gradient(90deg, #8acb68 0%, #4c8c32 100%);
   transform: scale(1.04);
 }
+
+
+
+body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .modo {
+      margin-bottom: 40px;
+    }
+
+    .modo h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+      text-transform: capitalize;
+    }
+
+    .tempos-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .tempo {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      background: #f9f9f9;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .tempo h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+
+ .linha {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 6px;
+}
+
+.linha label {
+  width: 60px;       /* fixo pro pronome */
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.linha input {
+  flex: 1;           /* ocupa o espaço que sobrar */
+  min-width: 0;      /* evita estourar o container */
+  padding: 4px 6px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+
+
+
+
+/* modal overlay */
+#resultadoModal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* caixa do modal */
+#resultadoConteudo {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+#resultadoConteudo h2 {
+  margin-bottom: 15px;
+}
+
+.resultado-linha {
+  margin: 4px 0;
+  font-family: monospace;
+}
+
+.correto {
+  color: green;
+  font-weight: bold;
+}
+
+.errado {
+  color: red;
+  font-weight: bold;
+}
+
+#fecharModal {
+  margin-top: 15px;
+  padding: 8px 14px;
+  background: #444;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

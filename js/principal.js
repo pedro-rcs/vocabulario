@@ -79,7 +79,7 @@ function buildTables(data) {
 
     language_selector_pratica.addEventListener("change", (e) => {
     idioma_praticado = e.target.value
-
+    setCookie('idioma_praticado', idioma_praticado, 365)
     carrega_csv()
   }) // Adiciona função ao clicar
 
@@ -355,6 +355,7 @@ function carrega_csv () {
     select.addEventListener('change', (e) => {
       currentLanguage = e.target.value;
 
+
       if (currentLanguage === idioma_praticado) {
         if (currentLanguage === 'en') {
           idioma_praticado = 'pt'
@@ -362,6 +363,10 @@ function carrega_csv () {
           idioma_praticado = 'en'
         }
       }
+
+      setCookie('currentLanguage', currentLanguage, 365)
+      setCookie('idioma_praticado', idioma_praticado, 365)
+
       updateUserInfo(); // <-- Atualiza o "Olá, ..."
       carrega_csv();
     });
@@ -501,9 +506,8 @@ function showStatsModal() {
   </tr></table>`;
 
   showCustomModal(html);
-}
 
-// Descubra os índices das colunas dos idiomas selecionados
+  // Descubra os índices das colunas dos idiomas selecionados
 const idxIdiomaGeral = headers.findIndex(h => {
   // Use seu array languages para comparar código
   return languages.find(l => l.code === currentLanguage && l.name_ingles.trim().toLowerCase() === h.trim().toLowerCase());
@@ -511,3 +515,9 @@ const idxIdiomaGeral = headers.findIndex(h => {
 const idxIdiomaPraticado = headers.findIndex(h => {
   return languages.find(l => l.code === idioma_praticado && l.name_ingles.trim().toLowerCase() === h.trim().toLowerCase());
 });
+}
+
+
+
+
+export { currentLanguage, idioma_praticado };

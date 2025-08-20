@@ -65,6 +65,14 @@ const traducoes_hud = {
     it: "Coniugazioni Verbali",
     de: "Verbkonjugationen"
   },
+  'treino_conjugacao': {
+    en: "Verb Conjugation Practice",
+    pt: "Treino de Conjugações Verbais",
+    es: "Práctica de Conjugaciones Verbales",
+    fr: "Entraînement aux Conjugaisons Verbales",
+    it: "Esercizi di Coniugazioni Verbali",
+    de: "Übung zur Verbkonjugation"
+  },
 'idiomas': [
   {
     idioma: 'en',

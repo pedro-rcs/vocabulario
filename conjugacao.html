@@ -4,46 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Treino de Conjugações Verbais</title>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
   <link rel="stylesheet" href="./css/estilos.css">
 
 </head>
 <body>
   <div id="user-info" style="margin: 1em 0; font-weight: bold;"></div>
-  <div class="container_idioma" style="margin-bottom: 2em;">
-    <div class="language-selector" id="language-select">
-      <label for="idioma_geral">Idioma:</label>
-      <select id="idioma_geral">
-        <option value="pt">Português</option>
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-        <option value="it">Italiano</option>
-        <option value="de">Deutsch</option>
-      </select>
-    </div>
-    <div class="language-selector" id="language-select-pratica">
-      <label for="idioma_praticado">Praticar:</label>
-      <select id="idioma_praticado">
-        <option value="pt">Português</option>
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="fr">Français</option>
-        <option value="it">Italiano</option>
-        <option value="de">Deutsch</option>
-      </select>
-    </div>
+  <div id="container_escolha_idiomas" class="container_idioma" style="margin-bottom: 2em;">
   </div>
 
-  <h2>Treino de Conjugações Verbais</h2>
+  <h2 id="h2_treino_conjugacao"></h2>
   <div id="conjugacao-treino" style="margin-top:2em;">
     <!-- Aqui você pode inserir o conteúdo do treino de conjugação -->
-    <p>Escolha um idioma e comece a treinar as conjugações verbais!</p>
     <!-- Exemplo de área de treino -->
     <div id="treino-area"></div>
   </div>
+  <div id="app"></div>
+<input type="file" id="csvFile" accept=".csv">
 
-  <a href="index.html" style="display:inline-block;margin-top:2em;">← Voltar</a>
+<button id="botao_teoria">Teoria</button>
+<button id="botao_pratica">Prática</button>
+<button id="botao_verificar">Verificar</button>
+
+
+<!-- Modal -->
+<div id="resultadoModal">
+  <div id="resultadoConteudo">
+    <h2>Resultado da Verificação</h2>
+    <div id="resultadoTexto"></div>
+    <button id="fecharModal">Fechar</button>
+  </div>
+</div>
+
+
 
   <script type="module" src="./js/conjugacao.js"></script>
+
+
+
+
+
+<a href="index.html" style="display:inline-block;margin-top:2em;">← Voltar</a>
+
+
+
 </body>
 </html>

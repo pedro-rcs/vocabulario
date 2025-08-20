@@ -1,3 +1,6 @@
+import { createLanguageSelector, cria_botoes_abas, traduzir_hud, traduzir_idioma_ingles, separar_idiomas_pratica } from './auxiliar.js'
+// import {  currentLanguage, idioma_praticado } from './principal.js'
+
 // Utilitário para cookie
 function getCookie(name) {
   const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
@@ -6,9 +9,13 @@ function getCookie(name) {
 
 // Exibe nome do usuário
 let userName = getCookie('userName');
+let currentLanguage = getCookie('currentLanguage');
+let idioma_praticado = getCookie('idioma_praticado');
+
 if (userName) {
-  document.getElementById('user-info').textContent = `Olá, ${userName}!`;
+  document.getElementById('user-info').textContent = `${traduzir_hud('ola', currentLanguage)}, ${userName}!`;
 }
+
 
 // Verbos para treinar
 const verbos = {
@@ -68,6 +75,375 @@ function mostrarConjugacao(verbo, idioma) {
   };
 }
 
+
+
+
+
+
+// Cria o container principal
+const container = document.createElement('div');
+container.className = 'container_idioma';
+container.style.marginBottom = '2em';
+
+// Função para criar um seletor de idioma
+function criarSeletorIdioma(id, labelText, selectId) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'language-selector';
+  wrapper.id = id;
+
+  const label = document.createElement('label');
+  label.setAttribute('for', selectId);
+
+  if (labelText === 'Praticar:') labelText = traduzir_hud('label_idioma_praticado', currentLanguage)
+  label.textContent = labelText;
+
+  const select = document.createElement('select');
+  select.id = selectId;
+
+
+
+  const idiomas = [
+    { value: 'pt', text: traduzir_idioma_ingles('pt', currentLanguage) },
+    { value: 'en', text: traduzir_idioma_ingles('en', currentLanguage) },
+    { value: 'es', text: traduzir_idioma_ingles('es', currentLanguage) },
+    { value: 'fr', text: traduzir_idioma_ingles('fr', currentLanguage) },
+    { value: 'it', text: traduzir_idioma_ingles('it', currentLanguage) },
+    { value: 'de', text: traduzir_idioma_ingles('de', currentLanguage) }
+  ];
+
+  idiomas.forEach(idioma => {
+    const option = document.createElement('option');
+    option.value = idioma.value;
+    option.textContent = idioma.text;
+    select.appendChild(option);
+  });
+
+  let valor
+  if (selectId === 'idioma_geral') valor = currentLanguage
+  if (selectId === 'idioma_praticado') valor = idioma_praticado
+  select.value = valor
+  
+  wrapper.appendChild(label);
+  wrapper.appendChild(select);
+  return wrapper;
+}
+
+// Cria os dois seletores
+const seletorGeral = criarSeletorIdioma('language-select', 'Idioma:', 'idioma_geral');
+const seletorPratica = criarSeletorIdioma('language-select-pratica', 'Praticar:', 'idioma_praticado');
+
+// Adiciona ao container
+container.appendChild(seletorGeral);
+seletorGeral.style.display = 'none'
+container.appendChild(seletorPratica);
+
+// Insere no body ou em outro lugar da página
+const container_escolha_idiomas = document.getElementById('container_escolha_idiomas')
+container_escolha_idiomas.appendChild(container);
+
 // Eventos de troca de idioma
 document.getElementById('idioma_praticado').addEventListener('change', renderTreino);
+
+document.getElementById('h2_treino_conjugacao').innerHTML = traduzir_hud('treino_conjugacao', currentLanguage)
 renderTreino();
+
+
+
+
+
+
+
+
+
+
+  const dados = {
+    idioma: "frances",
+    modos: [
+        {
+          modo: "indicatif",
+          ordem_tempos: ["présent", "passé composé", "imparfait", "plus-que-parfait", "passé simple", "passé antérieur", "futur simple", "futur antérieur"],
+          ordenacao: [
+            {
+              tempos: ["présent", "imparfait", "passé simple", "futur simple"],
+              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
+              elementos: ["pessoas", "conjugado"]
+            },
+            {
+              tempos: ["passé composé"],
+              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
+              auxs: ["ai", "as", "a", "avons", "avez", "ont"],
+              elementos: ["pessoas", "auxs", "conjugado"]
+            },
+            {
+              tempos: ["plus-que-parfait"],
+              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
+              auxs: ["avais", "avais", "avait", "avions", "aviez", "avaient"],
+              elementos: ["pessoas", "auxs", "conjugado"]
+            },
+            {
+              tempos: ["passé antérieur"],
+              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
+              auxs: ["eus", "eus", "eut", "eûmes", "eûtes", "eurent"],
+              elementos: ["pessoas", "auxs", "conjugado"]
+            },
+            {
+              tempos: ["futur antérieur"],
+              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
+              auxs: ["aurai", "auras", "aura", "aurons", "aurez", "auront"],
+              elementos: ["pessoas", "auxs", "conjugado"]
+            }
+          ]
+        },
+        {
+          modo: "subjonctif",
+          ordem_tempos: ["présent", "passé", "imparfait", "plus-que-parfait"],
+          ordenacao: [
+            {
+              tempos: ["présent", "imparfait"],
+              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
+              elementos: ["pessoas", "conjugado"]
+            },
+            {
+              tempos: ["passé"],
+              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
+              auxs: ["aie", "aies", "ait", "ayons", "ayez", "aient"],
+              elementos: ["pessoas", "auxs", "conjugado"]
+            },
+            {
+              tempos: ["plus-que-parfait"],
+              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
+              auxs: ["eusse", "eusses", "eût", "eussions", "eussiez", "eussent"],
+              elementos: ["pessoas", "auxs", "conjugado"]
+            }
+          ]
+        },
+        {
+          modo: "conditionnel",
+          ordem_tempos: ["présent", "passé 1ère forme"],
+          ordenacao: [
+            {
+              tempos: ["présent"],
+              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
+              elementos: ["pessoas", "conjugado"]
+            },
+            {
+              tempos: ["passé 1ère forme"],
+              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
+              auxs: ["aurais", "aurais", "aurait", "aurions", "auriez", "auraient"],
+              elementos: ["pessoas", "auxs", "conjugado"]
+            }
+          ]
+        },
+        {
+          modo: "impératif",
+          ordem_tempos: ["présent"],
+          ordenacao: [
+            {
+              tempos: ["présent"],
+              pessoas: ["tu", "nous", "vous"],
+              elementos: ["pessoas", "conjugado"]
+            }
+          ]
+        } 
+    ]
+  }
+
+
+    const app = document.getElementById("app");
+
+    dados.modos.forEach(modo => {
+      const divModo = document.createElement("div");
+      divModo.className = "modo";
+
+      const tituloModo = document.createElement("h2");
+      tituloModo.textContent = modo.modo;
+      divModo.appendChild(tituloModo);
+
+      const temposContainer = document.createElement("div");
+      temposContainer.className = "tempos-container";
+
+      modo.ordenacao.forEach(ord => {
+        ord.tempos.forEach(tempo => {
+          const divTempo = document.createElement("div");
+          divTempo.className = "tempo";
+
+          const tituloTempo = document.createElement("h3");
+          tituloTempo.textContent = tempo;
+          divTempo.appendChild(tituloTempo);
+
+          ord.pessoas.forEach((pessoa, i) => {
+            const linha = document.createElement("div");
+            linha.className = "linha";
+
+            const label = document.createElement("label");
+            label.textContent = pessoa;
+            linha.appendChild(label);
+
+            if (ord.auxs) {
+              const auxInput = document.createElement("input");
+              // auxInput.placeholder = ord.auxs[i] || "aux";
+              auxInput.placeholder = "auxiliar";
+              linha.appendChild(auxInput);
+            }
+
+            const verboInput = document.createElement("input");
+            verboInput.placeholder = "verbo";
+            linha.appendChild(verboInput);
+
+            divTempo.appendChild(linha);
+          });
+
+          temposContainer.appendChild(divTempo);
+        });
+      });
+
+      divModo.appendChild(temposContainer);
+      app.appendChild(divModo);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+let conjDados = {};
+
+function carregarCSV(file) {
+  Papa.parse(file, {
+    header: true,
+    complete: function(results) {
+      results.data.forEach(row => {
+        const key = `${row.modo}-${row.tempo}-${row.pessoa}`;
+        conjDados[key] = {
+          aux: row.aux || "",
+          conjugado: row.conjugado || ""
+        };
+      });
+      alert("CSV carregado!");
+    }
+  });
+}
+
+function verificar() {
+  const resultadoTexto = document.getElementById("resultadoTexto");
+  resultadoTexto.innerHTML = ""; // limpa antes
+
+  document.querySelectorAll(".tempo").forEach(divTempo => {
+    const modo = divTempo.closest(".modo").querySelector("h2").textContent;
+    const tempo = divTempo.querySelector("h3").textContent;
+
+    // título de seção
+    const bloco = document.createElement("div");
+    bloco.innerHTML = `<h3>${modo} – ${tempo}</h3>`;
+    
+    divTempo.querySelectorAll(".linha").forEach(linha => {
+      const pessoa = linha.querySelector("label").textContent;
+      const inputs = linha.querySelectorAll("input");
+      const key = `${modo}-${tempo}-${pessoa}`;
+      const esperado = conjDados[key] || {};
+
+      let saida = `${pessoa}: `;
+      let certo = true;
+
+      if (inputs.length === 2) {
+        const auxUser = inputs[0].value.trim();
+        const verboUser = inputs[1].value.trim();
+
+        if (auxUser === esperado.aux) {
+          saida += `<span class="correto">${auxUser}</span> `;
+        } else {
+          saida += `<span class="errado">${auxUser || "∅"}</span> (<span class="correto">${esperado.aux}</span>) `;
+          certo = false;
+        }
+
+        if (verboUser === esperado.conjugado) {
+          saida += `<span class="correto">${verboUser}</span>`;
+        } else {
+          saida += `<span class="errado">${verboUser || "∅"}</span> (<span class="correto">${esperado.conjugado}</span>)`;
+          certo = false;
+        }
+      }
+
+      if (inputs.length === 1) {
+        const verboUser = inputs[0].value.trim();
+        if (verboUser === esperado.conjugado) {
+          saida += `<span class="correto">${verboUser}</span>`;
+        } else {
+          saida += `<span class="errado">${verboUser || "∅"}</span> (<span class="correto">${esperado.conjugado}</span>)`;
+          certo = false;
+        }
+      }
+
+      const linhaRes = document.createElement("div");
+      linhaRes.className = "resultado-linha";
+      linhaRes.innerHTML = saida;
+      bloco.appendChild(linhaRes);
+
+      // se errado -> limpar input
+      if (!certo) {
+        inputs.forEach(inp => { if (inp.value.trim() !== esperado.aux && inp.value.trim() !== esperado.conjugado) inp.value = ""; });
+      }
+    });
+
+    resultadoTexto.appendChild(bloco);
+  });
+
+  // mostra modal
+  document.getElementById("resultadoModal").style.display = "flex";
+}
+
+// fechar modal
+document.getElementById("fecharModal").addEventListener("click", () => {
+  document.getElementById("resultadoModal").style.display = "none";
+
+  // foca no primeiro input vazio
+  const vazio = document.querySelector("input[value=''], input:not([value])");
+  if (vazio) vazio.focus();
+});
+
+
+
+// --- Botão TEORIA (preencher com os corretos do CSV)
+document.getElementById("botao_teoria").addEventListener("click", () => {
+
+  document.querySelectorAll(".tempo").forEach(divTempo => {
+    const modo = divTempo.closest(".modo").querySelector("h2").textContent;
+    const tempo = divTempo.querySelector("h3").textContent;
+
+    divTempo.querySelectorAll(".linha").forEach(linha => {
+      const pessoa = linha.querySelector("label").textContent;
+      const inputs = linha.querySelectorAll("input");
+      const key = `${modo}-${tempo}-${pessoa}`;
+      const esperado = conjDados[key] || {};
+
+      if (inputs.length === 2) {
+        inputs[0].value = esperado.aux || "";
+        inputs[1].value = esperado.conjugado || "";
+      } else if (inputs.length === 1) {
+        inputs[0].value = esperado.conjugado || "";
+      }
+    });
+  });
+});
+
+// --- Botão PRÁTICA (esvaziar tudo)
+document.getElementById("botao_pratica").addEventListener("click", () => {
+  document.querySelectorAll("input").forEach(inp => inp.value = "");
+  
+  // foca já no primeiro input vazio
+  const vazio = document.querySelector("input");
+  if (vazio) vazio.focus();
+});
+
+
+
+document.getElementById('botao_verificar').addEventListener('click', () => verificar())
+  document.getElementById("csvFile").addEventListener("change", function(e) {
+    carregarCSV(e.target.files[0]);
+  });

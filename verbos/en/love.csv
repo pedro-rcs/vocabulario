@@ -1,0 +1,112 @@
+modo,tempo,pessoa,aux,conjugado
+indicative,simple present,I,,love
+indicative,simple present,you,,love
+indicative,simple present,he/she/it,,loves
+indicative,simple present,we,,love
+indicative,simple present,you,,love
+indicative,simple present,they,,love
+
+indicative,present continuous,I,am,loving
+indicative,present continuous,you,are,loving
+indicative,present continuous,he/she/it,is,loving
+indicative,present continuous,we,are,loving
+indicative,present continuous,you,are,loving
+indicative,present continuous,they,are,loving
+
+indicative,simple past,I,,loved
+indicative,simple past,you,,loved
+indicative,simple past,he/she/it,,loved
+indicative,simple past,we,,loved
+indicative,simple past,you,,loved
+indicative,simple past,they,,loved
+
+indicative,past continuous,I,was,loving
+indicative,past continuous,you,were,loving
+indicative,past continuous,he/she/it,was,loving
+indicative,past continuous,we,were,loving
+indicative,past continuous,you,were,loving
+indicative,past continuous,they,were,loving
+
+indicative,present perfect,I,have,loved
+indicative,present perfect,you,have,loved
+indicative,present perfect,he/she/it,has,loved
+indicative,present perfect,we,have,loved
+indicative,present perfect,you,have,loved
+indicative,present perfect,they,have,loved
+
+indicative,present perfect continuous,I,have been,loving
+indicative,present perfect continuous,you,have been,loving
+indicative,present perfect continuous,he/she/it,has been,loving
+indicative,present perfect continuous,we,have been,loving
+indicative,present perfect continuous,you,have been,loving
+indicative,present perfect continuous,they,have been,loving
+
+indicative,past perfect,I,had,loved
+indicative,past perfect,you,had,loved
+indicative,past perfect,he/she/it,had,loved
+indicative,past perfect,we,had,loved
+indicative,past perfect,you,had,loved
+indicative,past perfect,they,had,loved
+
+indicative,past perfect continuous,I,had been,loving
+indicative,past perfect continuous,you,had been,loving
+indicative,past perfect continuous,he/she/it,had been,loving
+indicative,past perfect continuous,we,had been,loving
+indicative,past perfect continuous,you,had been,loving
+indicative,past perfect continuous,they,had been,loving
+
+indicative,future,I,will,love
+indicative,future,you,will,love
+indicative,future,he/she/it,will,love
+indicative,future,we,will,love
+indicative,future,you,will,love
+indicative,future,they,will,love
+
+indicative,future continuous,I,will be,loving
+indicative,future continuous,you,will be,loving
+indicative,future continuous,he/she/it,will be,loving
+indicative,future continuous,we,will be,loving
+indicative,future continuous,you,will be,loving
+indicative,future continuous,they,will be,loving
+
+indicative,future perfect,I,will have,loved
+indicative,future perfect,you,will have,loved
+indicative,future perfect,he/she/it,will have,loved
+indicative,future perfect,we,will have,loved
+indicative,future perfect,you,will have,loved
+indicative,future perfect,they,will have,loved
+
+indicative,future perfect continuous,I,will have been,loving
+indicative,future perfect continuous,you,will have been,loving
+indicative,future perfect continuous,he/she/it,will have been,loving
+indicative,future perfect continuous,we,will have been,loving
+indicative,future perfect continuous,you,will have been,loving
+indicative,future perfect continuous,they,will have been,loving
+
+conditional,simple,I,would,love
+conditional,simple,you,would,love
+conditional,simple,he/she/it,would,love
+conditional,simple,we,would,love
+conditional,simple,you,would,love
+conditional,simple,they,would,love
+
+conditional,progressive,I,would be,loving
+conditional,progressive,you,would be,loving
+conditional,progressive,he/she/it,would be,loving
+conditional,progressive,we,would be,loving
+conditional,progressive,you,would be,loving
+conditional,progressive,they,would be,loving
+
+conditional,perfect,I,would have,loved
+conditional,perfect,you,would have,loved
+conditional,perfect,he/she/it,would have,loved
+conditional,perfect,we,would have,loved
+conditional,perfect,you,would have,loved
+conditional,perfect,they,would have,loved
+
+conditional,perfect progressive,I,would have been,loving
+conditional,perfect progressive,you,would have been,loving
+conditional,perfect progressive,he/she/it,would have been,loving
+conditional,perfect progressive,we,would have been,loving
+conditional,perfect progressive,you,would have been,loving
+conditional,perfect progressive,they,would have been,loving

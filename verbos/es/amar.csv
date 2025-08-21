@@ -1,0 +1,114 @@
+modo,tempo,pessoa,aux,conjugado
+indicativo,presente,yo,,amo
+indicativo,presente,tú,,amas
+indicativo,presente,él/ella,,ama
+indicativo,presente,nosotros(as),,amamos
+indicativo,presente,vosotros(as),,amáis
+indicativo,presente,ellos/ellas,,aman
+indicativo,pretérito perfecto compuesto,yo,he,amado
+indicativo,pretérito perfecto compuesto,tú,has,amado
+indicativo,pretérito perfecto compuesto,él/ella,ha,amado
+indicativo,pretérito perfecto compuesto,nosotros(as),hemos,amado
+indicativo,pretérito perfecto compuesto,vosotros(as),habéis,amado
+indicativo,pretérito perfecto compuesto,ellos/ellas,han,amado
+indicativo,pretérito imperfecto,yo,,amaba
+indicativo,pretérito imperfecto,tú,,amabas
+indicativo,pretérito imperfecto,él/ella,,amaba
+indicativo,pretérito imperfecto,nosotros(as),,amábamos
+indicativo,pretérito imperfecto,vosotros(as),,amabais
+indicativo,pretérito imperfecto,ellos/ellas,,amaban
+indicativo,pretérito pluscuamperfecto,yo,había,amado
+indicativo,pretérito pluscuamperfecto,tú,habías,amado
+indicativo,pretérito pluscuamperfecto,él/ella,había,amado
+indicativo,pretérito pluscuamperfecto,nosotros(as),habíamos,amado
+indicativo,pretérito pluscuamperfecto,vosotros(as),habíais,amado
+indicativo,pretérito pluscuamperfecto,ellos/ellas,habían,amado
+indicativo,pretérito perfecto simple,yo,,amé
+indicativo,pretérito perfecto simple,tú,,amaste
+indicativo,pretérito perfecto simple,él/ella,,amó
+indicativo,pretérito perfecto simple,nosotros(as),,amamos
+indicativo,pretérito perfecto simple,vosotros(as),,amasteis
+indicativo,pretérito perfecto simple,ellos/ellas,,amaron
+indicativo,pretérito anterior,yo,hube,amado
+indicativo,pretérito anterior,tú,hubiste,amado
+indicativo,pretérito anterior,él/ella,hubo,amado
+indicativo,pretérito anterior,nosotros(as),hubimos,amado
+indicativo,pretérito anterior,vosotros(as),hubisteis,amado
+indicativo,pretérito anterior,ellos/ellas,hubieron,amado
+indicativo,futuro,yo,,amaré
+indicativo,futuro,tú,,amarás
+indicativo,futuro,él/ella,,amará
+indicativo,futuro,nosotros(as),,amaremos
+indicativo,futuro,vosotros(as),,amaréis
+indicativo,futuro,ellos/ellas,,amarán
+indicativo,futuro perfecto,yo,habré,amado
+indicativo,futuro perfecto,tú,habrás,amado
+indicativo,futuro perfecto,él/ella,habrá,amado
+indicativo,futuro perfecto,nosotros(as),habremos,amado
+indicativo,futuro perfecto,vosotros(as),habréis,amado
+indicativo,futuro perfecto,ellos/ellas,habran,amado
+condicional,simple,yo,,amaría
+condicional,simple,tú,,amarías
+condicional,simple,él/ella,,amaría
+condicional,simple,nosotros(as),,amaríamos
+condicional,simple,vosotros(as),,amaríais
+condicional,simple,ellos/ellas,,amarían
+condicional,compuesto,yo,habría,amado
+condicional,compuesto,tú,habrías,amado
+condicional,compuesto,él/ella,habría,amado
+condicional,compuesto,nosotros(as),habríamos,amado
+condicional,compuesto,vosotros(as),habríais,amado
+condicional,compuesto,ellos/ellas,habrían,amado
+subjuntivo,presente,yo,,ame
+subjuntivo,presente,tú,,ames
+subjuntivo,presente,él/ella,,ame
+subjuntivo,presente,nosotros(as),,amemos
+subjuntivo,presente,vosotros(as),,améis
+subjuntivo,presente,ellos/ellas,,amen
+subjuntivo,pretérito perfecto,yo,haya,amado
+subjuntivo,pretérito perfecto,tú,hayas,amado
+subjuntivo,pretérito perfecto,él/ella,haya,amado
+subjuntivo,pretérito perfecto,nosotros(as),hayamos,amado
+subjuntivo,pretérito perfecto,vosotros(as),hayáis,amado
+subjuntivo,pretérito perfecto,ellos/ellas,hayan,amado
+subjuntivo,pretérito imperfecto 1,yo,,amara
+subjuntivo,pretérito imperfecto 1,tú,,amaras
+subjuntivo,pretérito imperfecto 1,él/ella,,amara
+subjuntivo,pretérito imperfecto 1,nosotros(as),,amáramos
+subjuntivo,pretérito imperfecto 1,vosotros(as),,amarais
+subjuntivo,pretérito imperfecto 1,ellos/ellas,,amaran
+subjuntivo,pretérito imperfecto 2,yo,,amase
+subjuntivo,pretérito imperfecto 2,tú,,amases
+subjuntivo,pretérito imperfecto 2,él/ella,,amase
+subjuntivo,pretérito imperfecto 2,nosotros(as),,amásemos
+subjuntivo,pretérito imperfecto 2,vosotros(as),,amaseis
+subjuntivo,pretérito imperfecto 2,ellos/ellas,,amasen
+subjuntivo,pretérito pluscuamperfecto 1,yo,hubiera,amado
+subjuntivo,pretérito pluscuamperfecto 1,tú,hubieras,amado
+subjuntivo,pretérito pluscuamperfecto 1,él/ella,hubiera,amado
+subjuntivo,pretérito pluscuamperfecto 1,nosotros(as),hubiéramos,amado
+subjuntivo,pretérito pluscuamperfecto 1,vosotros(as),hubierais,amado
+subjuntivo,pretérito pluscuamperfecto 1,ellos/ellas,hubieran,amado
+subjuntivo,pretérito pluscuamperfecto 2,yo,hubiese,amado
+subjuntivo,pretérito pluscuamperfecto 2,tú,hubieses,amado
+subjuntivo,pretérito pluscuamperfecto 2,él/ella,hubiese,amado
+subjuntivo,pretérito pluscuamperfecto 2,nosotros(as),hubiésemos,amado
+subjuntivo,pretérito pluscuamperfecto 2,vosotros(as),hubieseis,amado
+subjuntivo,pretérito pluscuamperfecto 2,ellos/ellas,hubiesen,amado
+subjuntivo,futuro,yo,,amare
+subjuntivo,futuro,tú,,amares
+subjuntivo,futuro,él/ella,,amare
+subjuntivo,futuro,nosotros(as),,amáremos
+subjuntivo,futuro,vosotros(as),,amareis
+subjuntivo,futuro,ellos/ellas,,amaren
+subjuntivo,futuro perfecto,yo,hubiere,amado
+subjuntivo,futuro perfecto,tú,hubieres,amado
+subjuntivo,futuro perfecto,él/ella,hubiere,amado
+subjuntivo,futuro perfecto,nosotros(as),hubiéremos,amado
+subjuntivo,futuro perfecto,vosotros(as),hubiereis,amado
+subjuntivo,futuro perfecto,ellos/ellas,hubieren,amado
+imperativo,imperativo,tú,,ama
+imperativo,imperativo,usted,,ame
+imperativo,imperativo,nosotros(as),,amemos
+imperativo,imperativo,vosotros(as),,amad
+imperativo,imperativo,ustedes,,amen

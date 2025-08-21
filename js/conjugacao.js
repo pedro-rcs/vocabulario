@@ -1,8 +1,13 @@
 import { createLanguageSelector, cria_botoes_abas, traduzir_hud, traduzir_idioma_ingles, separar_idiomas_pratica } from './auxiliar.js'
+import regras_verbais from './regras_verbais.js'
 // import {  currentLanguage, idioma_praticado } from './principal.js'
 
 var modo = 'teoria'
 // Utilitário para cookie
+function setCookie(name, value, days) {
+  const expires = new Date(Date.now() + days*24*60*60*1000).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+}
 function getCookie(name) {
   const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
   return v ? decodeURIComponent(v[2]) : null;
@@ -127,105 +132,15 @@ document.getElementById('h2_treino_conjugacao').innerHTML = traduzir_hud('treino
 
 
 
-
-  const dados = {
-    idioma: "frances",
-    modos: [
-        {
-          modo: "indicatif",
-          ordem_tempos: ["présent", "passé composé", "imparfait", "plus-que-parfait", "passé simple", "passé antérieur", "futur simple", "futur antérieur"],
-          ordenacao: [
-            {
-              tempos: ["présent", "imparfait", "passé simple", "futur simple"],
-              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
-              elementos: ["pessoas", "conjugado"]
-            },
-            {
-              tempos: ["passé composé"],
-              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
-              auxs: ["ai", "as", "a", "avons", "avez", "ont"],
-              elementos: ["pessoas", "auxs", "conjugado"]
-            },
-            {
-              tempos: ["plus-que-parfait"],
-              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
-              auxs: ["avais", "avais", "avait", "avions", "aviez", "avaient"],
-              elementos: ["pessoas", "auxs", "conjugado"]
-            },
-            {
-              tempos: ["passé antérieur"],
-              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
-              auxs: ["eus", "eus", "eut", "eûmes", "eûtes", "eurent"],
-              elementos: ["pessoas", "auxs", "conjugado"]
-            },
-            {
-              tempos: ["futur antérieur"],
-              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
-              auxs: ["aurai", "auras", "aura", "aurons", "aurez", "auront"],
-              elementos: ["pessoas", "auxs", "conjugado"]
-            }
-          ]
-        },
-        {
-          modo: "subjonctif",
-          ordem_tempos: ["présent", "passé", "imparfait", "plus-que-parfait"],
-          ordenacao: [
-            {
-              tempos: ["présent", "imparfait"],
-              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
-              elementos: ["pessoas", "conjugado"]
-            },
-            {
-              tempos: ["passé"],
-              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
-              auxs: ["aie", "aies", "ait", "ayons", "ayez", "aient"],
-              elementos: ["pessoas", "auxs", "conjugado"]
-            },
-            {
-              tempos: ["plus-que-parfait"],
-              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
-              auxs: ["eusse", "eusses", "eût", "eussions", "eussiez", "eussent"],
-              elementos: ["pessoas", "auxs", "conjugado"]
-            }
-          ]
-        },
-        {
-          modo: "conditionnel",
-          ordem_tempos: ["présent", "passé 1ère forme"],
-          ordenacao: [
-            {
-              tempos: ["présent"],
-              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
-              elementos: ["pessoas", "conjugado"]
-            },
-            {
-              tempos: ["passé 1ère forme"],
-              pessoas: ["je", "tu", "il/elle", "nous", "vous", "ils/elles"],
-              auxs: ["aurais", "aurais", "aurait", "aurions", "auriez", "auraient"],
-              elementos: ["pessoas", "auxs", "conjugado"]
-            }
-          ]
-        },
-        {
-          modo: "impératif",
-          ordem_tempos: ["présent"],
-          ordenacao: [
-            {
-              tempos: ["présent"],
-              pessoas: ["tu", "nous", "vous"],
-              elementos: ["pessoas", "conjugado"]
-            }
-          ]
-        } 
-    ]
-  }
-
-
 function cria_tabela_verbos () {
 
       const app = document.getElementById("app");
   app.innerHTML = ''
-    dados.modos.forEach(modo => {
+
+  for (let i = 0; i < regras_verbais.length; i++) {
+    if (regras_verbais[i].idioma_sigla === idioma_praticado) {
+
+      regras_verbais[i].modos.forEach(modo => {
       const divModo = document.createElement("div");
       divModo.className = "modo";
 
@@ -275,6 +190,10 @@ function cria_tabela_verbos () {
       divModo.appendChild(temposContainer);
       app.appendChild(divModo);
     });
+    }
+  }
+
+
 }
 
 
@@ -518,3 +437,11 @@ botaoPratica.addEventListener("click", () => ativarBotao(botaoPratica));
 document.getElementById('escolha_verbo_abaixo').innerHTML = traduzir_hud('escolha_verbo', currentLanguage)
 document.getElementById('botao_teoria').innerHTML = traduzir_hud('botao_teoria', currentLanguage)
 document.getElementById('botao_pratica').innerHTML = traduzir_hud('botao_pratica', currentLanguage)
+
+const select_idioma_praticado = document.getElementById('idioma_praticado')
+select_idioma_praticado.addEventListener('change', function(event) {
+  const valorSelecionado = event.target.value;
+  setCookie("idioma_praticado", valorSelecionado, 365)
+  window.location.reload()
+
+});

@@ -1,0 +1,112 @@
+modo,tempo,pessoa,aux,conjugado
+indicative,simple present,I,,speak
+indicative,simple present,you,,speak
+indicative,simple present,he/she/it,,speaks
+indicative,simple present,we,,speak
+indicative,simple present,you,,speak
+indicative,simple present,they,,speak
+
+indicative,present continuous,I,am,speaking
+indicative,present continuous,you,are,speaking
+indicative,present continuous,he/she/it,is,speaking
+indicative,present continuous,we,are,speaking
+indicative,present continuous,you,are,speaking
+indicative,present continuous,they,are,speaking
+
+indicative,simple past,I,,spoke
+indicative,simple past,you,,spoke
+indicative,simple past,he/she/it,,spoke
+indicative,simple past,we,,spoke
+indicative,simple past,you,,spoke
+indicative,simple past,they,,spoke
+
+indicative,past continuous,I,was,speaking
+indicative,past continuous,you,were,speaking
+indicative,past continuous,he/she/it,was,speaking
+indicative,past continuous,we,were,speaking
+indicative,past continuous,you,were,speaking
+indicative,past continuous,they,were,speaking
+
+indicative,present perfect,I,have,spoken
+indicative,present perfect,you,have,spoken
+indicative,present perfect,he/she/it,has,spoken
+indicative,present perfect,we,have,spoken
+indicative,present perfect,you,have,spoken
+indicative,present perfect,they,have,spoken
+
+indicative,present perfect continuous,I,have been,speaking
+indicative,present perfect continuous,you,have been,speaking
+indicative,present perfect continuous,he/she/it,has been,speaking
+indicative,present perfect continuous,we,have been,speaking
+indicative,present perfect continuous,you,have been,speaking
+indicative,present perfect continuous,they,have been,speaking
+
+indicative,past perfect,I,had,spoken
+indicative,past perfect,you,had,spoken
+indicative,past perfect,he/she/it,had,spoken
+indicative,past perfect,we,had,spoken
+indicative,past perfect,you,had,spoken
+indicative,past perfect,they,had,spoken
+
+indicative,past perfect continuous,I,had been,speaking
+indicative,past perfect continuous,you,had been,speaking
+indicative,past perfect continuous,he/she/it,had been,speaking
+indicative,past perfect continuous,we,had been,speaking
+indicative,past perfect continuous,you,had been,speaking
+indicative,past perfect continuous,they,had been,speaking
+
+indicative,future,I,will,speak
+indicative,future,you,will,speak
+indicative,future,he/she/it,will,speak
+indicative,future,we,will,speak
+indicative,future,you,will,speak
+indicative,future,they,will,speak
+
+indicative,future continuous,I,will be,speaking
+indicative,future continuous,you,will be,speaking
+indicative,future continuous,he/she/it,will be,speaking
+indicative,future continuous,we,will be,speaking
+indicative,future continuous,you,will be,speaking
+indicative,future continuous,they,will be,speaking
+
+indicative,future perfect,I,will have,spoken
+indicative,future perfect,you,will have,spoken
+indicative,future perfect,he/she/it,will have,spoken
+indicative,future perfect,we,will have,spoken
+indicative,future perfect,you,will have,spoken
+indicative,future perfect,they,will have,spoken
+
+indicative,future perfect continuous,I,will have been,speaking
+indicative,future perfect continuous,you,will have been,speaking
+indicative,future perfect continuous,he/she/it,will have been,speaking
+indicative,future perfect continuous,we,will have been,speaking
+indicative,future perfect continuous,you,will have been,speaking
+indicative,future perfect continuous,they,will have been,speaking
+
+conditional,simple,I,would,speak
+conditional,simple,you,would,speak
+conditional,simple,he/she/it,would,speak
+conditional,simple,we,would,speak
+conditional,simple,you,would,speak
+conditional,simple,they,would,speak
+
+conditional,progressive,I,would be,speaking
+conditional,progressive,you,would be,speaking
+conditional,progressive,he/she/it,would be,speaking
+conditional,progressive,we,would be,speaking
+conditional,progressive,you,would be,speaking
+conditional,progressive,they,would be,speaking
+
+conditional,perfect,I,would have,spoken
+conditional,perfect,you,would have,spoken
+conditional,perfect,he/she/it,would have,spoken
+conditional,perfect,we,would have,spoken
+conditional,perfect,you,would have,spoken
+conditional,perfect,they,would have,spoken
+
+conditional,perfect progressive,I,would have been,speaking
+conditional,perfect progressive,you,would have been,speaking
+conditional,perfect progressive,he/she/it,would have been,speaking
+conditional,perfect progressive,we,would have been,speaking
+conditional,perfect progressive,you,would have been,speaking
+conditional,perfect progressive,they,would have been,speaking

@@ -423,8 +423,12 @@ body {
   padding: 4px 6px;
   border: 1px solid #bbb;
   border-radius: 5px;
+  font-size: 17px;
 }
 
+.linha_input_teoria {
+  border: none;
+}
 
 
 

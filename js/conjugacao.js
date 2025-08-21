@@ -222,8 +222,9 @@ document.getElementById('h2_treino_conjugacao').innerHTML = traduzir_hud('treino
 
 
 function cria_tabela_verbos () {
-      const app = document.getElementById("app");
 
+      const app = document.getElementById("app");
+  app.innerHTML = ''
     dados.modos.forEach(modo => {
       const divModo = document.createElement("div");
       divModo.className = "modo";
@@ -255,12 +256,13 @@ function cria_tabela_verbos () {
             if (ord.auxs) {
               const auxInput = document.createElement("input");
               // auxInput.placeholder = ord.auxs[i] || "aux";
-              auxInput.placeholder = "auxiliar";
+              auxInput.placeholder = traduzir_hud('placeholder_auxiliar', currentLanguage)
               linha.appendChild(auxInput);
             }
 
             const verboInput = document.createElement("input");
-            verboInput.placeholder = "verbo";
+            verboInput.placeholder = traduzir_hud('placeholder_verbo', currentLanguage)
+
             linha.appendChild(verboInput);
 
             divTempo.appendChild(linha);
@@ -306,6 +308,8 @@ function carregarCSV(arquivo) {
       });
       // alert("CSV carregado!");
       cria_tabela_verbos()
+      document.getElementById("botao_teoria").click();
+
     }
   });
 }
@@ -404,6 +408,10 @@ document.getElementById("botao_teoria").addEventListener("click", () => {
       const key = `${modo}-${tempo}-${pessoa}`;
       const esperado = conjDados[key] || {};
 
+      inputs.forEach(input => {
+        input.disabled = true;
+      });
+
       if (inputs.length === 2) {
         inputs[0].value = esperado.aux || "";
         inputs[1].value = esperado.conjugado || "";
@@ -417,7 +425,10 @@ document.getElementById("botao_teoria").addEventListener("click", () => {
 // --- Botão PRÁTICA (esvaziar tudo)
 document.getElementById("botao_pratica").addEventListener("click", () => {
   
-  document.querySelectorAll("input").forEach(inp => inp.value = "");
+  document.querySelectorAll("input").forEach(inp => {
+    inp.value = ""
+    inp.disabled = false;
+  });
   
   document.getElementById('botao_verificar').style.display = 'inline'
 
@@ -484,10 +495,9 @@ function clicou_link (botao, verbo) {
   carregarCSV(verbo)
 }
 
-    // aqui você pode trocar o conteúdo da interface baseado no btn.dataset.tab
+// aqui você pode trocar o conteúdo da interface baseado no btn.dataset.tab
 
 faz_botoes_verbos()
-
 
 const botaoTeoria = document.getElementById("botao_teoria");
 const botaoPratica = document.getElementById("botao_pratica");

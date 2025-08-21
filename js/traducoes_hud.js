@@ -81,6 +81,23 @@ const traducoes_hud = {
     it: "Scegli uno dei verbi qui sotto per esercitarti.",
     fr: "Choisis l'un des verbes ci-dessous pour t'exercer."
   },
+  'placeholder_verbo': {
+    pt: "verbo",
+    en: "verb",
+    es: "verbo",
+    fr: "verbe",
+    de: "Verb",
+    it: "verbo"
+  },
+  'placeholder_auxiliar': {
+    pt: "auxiliar",
+    en: "auxiliary",
+    es: "auxiliar",
+    fr: "auxiliaire",
+    de: "Hilfsverb",
+    it: "ausiliare"
+  },
+
 
 'idiomas': [
   {

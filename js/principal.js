@@ -204,13 +204,15 @@ function buildTables(data) {
         
           td.addEventListener('click', () => {
             const idioma = headers[idx];
+            console.log(categoria)
             const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
             if (!arquivoAudio) {
               alert('Áudio não encontrado para esta frase.');
               return;
             }
-            const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
+            const audioPath = `${idioma}/${arquivoAudio}`;
             const audio = new Audio(audioPath);
+            console.log(audioPath)
             audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
           });
         }

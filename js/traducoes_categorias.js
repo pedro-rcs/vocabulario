@@ -1,4 +1,71 @@
 const traducoesCategoria = {
+  'artigos': {
+    en: 'Articles',
+    pt: 'Artigos',
+    es: 'Artículos',
+    it: 'Articoli',
+    fr: 'Articles',
+    de: 'Artikel'
+  },
+  'pronomes': {
+    en: 'Pronouns',
+    pt: 'Pronomes',
+    es: 'Pronombres',
+    it: 'Pronomi',
+    fr: 'Pronoms',
+    de: 'Pronomen'
+  },
+  'conjuncoes': {
+    en: 'Conjunctions',
+    pt: 'Conjunções',
+    es: 'Conjunciones',
+    it: 'Congiunzioni',
+    fr: 'Conjonctions',
+    de: 'Konjunktionen'
+  },
+  'preposicoes': {
+    en: 'Prepositions',
+    pt: 'Preposições',
+    es: 'Preposiciones',
+    it: 'Preposizioni',
+    fr: 'Prépositions',
+    de: 'Präpositionen'
+  },
+  'substantivos': {
+    en: 'Nouns',
+    pt: 'Substantivos',
+    es: 'Sustantivos',
+    it: 'Sostantivi',
+    fr: 'Noms',
+    de: 'Substantive'
+  },
+  'adjetivos': {
+    en: 'Adjectives',
+    pt: 'Adjetivos',
+    es: 'Adjetivos',
+    it: 'Aggettivi',
+    fr: 'Adjectifs',
+    de: 'Adjektive'
+  },
+  'adverbios': {
+    en: 'Adverbs',
+    pt: 'Advérbios',
+    es: 'Adverbios',
+    it: 'Avverbi',
+    fr: 'Adverbes',
+    de: 'Adverbien'
+  },
+  'verbos_infinitivos': {
+    en: 'Infinitive Verbs',
+    pt: 'Verbos Infinitivos',
+    es: 'Verbos Infinitivos',
+    it: 'Verbi all’infinito',
+    fr: 'Verbes à l’infinitif',
+    de: 'Infinitivverben'
+  },
+
+
+
   'Greetings': {
     en: 'Greetings',
     pt: 'Saudações',

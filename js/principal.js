@@ -9,6 +9,9 @@ const caminho = location.hostname === "127.0.0.1" ? "../" : "./";
 var modo = 'teoria'
 let idioma_praticado = 'pt'
 
+setCookie('currentLanguage', currentLanguage, 365)
+setCookie('idioma_praticado', idioma_praticado, 365)
+
 function buildTables(data) {
   const headers = data[0].slice(1);
   const grouped = {};

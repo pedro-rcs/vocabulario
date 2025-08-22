@@ -64,8 +64,6 @@ const traducoesCategoria = {
     de: 'Infinitivverben'
   },
 
-
-
   'Greetings': {
     en: 'Greetings',
     pt: 'Saudações',

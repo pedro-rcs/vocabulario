@@ -17,6 +17,7 @@ import {
 const caminho = location.hostname === "127.0.0.1" ? "../" : "./"
 
 let modo = 'teoria'
+let mostra_placeholder_palavras = 'nao'
 
 let currentLanguage = getCookie("currentLanguage")
 if (!currentLanguage) {
@@ -101,10 +102,22 @@ function buildTables(data) {
   container_idioma.appendChild(language_selector_pratica); // insere no container
 
   let botao_placeholder_palavra = document.createElement('button');
-  botao_placeholder_palavra.style.display = 'none'
-  botao_placeholder_palavra.innerHTML = 'Dicas Palavras'
-  container_idioma.addEventListener('click', () => {
-    alert("oe")
+  botao_placeholder_palavra.id = 'botao_placeholder_palavra'
+  botao_placeholder_palavra.style.display = 'flex'
+  botao_placeholder_palavra.className = (mostra_placeholder_palavras === 'sim') ? "botao_terminei botao_ativado" : 'botao_terminei'
+  botao_placeholder_palavra.innerHTML = traduzir_hud('placeholder_palavra', currentLanguage)
+  
+  botao_placeholder_palavra.addEventListener('click', () => {
+
+    if (mostra_placeholder_palavras === 'sim') {
+      mostra_placeholder_palavras = 'nao'
+      botao_placeholder_palavra.classList.remove('botao_ativado')
+    } else {
+      mostra_placeholder_palavras = 'sim'
+      botao_placeholder_palavra.classList.remove('botao_ativado')
+    }
+    carrega_csv()
+    // window.location.reload()
   })
 
   container_idioma.appendChild(botao_placeholder_palavra); // insere no container
@@ -209,11 +222,13 @@ function buildTables(data) {
           input.type = 'text';
           input.id = `input_${categoria}_${fraseIndex}`;
           input.name = `input_${categoria}_${fraseIndex}`;
-
+          if (mostra_placeholder_palavras === 'sim') input.placeholder = `${frase[1]}`
+          // console.log(frase)
           // Recupera progresso salvo
           const acertadas = getProgress(userName, idioma_praticado, categoria);
           if (acertadas.includes(fraseIndex)) {
             input.value = frase[1];
+
             input.readOnly = true;
             input.classList.add('input-audio');
             input.title = 'Clique para ouvir o áudio';
@@ -229,9 +244,11 @@ function buildTables(data) {
               audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
             };
           }
+          // input.placeholder = `${frase[fraseIndex]}`;
 
           td.appendChild(input);
         } else {
+
           td.textContent = texto;
           td.style.cursor = 'pointer';
         

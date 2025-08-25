@@ -97,6 +97,14 @@ const traducoes_hud = {
     de: "Hilfsverb",
     it: "ausiliare"
   },
+  'placeholder_palavra': {
+    pt: "Mostrar as Palavras",
+    en: "Show the Words",
+    es: "Mostrar las Palabras",
+    fr: "Afficher les Mots",
+    de: "Wörter anzeigen",
+    it: "Mostra le Parole"
+  },
 
 
 'idiomas': [

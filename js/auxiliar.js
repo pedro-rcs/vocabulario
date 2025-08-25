@@ -87,7 +87,6 @@ function traduzir_hud (item, idioma) {
 
 function traduzir_idioma_ingles(codigo_idioma_h, currentLanguage) {
   const langObj = traducoes_hud.idiomas.find(lang => lang.idioma === currentLanguage);
-  console.log('langObj:', langObj, 'codigo_idioma_h:', codigo_idioma_h);
   return langObj?.[codigo_idioma_h] || 'Unknown Language';
 }
 
@@ -119,6 +118,50 @@ function separar_idiomas_pratica(dados, selecionado, praticado) {
   return resultadoFiltrado;
 }
 
+function setCookie(name, value, days) {
+  const expires = new Date(Date.now() + days*24*60*60*1000).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+  console.log("Cookie definido:", document.cookie);
+}
+function getCookie(name) {
+  const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  return v ? decodeURIComponent(v[2]) : null;
+}
+function apagaCookie(name) {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  console.log(`apagado: ${name}`)
+  window.location.reload()
+}
 
+function showCustomModal(message, callback) {
+  const modal = document.getElementById('custom-modal');
+  const msgDiv = document.getElementById('custom-modal-message');
+  const closeBtn = document.getElementById('custom-modal-close');
+  
+  msgDiv.innerHTML = message;
+  modal.style.display = 'flex';
 
-export { createLanguageSelector, cria_botoes_abas, traduzir_hud, traduzir_idioma_ingles, separar_idiomas_pratica }
+  function closeModal() {
+    modal.style.display = 'none';
+    closeBtn.removeEventListener('click', closeModal);
+    modal.removeEventListener('click', outsideClick);
+    if (callback) callback();
+  }
+  function outsideClick(e) {
+    if (e.target === modal) closeModal();
+  }
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', outsideClick);
+}
+
+export {
+  createLanguageSelector,
+  cria_botoes_abas,
+  traduzir_hud,
+  traduzir_idioma_ingles,
+  separar_idiomas_pratica,
+  setCookie,
+  getCookie,
+  apagaCookie,
+  showCustomModal
+}

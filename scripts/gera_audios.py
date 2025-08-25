@@ -16,12 +16,15 @@ lang_codes = {
 }
 
 # 🔢 Contador começa em 600
-contador = 600
+contador = 1725
 
 # 📖 Leitura do CSV
 with open(csv_path, mode="r", encoding="utf-8") as file:
     reader = csv.DictReader(file)
-    for row in reader:
+    for index, row in enumerate(reader):
+        if index < 1725:
+            continue  # ⏭️ pula as primeiras 600 linhas
+
         print(f"🔄 Processando linha {contador}: {row}")
 
         for idioma_en, lang_code in lang_codes.items():

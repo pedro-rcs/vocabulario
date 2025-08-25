@@ -1,16 +1,36 @@
-import { audioMap } from './audio_map.js';
-
+import { audioMap } from './audio_map.js'
 import { traducoesCategoria } from './traducoes_categorias.js'
-import { createLanguageSelector, cria_botoes_abas, traduzir_hud, traduzir_idioma_ingles, separar_idiomas_pratica } from './auxiliar.js'
-import { parseCSV } from './csv_utils.js';
+import { parseCSV } from './csv_utils.js'
+import {
+  createLanguageSelector,
+  cria_botoes_abas,
+  traduzir_hud,
+  traduzir_idioma_ingles,
+  separar_idiomas_pratica,
+  setCookie,
+  getCookie,
+  apagaCookie,
+  showCustomModal
+} from './auxiliar.js'
 
-let currentLanguage = 'en'; // valor padrão
-const caminho = location.hostname === "127.0.0.1" ? "../" : "./";
-var modo = 'teoria'
-let idioma_praticado = 'pt'
+// Definimos variáveis e contantes.
+const caminho = location.hostname === "127.0.0.1" ? "../" : "./"
 
-setCookie('currentLanguage', currentLanguage, 365)
-setCookie('idioma_praticado', idioma_praticado, 365)
+let modo = 'teoria'
+
+let currentLanguage = getCookie("currentLanguage")
+if (!currentLanguage) {
+  currentLanguage = 'en'
+  setCookie('currentLanguage', currentLanguage, 365)
+}
+
+let idioma_praticado = getCookie("idioma_praticado")
+if (!idioma_praticado) {
+  idioma_praticado = 'pt'
+  setCookie('idioma_praticado', idioma_praticado, 365)
+}
+
+
 
 function buildTables(data) {
   const headers = data[0].slice(1);
@@ -48,6 +68,7 @@ function buildTables(data) {
   botao_teoria.addEventListener("click", () => {
     modo = 'teoria'
     // document.getElementById("language_selector_pratica").style.display = 'none'
+    document.getElementById("botao_placeholder_palavra").style.display = 'none'
     carrega_csv()
   })
   container_idioma.appendChild(botao_teoria)
@@ -56,6 +77,7 @@ function buildTables(data) {
   botao_pratica.addEventListener("click", () => {
     modo = 'pratica'
     document.getElementById("language_selector_pratica").style.display = 'flex'
+    document.getElementById("botao_placeholder_palavra").style.display = 'flex'
     carrega_csv()
   })
   container_idioma.appendChild(botao_pratica)
@@ -77,6 +99,18 @@ function buildTables(data) {
 
   createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica', idioma_praticado) // adiciona label + select dentro desse div
   container_idioma.appendChild(language_selector_pratica); // insere no container
+
+  let botao_placeholder_palavra = document.createElement('button');
+  botao_placeholder_palavra.style.display = 'none'
+  botao_placeholder_palavra.innerHTML = 'Dicas Palavras'
+  container_idioma.addEventListener('click', () => {
+    alert("oe")
+  })
+
+  container_idioma.appendChild(botao_placeholder_palavra); // insere no container
+
+  
+
 
   container.appendChild(container_idioma);
 
@@ -147,7 +181,6 @@ function buildTables(data) {
           break;
         }
       }
-            console.log(`${codigo_idioma_h} ESSE É O H`);
 
       th.textContent = traduzir_idioma_ingles(codigo_idioma_h, currentLanguage);
       // th.textContent = h;
@@ -388,40 +421,17 @@ function traduzirCategoria(categoria, idioma) {
   return traducoesCategoria[categoria]?.[idioma] || categoria
 }
 
-function showCustomModal(message, callback) {
-  const modal = document.getElementById('custom-modal');
-  const msgDiv = document.getElementById('custom-modal-message');
-  const closeBtn = document.getElementById('custom-modal-close');
-  msgDiv.innerHTML = message;
-  modal.style.display = 'flex';
 
-  function closeModal() {
-    modal.style.display = 'none';
-    closeBtn.removeEventListener('click', closeModal);
-    modal.removeEventListener('click', outsideClick);
-    if (callback) callback();
-  }
-  function outsideClick(e) {
-    if (e.target === modal) closeModal();
-  }
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', outsideClick);
-}
 
-function setCookie(name, value, days) {
-  const expires = new Date(Date.now() + days*24*60*60*1000).toUTCString();
-  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
-}
-function getCookie(name) {
-  const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-  return v ? decodeURIComponent(v[2]) : null;
-}
 
 let userName = getCookie('userName');
 if (!userName) {
+  const html = `<Qual é o seu nome?<br><input type="text"></input>`
+  showCustomModal(html)
   userName = prompt('Qual é o seu nome?');
   if (userName) setCookie('userName', userName, 365);
 }
+
 function updateUserInfo() {
   const ola = traduzir_hud('ola', currentLanguage);
   const statsLabel = traduzir_hud('estatisticas', currentLanguage) || 'Estatísticas';
@@ -509,21 +519,29 @@ function showStatsModal() {
   html += `<tr style="font-weight:bold;">
     <td>Total</td>
     <td style="text-align:center;">${totalAcertos}/${totalFrases}</td>
-  </tr></table>`;
+    <br><br>
+
+  </tr>
+
+</table>    <button id="botao_apaga_progresso" class="botao_terminei">
+    Apagar Progresso
+  </button>`;
 
   showCustomModal(html);
 
+document.getElementById('botao_apaga_progresso').addEventListener('click', () => apagaCookie('progresso') )
+
   // Descubra os índices das colunas dos idiomas selecionados
-const idxIdiomaGeral = headers.findIndex(h => {
-  // Use seu array languages para comparar código
-  return languages.find(l => l.code === currentLanguage && l.name_ingles.trim().toLowerCase() === h.trim().toLowerCase());
-});
-const idxIdiomaPraticado = headers.findIndex(h => {
-  return languages.find(l => l.code === idioma_praticado && l.name_ingles.trim().toLowerCase() === h.trim().toLowerCase());
-});
+  /*
+  const idxIdiomaGeral = headers.findIndex(h => {
+    // Use seu array languages para comparar código
+    return languages.find(l => l.code === currentLanguage && l.name_ingles.trim().toLowerCase() === h.trim().toLowerCase());
+  });
+  
+  const idxIdiomaPraticado = headers.findIndex(h => {
+    return languages.find(l => l.code === idioma_praticado && l.name_ingles.trim().toLowerCase() === h.trim().toLowerCase());
+
+  });*/
 }
 
-
-
-
-export { currentLanguage, idioma_praticado };
+export { currentLanguage, idioma_praticado }

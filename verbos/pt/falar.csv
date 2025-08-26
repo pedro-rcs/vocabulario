@@ -1,0 +1,65 @@
+modo,tempo,pessoa,aux,conjugado
+indicativo,presente,eu,,falo
+indicativo,presente,tu,,falas
+indicativo,presente,ele/ela,,fala
+indicativo,presente,nós,,falamos
+indicativo,presente,vós,,falais
+indicativo,presente,eles/elas,,falam
+indicativo,pretérito imperfeito,eu,,falava
+indicativo,pretérito imperfeito,tu,,falavas
+indicativo,pretérito imperfeito,ele/ela,,falava
+indicativo,pretérito imperfeito,nós,,falávamos
+indicativo,pretérito imperfeito,vós,,faláveis
+indicativo,pretérito imperfeito,eles/elas,,falavam
+indicativo,pretérito perfeito simples,eu,,falei
+indicativo,pretérito perfeito simples,tu,,falaste
+indicativo,pretérito perfeito simples,ele/ela,,falou
+indicativo,pretérito perfeito simples,nós,,falamos
+indicativo,pretérito perfeito simples,vós,,falastes
+indicativo,pretérito perfeito simples,eles/elas,,falaram
+indicativo,pretérito mais-que-perfeito simples,eu,,falara
+indicativo,pretérito mais-que-perfeito simples,tu,,falaras
+indicativo,pretérito mais-que-perfeito simples,ele/ela,,falara
+indicativo,pretérito mais-que-perfeito simples,nós,,faláramos
+indicativo,pretérito mais-que-perfeito simples,vós,,faláreis
+indicativo,pretérito mais-que-perfeito simples,eles/elas,,falaram
+indicativo,futuro do presente,eu,,falarei
+indicativo,futuro do presente,tu,,falarás
+indicativo,futuro do presente,ele/ela,,falará
+indicativo,futuro do presente,nós,,falaremos
+indicativo,futuro do presente,vós,,falareis
+indicativo,futuro do presente,eles/elas,,falarão
+indicativo,futuro do pretérito,eu,,falaria
+indicativo,futuro do pretérito,tu,,falarias
+indicativo,futuro do pretérito,ele/ela,,falaria
+indicativo,futuro do pretérito,nós,,falaríamos
+indicativo,futuro do pretérito,vós,,falaríeis
+indicativo,futuro do pretérito,eles/elas,,falariam
+subjuntivo,presente,eu,que,fale
+subjuntivo,presente,tu,que,fales
+subjuntivo,presente,ele/ela,que,fale
+subjuntivo,presente,nós,que,falemos
+subjuntivo,presente,vós,que,faleis
+subjuntivo,presente,eles/elas,que,falem
+subjuntivo,pretérito imperfeito,eu,se,falasse
+subjuntivo,pretérito imperfeito,tu,se,falasses
+subjuntivo,pretérito imperfeito,ele/ela,se,falasse
+subjuntivo,pretérito imperfeito,nós,se,falássemos
+subjuntivo,pretérito imperfeito,vós,se,falásseis
+subjuntivo,pretérito imperfeito,eles/elas,se,falassem
+subjuntivo,futuro,eu,quando,falar
+subjuntivo,futuro,tu,quando,falares
+subjuntivo,futuro,ele/ela,quando,falar
+subjuntivo,futuro,nós,quando,falarmos
+subjuntivo,futuro,vós,quando,falardes
+subjuntivo,futuro,eles/elas,quando,falarem
+imperativo,afirmativo,tu,,fala
+imperativo,afirmativo,você,,fale
+imperativo,afirmativo,nós,,falemos
+imperativo,afirmativo,vós,,falai
+imperativo,afirmativo,vocês,,falem
+imperativo,negativo,tu,não,fales
+imperativo,negativo,você,não,fale
+imperativo,negativo,nós,não,falemos
+imperativo,negativo,vós,não,faleis
+imperativo,negativo,vocês,não,falem

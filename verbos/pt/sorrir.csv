@@ -1,0 +1,65 @@
+modo,tempo,pessoa,aux,conjugado
+indicativo,presente,eu,,sorrio
+indicativo,presente,tu,,sorris
+indicativo,presente,ele/ela,,sorri
+indicativo,presente,nós,,sorrimos
+indicativo,presente,vós,,sorris
+indicativo,presente,eles/elas,,sorriem
+indicativo,pretérito imperfeito,eu,,sorria
+indicativo,pretérito imperfeito,tu,,sorrias
+indicativo,pretérito imperfeito,ele/ela,,sorria
+indicativo,pretérito imperfeito,nós,,sorríamos
+indicativo,pretérito imperfeito,vós,,sorríeis
+indicativo,pretérito imperfeito,eles/elas,,sorriam
+indicativo,pretérito perfeito simples,eu,,sorri
+indicativo,pretérito perfeito simples,tu,,sorriste
+indicativo,pretérito perfeito simples,ele/ela,,sorriu
+indicativo,pretérito perfeito simples,nós,,sorrimos
+indicativo,pretérito perfeito simples,vós,,sorristes
+indicativo,pretérito perfeito simples,eles/elas,,sorriram
+indicativo,pretérito mais-que-perfeito simples,eu,,sorrira
+indicativo,pretérito mais-que-perfeito simples,tu,,sorriras
+indicativo,pretérito mais-que-perfeito simples,ele/ela,,sorrira
+indicativo,pretérito mais-que-perfeito simples,nós,,sorríramos
+indicativo,pretérito mais-que-perfeito simples,vós,,sorríreis
+indicativo,pretérito mais-que-perfeito simples,eles/elas,,sorriram
+indicativo,futuro do presente,eu,,sorrirei
+indicativo,futuro do presente,tu,,sorrirás
+indicativo,futuro do presente,ele/ela,,sorrirá
+indicativo,futuro do presente,nós,,sorriremos
+indicativo,futuro do presente,vós,,sorrireis
+indicativo,futuro do presente,eles/elas,,sorrirão
+indicativo,futuro do pretérito,eu,,sorriria
+indicativo,futuro do pretérito,tu,,sorririas
+indicativo,futuro do pretérito,ele/ela,,sorriria
+indicativo,futuro do pretérito,nós,,sorriríamos
+indicativo,futuro do pretérito,vós,,sorriríeis
+indicativo,futuro do pretérito,eles/elas,,sorririam
+subjuntivo,presente,eu,que,sorria
+subjuntivo,presente,tu,que,sorrias
+subjuntivo,presente,ele/ela,que,sorria
+subjuntivo,presente,nós,que,sorríamos
+subjuntivo,presente,vós,que,sorríeis
+subjuntivo,presente,eles/elas,que,sorriam
+subjuntivo,pretérito imperfeito,eu,se,sorrisse
+subjuntivo,pretérito imperfeito,tu,se,sorrisses
+subjuntivo,pretérito imperfeito,ele/ela,se,sorrisse
+subjuntivo,pretérito imperfeito,nós,se,sorríssemos
+subjuntivo,pretérito imperfeito,vós,se,sorrísseis
+subjuntivo,pretérito imperfeito,eles/elas,se,sorrissem
+subjuntivo,futuro,eu,quando,sorrir
+subjuntivo,futuro,tu,quando,sorrires
+subjuntivo,futuro,ele/ela,quando,sorrir
+subjuntivo,futuro,nós,quando,sorrirmos
+subjuntivo,futuro,vós,quando,sorrirdes
+subjuntivo,futuro,eles/elas,quando,sorrirem
+imperativo,afirmativo,tu,,sorri
+imperativo,afirmativo,você,,sorria
+imperativo,afirmativo,nós,,sorríamos
+imperativo,afirmativo,vós,,sorri
+imperativo,afirmativo,vocês,,sorriam
+imperativo,negativo,tu,não,sorris
+imperativo,negativo,você,não,sorria
+imperativo,negativo,nós,não,sorríamos
+imperativo,negativo,vós,não,sorris
+imperativo,negativo,vocês,não,sorriam

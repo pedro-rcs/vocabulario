@@ -57,6 +57,14 @@ const traducoes_hud = {
     fr: 'Pratique',
     de: 'Praxis'
   },
+  'botao_palavras': {
+    en: "Words",
+    pt: "Palavras",
+    es: "Palabras",
+    de: "Wörter",
+    it: "Parole",
+    fr: "Mots"
+  },
   'botao_conjugacao': {
     en: "Verb Conjugation",
     pt: "Conjugações Verbais",

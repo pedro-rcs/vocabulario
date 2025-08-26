@@ -1,0 +1,65 @@
+modo,tempo,pessoa,aux,conjugado
+indicativo,presente,eu,,amo
+indicativo,presente,tu,,amas
+indicativo,presente,ele/ela,,ama
+indicativo,presente,nós,,amamos
+indicativo,presente,vós,,amais
+indicativo,presente,eles/elas,,amam
+indicativo,pretérito imperfeito,eu,,amava
+indicativo,pretérito imperfeito,tu,,amavas
+indicativo,pretérito imperfeito,ele/ela,,amava
+indicativo,pretérito imperfeito,nós,,amávamos
+indicativo,pretérito imperfeito,vós,,amáveis
+indicativo,pretérito imperfeito,eles/elas,,amavam
+indicativo,pretérito perfeito simples,eu,,amei
+indicativo,pretérito perfeito simples,tu,,amaste
+indicativo,pretérito perfeito simples,ele/ela,,amou
+indicativo,pretérito perfeito simples,nós,,amamos
+indicativo,pretérito perfeito simples,vós,,amastes
+indicativo,pretérito perfeito simples,eles/elas,,amaram
+indicativo,pretérito mais-que-perfeito simples,eu,,amara
+indicativo,pretérito mais-que-perfeito simples,tu,,amaras
+indicativo,pretérito mais-que-perfeito simples,ele/ela,,amara
+indicativo,pretérito mais-que-perfeito simples,nós,,amáramos
+indicativo,pretérito mais-que-perfeito simples,vós,,amáreis
+indicativo,pretérito mais-que-perfeito simples,eles/elas,,amaram
+indicativo,futuro do presente,eu,,amarei
+indicativo,futuro do presente,tu,,amarás
+indicativo,futuro do presente,ele/ela,,amará
+indicativo,futuro do presente,nós,,amaremos
+indicativo,futuro do presente,vós,,amareis
+indicativo,futuro do presente,eles/elas,,amarão
+indicativo,futuro do pretérito,eu,,amaria
+indicativo,futuro do pretérito,tu,,amarias
+indicativo,futuro do pretérito,ele/ela,,amaria
+indicativo,futuro do pretérito,nós,,amaríamos
+indicativo,futuro do pretérito,vós,,amaríeis
+indicativo,futuro do pretérito,eles/elas,,amariam
+subjuntivo,presente,eu,que,ame
+subjuntivo,presente,tu,que,ames
+subjuntivo,presente,ele/ela,que,ame
+subjuntivo,presente,nós,que,amemos
+subjuntivo,presente,vós,que,ameis
+subjuntivo,presente,eles/elas,que,amem
+subjuntivo,pretérito imperfeito,eu,se,amasse
+subjuntivo,pretérito imperfeito,tu,se,amasses
+subjuntivo,pretérito imperfeito,ele/ela,se,amasse
+subjuntivo,pretérito imperfeito,nós,se,amássemos
+subjuntivo,pretérito imperfeito,vós,se,amásseis
+subjuntivo,pretérito imperfeito,eles/elas,se,amassem
+subjuntivo,futuro,eu,quando,amar
+subjuntivo,futuro,tu,quando,amares
+subjuntivo,futuro,ele/ela,quando,amar
+subjuntivo,futuro,nós,quando,amarmos
+subjuntivo,futuro,vós,quando,amardes
+subjuntivo,futuro,eles/elas,quando,amarem
+imperativo,afirmativo,tu,,ama
+imperativo,afirmativo,você,,ame
+imperativo,afirmativo,nós,,amemos
+imperativo,afirmativo,vós,,amai
+imperativo,afirmativo,vocês,,amem
+imperativo,negativo,tu,não,ames
+imperativo,negativo,você,não,ame
+imperativo,negativo,nós,não,amemos
+imperativo,negativo,vós,não,ameis
+imperativo,negativo,vocês,não,amem

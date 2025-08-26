@@ -49,18 +49,50 @@ function buildTables(data) {
 
   let language_selector = document.createElement('div');
   language_selector.className = "language-selector";
-  language_selector.id = 'language-select'
+  language_selector.style.marginBottom = "10px"
 
   createLanguageSelector(language_selector, currentLanguage, 'padrao') // adiciona label
   container.appendChild(language_selector);  // insere no container
+ 
+
+  let language_selector_pratica = document.createElement('div');
+  language_selector_pratica.className = "language-selector";
+  language_selector_pratica.style.marginBottom = "10px"
+  language_selector_pratica.id = 'language_selector_pratica'
+
+  createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica', idioma_praticado) // adiciona label + select dentro desse div
+  container.appendChild(language_selector_pratica); // insere no container
 
 
   // Cria título principal
   const h1 = document.createElement('h1');  
   h1.className = 'h1_titulo'
   h1.textContent = traduzir_hud('100_useful_travel_phrases', currentLanguage)
-  container.appendChild(h1);
-  
+  // container.appendChild(h1);
+
+  const container_botoes_modalidades = document.createElement('div')
+  container_botoes_modalidades.className = 'container_idioma'
+  container_botoes_modalidades.style.marginTop = '40px'
+  container_botoes_modalidades.style.marginBottom = '40px'
+
+
+  const botao_palavras = cria_botoes_abas(traduzir_hud('botao_palavras', currentLanguage), "ativo");
+  container_botoes_modalidades.appendChild(botao_palavras)
+
+
+
+  const botao_conjugacao = cria_botoes_abas(traduzir_hud('botao_conjugacao', currentLanguage), "inativo");
+  botao_conjugacao.id = "botao_conjugacao";
+  botao_conjugacao.addEventListener("click", () => {
+    // Redireciona para uma página de conjugação ou chama uma função/modal
+    window.location.href = "conjugacao.html";
+  });
+  container_botoes_modalidades.appendChild(botao_conjugacao)
+
+
+
+
+
   // Criar botão "Teoria" e "Prática"
   const container_idioma = document.createElement('div');
   container_idioma.className = 'container_idioma'
@@ -83,23 +115,8 @@ function buildTables(data) {
   })
   container_idioma.appendChild(botao_pratica)
 
-  const botao_conjugacao = cria_botoes_abas(traduzir_hud('botao_conjugacao', currentLanguage), "inativo");
-  botao_conjugacao.id = "botao_conjugacao";
-  botao_conjugacao.addEventListener("click", () => {
-    // Redireciona para uma página de conjugação ou chama uma função/modal
-    window.location.href = "conjugacao.html";
-    // ou: abrirModalConjugacao();
-  });
-  container_idioma.appendChild(botao_conjugacao)
+  
 
-
-  let language_selector_pratica = document.createElement('div');
-  language_selector_pratica.className = "language-selector";
-  // language_selector_pratica.style.display = "none"
-  language_selector_pratica.id = 'language_selector_pratica'
-
-  createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica', idioma_praticado) // adiciona label + select dentro desse div
-  container_idioma.appendChild(language_selector_pratica); // insere no container
 
   let botao_placeholder_palavra = document.createElement('button');
   botao_placeholder_palavra.id = 'botao_placeholder_palavra'
@@ -124,6 +141,7 @@ function buildTables(data) {
 
   
 
+  container.appendChild(container_botoes_modalidades);
 
   container.appendChild(container_idioma);
 

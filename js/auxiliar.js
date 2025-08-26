@@ -81,6 +81,15 @@ function cria_botoes_abas (texto, atividade) {
   return botao
 }
 
+function cria_botoes_abas_2 (texto, atividade) {
+
+  const classe_ativo = (atividade === 'ativo') ? 'active' : ''
+  const botao = document.createElement('button');
+  botao.textContent = texto
+  botao.className = `tab-btn2 ${classe_ativo}`
+  return botao
+}
+
 function traduzir_hud (item, idioma) {
   return traducoes_hud[item]?.[idioma] || item
 }
@@ -157,6 +166,7 @@ function showCustomModal(message, callback) {
 export {
   createLanguageSelector,
   cria_botoes_abas,
+  cria_botoes_abas_2,
   traduzir_hud,
   traduzir_idioma_ingles,
   separar_idiomas_pratica,

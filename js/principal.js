@@ -4,6 +4,7 @@ import { parseCSV } from './csv_utils.js'
 import {
   createLanguageSelector,
   cria_botoes_abas,
+  cria_botoes_abas_2,
   traduzir_hud,
   traduzir_idioma_ingles,
   separar_idiomas_pratica,
@@ -76,12 +77,12 @@ function buildTables(data) {
   container_botoes_modalidades.style.marginBottom = '40px'
 
 
-  const botao_palavras = cria_botoes_abas(traduzir_hud('botao_palavras', currentLanguage), "ativo");
+  const botao_palavras = cria_botoes_abas_2(traduzir_hud('botao_palavras', currentLanguage), "ativo")
   container_botoes_modalidades.appendChild(botao_palavras)
 
 
 
-  const botao_conjugacao = cria_botoes_abas(traduzir_hud('botao_conjugacao', currentLanguage), "inativo");
+  const botao_conjugacao = cria_botoes_abas_2(traduzir_hud('botao_conjugacao', currentLanguage), "inativo")
   botao_conjugacao.id = "botao_conjugacao";
   botao_conjugacao.addEventListener("click", () => {
     // Redireciona para uma página de conjugação ou chama uma função/modal

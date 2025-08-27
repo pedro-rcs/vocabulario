@@ -116,6 +116,14 @@ function buildTables(data) {
   })
   container_idioma.appendChild(botao_pratica)
 
+  const botao_multipla_escolha = cria_botoes_abas(traduzir_hud('botao_multipla_escolha', currentLanguage), "inativo")  
+  botao_multipla_escolha.addEventListener("click", () => {
+    modo = 'multipla_escolha'
+
+    carrega_csv()
+  })
+  container_idioma.appendChild(botao_multipla_escolha)
+
   
 
 
@@ -418,7 +426,9 @@ function carrega_csv () {
       const resultado_filtrado = separar_idiomas_pratica(data, currentLanguage, idioma_praticado)
       buildTables(resultado_filtrado)
     }
+    if (modo === 'multipla_escolha') {
 
+    }
     // ...dentro de carrega_csv() ou logo após definir o modo...
     if (modo === 'pratica') {
       document.body.classList.add('pratica');

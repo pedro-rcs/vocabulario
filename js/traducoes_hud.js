@@ -50,13 +50,21 @@ const traducoes_hud = {
     de: 'Theorie'
   },
   'botao_pratica': {
-    en: 'Practice',
-    pt: 'Prática',
-    es: 'Práctica',
-    it: 'Pratica',
-    fr: 'Pratique',
-    de: 'Praxis'
+    en: 'Written Practice',
+    pt: 'Prática Escrita',
+    es: 'Práctica Escrita',
+    it: 'Pratica Scritta',
+    fr: 'Pratique Écrite',
+    de: 'Schriftliche Praxis'
   },
+  'botao_multipla_escolha': {
+  en: 'Multiple Choice',
+  pt: 'Múltipla Escolha',
+  es: 'Opción Múltiple',
+  it: 'Scelta Multipla',
+  fr: 'Choix Multiple',
+  de: 'Multiple Choice'
+},
   'botao_palavras': {
     en: "Words",
     pt: "Palavras",

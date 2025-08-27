@@ -101,7 +101,7 @@ function buildTables(data) {
   const botao_teoria = cria_botoes_abas(traduzir_hud('botao_teoria', currentLanguage), "ativo")
   botao_teoria.addEventListener("click", () => {
     modo = 'teoria'
-    // document.getElementById("language_selector_pratica").style.display = 'none'
+
     document.getElementById("botao_placeholder_palavra").style.display = 'none'
     carrega_csv()
   })

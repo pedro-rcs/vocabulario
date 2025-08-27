@@ -1,4 +1,4 @@
-import { createLanguageSelector, cria_botoes_abas, traduzir_hud, traduzir_idioma_ingles, separar_idiomas_pratica } from './auxiliar.js'
+import { createLanguageSelector,cria_botoes_abas_2, cria_botoes_abas, traduzir_hud, traduzir_idioma_ingles, separar_idiomas_pratica } from './auxiliar.js'
 import regras_verbais from './regras_verbais.js'
 // import {  currentLanguage, idioma_praticado } from './principal.js'
 
@@ -73,68 +73,16 @@ const container = document.createElement('div');
 container.className = 'container_idioma';
 container.style.marginBottom = '2em';
 
-// Função para criar um seletor de idioma
-function criarSeletorIdioma(id, labelText, selectId) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'language-selector';
-  wrapper.id = id;
-
-  const label = document.createElement('label');
-  label.setAttribute('for', selectId);
-
-  if (labelText === 'Praticar:') labelText = traduzir_hud('label_idioma_praticado', currentLanguage)
-  label.textContent = labelText;
-
-  const select = document.createElement('select');
-  select.id = selectId;
-
-  const idiomas = [
-    { value: 'pt', text: traduzir_idioma_ingles('pt', currentLanguage) },
-    { value: 'en', text: traduzir_idioma_ingles('en', currentLanguage) },
-    { value: 'es', text: traduzir_idioma_ingles('es', currentLanguage) },
-    { value: 'fr', text: traduzir_idioma_ingles('fr', currentLanguage) },
-    { value: 'it', text: traduzir_idioma_ingles('it', currentLanguage) },
-    { value: 'de', text: traduzir_idioma_ingles('de', currentLanguage) }
-  ];
-
-  idiomas.forEach(idioma => {
-    const option = document.createElement('option');
-    option.value = idioma.value;
-    option.textContent = idioma.text;
-    select.appendChild(option);
-  });
-
-  let valor
-  if (selectId === 'idioma_geral') valor = currentLanguage
-  if (selectId === 'idioma_praticado') valor = idioma_praticado
-  select.value = valor
-  
-  wrapper.appendChild(label);
-  wrapper.appendChild(select);
-  return wrapper;
-}
-
-// Cria os dois seletores
-const seletorGeral = criarSeletorIdioma('language-select', 'Idioma:', 'idioma_geral');
-const seletorPratica = criarSeletorIdioma('language-select-pratica', 'Praticar:', 'idioma_praticado');
-
-// Adiciona ao container
-container.appendChild(seletorGeral);
-seletorGeral.style.display = 'none'
-container.appendChild(seletorPratica);
-
 // Insere no body ou em outro lugar da página
 const container_escolha_idiomas = document.getElementById('container_escolha_idiomas')
-container_escolha_idiomas.appendChild(container);
+container_escolha_idiomas.appendChild(container)
 
 // Eventos de troca de idioma
 document.getElementById('h2_treino_conjugacao').innerHTML = traduzir_hud('treino_conjugacao', currentLanguage)
 
-
-
 function cria_tabela_verbos () {
 
-      const app = document.getElementById("app");
+  const app = document.getElementById("app")
   app.innerHTML = ''
 
   for (let i = 0; i < regras_verbais.length; i++) {
@@ -438,10 +386,71 @@ document.getElementById('escolha_verbo_abaixo').innerHTML = traduzir_hud('escolh
 document.getElementById('botao_teoria').innerHTML = traduzir_hud('botao_teoria', currentLanguage)
 document.getElementById('botao_pratica').innerHTML = traduzir_hud('botao_pratica', currentLanguage)
 
-const select_idioma_praticado = document.getElementById('idioma_praticado')
-select_idioma_praticado.addEventListener('change', function(event) {
-  const valorSelecionado = event.target.value;
-  setCookie("idioma_praticado", valorSelecionado, 365)
-  window.location.reload()
 
-});
+  const container_botoes_modalidades = document.getElementById('container_botoes_modalidades')
+   container_botoes_modalidades.style.marginTop = '40px'
+  container_botoes_modalidades.style.marginBottom = '40px'
+
+
+  const botao_palavras = cria_botoes_abas_2(traduzir_hud('botao_palavras', currentLanguage), "inativo")
+  container_botoes_modalidades.appendChild(botao_palavras)
+
+  const botao_conjugacao = cria_botoes_abas_2(traduzir_hud('botao_conjugacao', currentLanguage), "ativo")
+  botao_conjugacao.id = "botao_conjugacao";
+  botao_palavras.addEventListener("click", () => {
+    // Redireciona para uma página de conjugação ou chama uma função/modal
+    window.location.href = "index.html";
+  });
+  container_botoes_modalidades.appendChild(botao_conjugacao)
+
+
+
+  
+  let language_selector = document.createElement('div');
+    language_selector.className = "language-selector";
+    language_selector.style.marginBottom = "10px"
+  
+    createLanguageSelector(language_selector, currentLanguage, 'padrao') // adiciona label
+    document.getElementById('container_idiomas').appendChild(language_selector);  // insere no container
+
+    language_selector.addEventListener('change', (e) => {
+      currentLanguage = e.target.value
+      setCookie('currentLanguage', e.target.value, 365)
+      
+      if (currentLanguage === idioma_praticado) {
+        if (currentLanguage === 'en') {
+          idioma_praticado = 'pt'
+        } else {
+          idioma_praticado = 'en'
+        }
+      }
+    setCookie('idioma_praticado', idioma_praticado, 365)
+
+      window.location.reload()
+    })
+  
+    let language_selector_pratica = document.createElement('div')
+    language_selector_pratica.className = "language-selector"
+    language_selector_pratica.style.marginBottom = "10px"
+    language_selector_pratica.id = 'language_selector_pratica'
+
+  
+  
+    createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica', idioma_praticado) // adiciona label + select dentro desse div
+    
+  language_selector_pratica.addEventListener("change", (e) => {
+
+    idioma_praticado = e.target.value
+    setCookie('idioma_praticado', idioma_praticado, 365)
+
+    if (currentLanguage === idioma_praticado) {
+      if (currentLanguage === 'en') {
+        idioma_praticado = 'pt'
+      } else {
+        idioma_praticado = 'en'
+      }
+    }
+ 
+    window.location.reload()
+  })
+  document.getElementById('container_idiomas').appendChild(language_selector_pratica); // insere no container

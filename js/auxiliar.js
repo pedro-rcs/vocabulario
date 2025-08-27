@@ -52,7 +52,7 @@ function idioma_select_padrao (idioma_selecionado, tipo, idioma_praticado) {
 function idioma_select_praticado (idioma_selecionado, tipo, idioma_praticado) {
   
   const select = document.createElement('select');
-  select.id = 'language-select';
+  select.id = 'language-select-praticado';
   select.name = 'language';
 
   languages.forEach(lang => {

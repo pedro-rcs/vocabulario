@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.controls label, .controls select, .controls button {
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.controls select {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+#start-btn, #restart-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#start-btn:hover, #restart-btn:hover {
+    background-color: #0056b3;
+}
+
+#game-container {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+#stats {
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#question-box {
+    margin-bottom: 20px;
+}
+
+#question-box p {
+    margin: 0;
+    color: #666;
+    font-size: 18px;
+}
+
+#question-word {
+    font-size: 2.5em;
+    color: #333;
+    margin-top: 5px;
+}
+
+#options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-btn {
+    font-size: 18px;
+    padding: 12px;
+    border: 2px solid #007bff;
+    background-color: #fff;
+    color: #007bff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.option-btn:hover {
+    background-color: #e9f5ff;
+}
+
+.option-btn.correct {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+.option-btn.wrong {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.hidden {
+    display: none;
+}
+
+#message-container {
+    padding-top: 20px;
+    text-align: center;
+}
+
+#end-message {
+    font-size: 2em;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+#restart-btn {
+    width: 100%;
+}

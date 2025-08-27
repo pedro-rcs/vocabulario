@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Traduções</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7fcf9;
+            color: #264d26;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        .h1_titulo {
+            margin-top: 35px;
+            margin-bottom: 35px;
+            color: #3a7d44;
+            font-weight: 700;
+            font-size: 2.2rem;
+        }
+
+        #question {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #3a7d44;
+            font-weight: 700;
+            border-left: 6px solid #a4d4ae;
+            padding-left: 0.5rem;
+            background: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background 0.25s, transform 0.15s;
+            margin: 8px 0;
+        }
+
+        #question:hover {
+            background: #e2e2e2;
+            transform: translateX(3px);
+        }
+
+        #options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option {
+            padding: 16px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #6dd171;
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 900;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            transition: background 0.3s, transform 0.15s, box-shadow 0.3s;
+            width: 200px;
+            text-align: center;
+        }
+
+        .option:hover {
+            background-color: #43a047;
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        .option:active {
+            background-color: #2e7d32;
+            box-shadow: 0 0 0 3px #c8e6c9;
+            transform: scale(0.98);
+        }
+
+        .option:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Animação para acerto (crescer) */
+        .correct-animation {
+            animation: pulse 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Animação para erro (balançar horizontalmente) */
+        .wrong-animation {
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        #feedback {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            color: #264d26;
+            font-weight: 500;
+        }
+
+        #scores {
+            font-size: 1.1rem;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: #f5f5f5;
+            border-left: 4px solid #a4d4ae;
+            display: inline-block;
+            transition: background 0.25s, transform 0.15s;
+        }
+
+        #scores:hover {
+            background: #e2e2e2;
+            transform: translateX(3px);
+        }
+    </style>
+</head>
+<body>
+    <h1 class="h1_titulo">Jogo de Traduções</h1>
+    <div id="question"></div>
+    <div id="options"></div>
+    <div id="feedback"></div>
+    <div id="scores"><span>✔️</span>: 0 | <span>❌</span>: 0</div>
+
+    <script>
+        // Configurações ajustáveis
+        const params = new URLSearchParams(window.location.search);
+        const classe = params.get("classe");
+        const currentLanguage = params.get("currentLanguage");
+        const idioma_praticado = params.get("idioma_praticado");
+
+        const categoria = classe; // Categoria a filtrar
+
+        const idiomaPergunta = currentLanguage // Idioma da pergunta (ex: 'en' para English)
+        const idiomaResposta = idioma_praticado // Idioma das respostas (ex: 'pt' para Portuguese)
+
+        let numOptions = 2 // Número de opções (fácil expandir para 3)
+        const csvFile = '../dados.csv' // Nome do arquivo CSV (coloque no mesmo diretório)
+
+        // Mapeamento de headers para códigos curtos
+        const langMap = {
+            'English': 'en',
+            'Portuguese': 'pt',
+            'Spanish': 'es',
+            'French': 'fr',
+            'German': 'de',
+            'Italian': 'it'
+        };
+
+        let words = []; // Todas as palavras filtradas
+        let remainingWords = []; // Palavras restantes
+        let correct = 0;
+        let wrong = 0;
+        let isProcessing = false; // Flag para evitar múltiplos cliques/teclas
+        let currentWord = null; // Armazena a palavra atual da pergunta
+        let correta = null; // Armazena a resposta correta
+
+        // Sons para acerto e erro (usando arquivos MP3)
+        const correctSound = new Audio('acerto.mp3');
+        const errorSound = new Audio('erro.mp3');
+
+        // Função para carregar e parsear CSV
+        async function loadCSV() {
+            try {
+                const response = await fetch(csvFile);
+                const data = await response.text();
+                const lines = data.trim().split('\n');
+                const headers = lines[0].split(',').map(h => h.trim());
+                const langHeaders = headers.slice(1); // Headers de idiomas
+
+                for (let i = 1; i < lines.length; i++) {
+                    const values = lines[i].split(',');
+                    const cat = values[0].trim();
+                    if (cat === categoria) {
+                        const word = {};
+                        for (let j = 1; j < values.length; j++) {
+                            const lang = langMap[langHeaders[j-1]];
+                            word[lang] = values[j].trim();
+                        }
+                        words.push(word);
+                    }
+                }
+
+                if (words.length === 0) {
+                    alert('Nenhuma palavra encontrada na categoria.');
+                    return;
+                }
+
+                remainingWords = [...words];
+                nextQuestion();
+            } catch (error) {
+                console.error('Erro ao carregar CSV:', error);
+                alert('Erro ao carregar o arquivo CSV.');
+            }
+        }
+
+        // Função para embaralhar array
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Função para gerar próxima pergunta
+        function nextQuestion() {
+            if (remainingWords.length === 0) {
+                document.getElementById('question').innerText = 'Vc ganhou!';
+                document.getElementById('options').innerHTML = '';
+                document.getElementById('feedback').innerText = '';
+                isProcessing = false;
+                currentWord = null;
+                correta = null;
+                return;
+            }
+
+            // Seleciona palavra aleatória
+            const index = Math.floor(Math.random() * remainingWords.length);
+            currentWord = remainingWords[index];
+
+            // Pergunta
+            document.getElementById('question').innerText = `${currentWord[idiomaPergunta]}`;
+
+            // Opções
+            correta = currentWord[idiomaResposta];
+            const erradas = [];
+            while (erradas.length < numOptions - 1) {
+                const otherIndex = Math.floor(Math.random() * words.length);
+                const other = words[otherIndex][idiomaResposta];
+                if (other !== correta && !erradas.includes(other)) {
+                    erradas.push(other);
+                }
+            }
+
+            let options = [correta, ...erradas];
+            options = shuffle(options);
+
+            // Renderiza opções
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            options.forEach((opt, idx) => {
+                const btn = document.createElement('div');
+                btn.className = 'option';
+                btn.innerText = opt;
+                btn.dataset.index = idx; // Para mapear teclas
+                btn.onclick = () => {
+                    if (!isProcessing) {
+                        handleAnswer(opt, correta, currentWord, btn);
+                    }
+                };
+                optionsDiv.appendChild(btn);
+            });
+
+            document.getElementById('feedback').innerText = '';
+            isProcessing = false; // Reativa após renderizar nova pergunta
+        }
+
+        // Função para lidar com resposta
+        function handleAnswer(selected, correta, currentWord, button) {
+            if (isProcessing) return; // Impede múltiplos cliques/teclas
+            isProcessing = true;
+
+            // Desativa botões
+            document.querySelectorAll('.option').forEach(btn => {
+                btn.disabled = true;
+            });
+
+            // Aplica animação com base na resposta
+            if (selected === correta) {
+                correct++;
+                button.classList.add('correct-animation');
+                // document.getElementById('feedback').innerText = 'Correto!';
+                correctSound.play();
+                // Remove da lista
+                remainingWords = remainingWords.filter(w => w[idiomaPergunta] !== currentWord[idiomaPergunta]);
+            } else {
+                wrong++;
+                button.classList.add('wrong-animation');
+                // document.getElementById('feedback').innerText = 'Errado! Tente novamente.';
+                errorSound.play();
+            }
+
+            // Atualiza scores
+            document.getElementById('scores').innerText = `✔️: ${correct} | ❌: ${wrong}`;
+
+            // Remove animação após completar
+            setTimeout(() => {
+                button.classList.remove('correct-animation', 'wrong-animation');
+                nextQuestion();
+            }, 500); // Delay para ver feedback e animação
+        }
+
+        // Evento para teclas numéricas
+        document.addEventListener('keydown', (event) => {
+            if (isProcessing || !currentWord || !correta) return; // Impede múltiplas teclas ou se não houver pergunta
+
+            const options = document.querySelectorAll('.option');
+            if (options.length === 0) return;
+
+            let selectedOption;
+            if (event.key === '8' && numOptions >= 1) {
+                selectedOption = options[0]; // Botão de cima
+            } else if (event.key === '5' && numOptions >= 2) {
+                selectedOption = options[1]; // Botão de baixo
+            } else if (event.key === '2' && numOptions >= 3) {
+                selectedOption = options[2]; // Terceiro botão, se existir
+            }
+
+            if (selectedOption) {
+                const selectedText = selectedOption.innerText;
+                handleAnswer(selectedText, correta, currentWord, selectedOption);
+            }
+        });
+
+        // Inicia o jogo
+        loadCSV();
+    </script>
+</body>
+</html>

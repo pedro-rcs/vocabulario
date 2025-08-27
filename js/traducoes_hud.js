@@ -122,6 +122,33 @@ const traducoes_hud = {
     it: "Mostra le Parole"
   },
 
+  'botao_joga': {
+    en: 'Play',
+    pt: 'Jogar',
+    es: 'Jugar',
+    it: 'Giocare',
+    fr: 'Jouer',
+    de: 'Spielen'
+  },
+
+  'acertos': {
+  en: 'Hits',
+  pt: 'Acertos',
+  es: 'Aciertos',
+  it: 'Risposte esatte',
+  fr: 'Réponses correctes',
+  de: 'Treffer'
+},
+
+'erros': {
+  en: 'Mistakes',
+  pt: 'Erros',
+  es: 'Errores',
+  it: 'Errori',
+  fr: 'Erreurs',
+  de: 'Fehler'
+},
+
 
 'idiomas': [
   {

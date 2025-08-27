@@ -187,6 +187,12 @@ h2.open::after {
   border-color: #3a7d44;
   box-shadow: 0 0 6px rgba(58, 125, 68, 0.35);
 }
+.container_botao_joga {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .container_idioma {
   display: flex;

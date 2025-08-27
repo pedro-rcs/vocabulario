@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jogo de Múltipla Escolha por Categorias</title>
+  <style>
+    :root{
+      --bg:#0f172a; /* slate-900 */
+      --panel:#111827ee; /* gray-900 */
+      --text:#e5e7eb; /* gray-200 */
+      --muted:#9ca3af; /* gray-400 */
+      --accent:#22c55e; /* green-500 */
+      --accent-2:#3b82f6; /* blue-500 */
+      --danger:#ef4444; /* red-500 */
+      --warn:#f59e0b; /* amber-500 */
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; padding:24px; font-family:system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 800px at 20% 10%, #0b1226 0%, #0f172a 50%, #0b1020 100%);
+      color:var(--text);
+    }
+    .app{
+      max-width:960px; margin:0 auto; display:grid; gap:16px;
+      grid-template-columns: 1fr; 
+    }
+    header{display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+    h1{font-size:clamp(20px, 3vw, 28px); margin:0; letter-spacing:0.3px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(6px);
+    }
+    .controls{display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px}
+    label{font-size:12px; color:var(--muted); display:block; margin-bottom:6px}
+    select, input[type="number"], input[type="file"], button{
+      width:100%; padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,0.14);
+      background:#0b1328; color:var(--text);
+    }
+    button{cursor:pointer; border:1px solid rgba(255,255,255,0.16); transition: all .15s ease}
+    button.primary{background:linear-gradient(180deg, #1f2937, #111827); border-color:#334155}
+    button.primary:hover{transform:translateY(-1px); box-shadow:0 8px 18px rgba(0,0,0,.35)}
+    button.success{background:linear-gradient(180deg, #065f46, #064e3b); border-color:#10b981}
+    button.warn{background:linear-gradient(180deg, #7c2d12, #581c0c); border-color:#f59e0b}
+
+    .row{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .pill{font-size:12px; border:1px solid rgba(255,255,255,0.14); padding:6px 10px; border-radius:999px; color:var(--muted)}
+
+    .question{
+      font-size:clamp(20px, 4vw, 32px); text-align:center; margin:8px 0 4px
+    }
+    .categoryTag{font-size:12px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); text-align:center}
+    .answers{display:grid; gap:12px; grid-template-columns: 1fr 1fr}
+    .answers.three{grid-template-columns: 1fr 1fr 1fr}
+    .answers button{padding:14px 12px; font-size:clamp(14px, 2.4vw, 18px); border-radius:14px}
+    .answers button.correct{outline:2px solid var(--accent)}
+    .answers button.wrong{outline:2px solid var(--danger)}
+
+    .status{display:flex; gap:8px; align-items:center; justify-content:space-between; flex-wrap:wrap; color:var(--muted)}
+    .status strong{color:var(--text)}
+
+    .hidden{display:none}
+    .toast{position:fixed; bottom:18px; left:50%; transform:translateX(-50%); background:#111827; border:1px solid rgba(255,255,255,.12); padding:12px 14px; border-radius:12px; color:var(--text); opacity:0; pointer-events:none; transition: opacity .2s ease}
+    .toast.show{opacity:1}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Jogo de Múltipla Escolha · CSV → Categorias & Idiomas</h1>
+      <div class="row">
+        <span class="pill" id="poolInfo">Sem CSV</span>
+        <span class="pill" id="progressInfo">0/0</span>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="controls">
+        <div>
+          <label>Carregar CSV</label>
+          <input type="file" id="csvFile" accept=".csv" />
+        </div>
+        <div>
+          <label>Categoria</label>
+          <select id="categorySelect" disabled></select>
+        </div>
+        <div>
+          <label>Idioma da Pergunta (origem)</label>
+          <select id="sourceLang" disabled></select>
+        </div>
+        <div>
+          <label>Idioma das Respostas (alvo)</label>
+          <select id="targetLang" disabled></select>
+        </div>
+        <div>
+          <label>Nº de opções</label>
+          <select id="optionCount" disabled>
+            <option value="2" selected>2 (padrão)</option>
+            <option value="3">3 (expandido)</option>
+          </select>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button id="startBtn" class="primary" disabled>Iniciar</button>
+        </div>
+      </div>
+      <p style="margin-top:10px; color:var(--muted); font-size:13px">
+        Formato esperado da primeira linha do CSV: <code>Categoria,English,Portuguese,Spanish,French,German,Italian</code>. Valores múltiplos podem ser separados por ponto-e-vírgula (<code>;</code>), p.ex.: <code>os;as</code>.
+      </p>
+    </section>
+
+    <section id="game" class="card hidden">
+      <div class="categoryTag" id="categoryTag"></div>
+      <div class="question" id="questionText">—</div>
+      <div class="answers" id="answers"></div>
+      <div class="status" style="margin-top:12px">
+        <div>Acertos: <strong id="hits">0</strong> · Erros: <strong id="misses">0</strong></div>
+        <div>Restantes nesta categoria: <strong id="remaining">0</strong></div>
+        <div class="row">
+          <button id="skipBtn" class="warn">Pular</button>
+          <button id="resetBtn">Reiniciar</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="win" class="card hidden" style="text-align:center">
+      <h2 style="margin:4px 0 8px">Você ganhou! 🎉</h2>
+      <p style="color:var(--muted)">Todas as palavras desta categoria foram respondidas corretamente.</p>
+      <button id="playAgain" class="primary">Jogar novamente</button>
+    </section>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ======= Helpers =======
+    const byId = (id) => document.getElementById(id);
+    const choice = (arr) => arr[Math.floor(Math.random()*arr.length)];
+    const shuffle = (arr) => arr.sort(() => Math.random()-0.5);
+    const normalize = (s) => (s||"").trim().toLowerCase();
+
+    function showToast(msg){
+      const el = byId('toast');
+      el.textContent = msg; el.classList.add('show');
+      setTimeout(()=> el.classList.remove('show'), 1200);
+    }
+
+    // Divide por ";" e normaliza espaços
+    function splitVariants(v){
+      return String(v||"")
+        .split(';')
+        .map(x => x.trim())
+        .filter(Boolean);
+    }
+
+    // Parser CSV simples (assume que não há vírgulas escapadas)
+    function parseCSV(text){
+      const lines = text.replace(/\r/g, '').split('\n').filter(l=>l.trim().length);
+      const header = lines[0].split(',').map(h => h.trim());
+      const rows = lines.slice(1).map(line => {
+        const cols = line.split(',');
+        const obj = {};
+        header.forEach((h, i) => obj[h] = (cols[i] ?? '').trim());
+        return obj;
+      });
+      return { header, rows };
+    }
+
+    // ======= State =======
+    const state = {
+      rawRows: [],
+      header: [],
+      categories: new Set(),
+      poolByCategory: new Map(), // categoria -> array de itens
+      currentCategory: null,
+      langHeaderToLabel: {
+        English: 'Inglês', Portuguese: 'Português', Spanish: 'Espanhol', French: 'Francês', German: 'Alemão', Italian: 'Italiano'
+      },
+      source: 'English',
+      target: 'Portuguese',
+      optionCount: 2,
+      currentItem: null,
+      remainingSet: new Set(), // índices ainda não acertados
+      hits: 0,
+      misses: 0
+    };
+
+    // ======= UI Refs =======
+    const csvFile = byId('csvFile');
+    const categorySelect = byId('categorySelect');
+    const sourceLang = byId('sourceLang');
+    const targetLang = byId('targetLang');
+    const optionCount = byId('optionCount');
+    const startBtn = byId('startBtn');
+
+    const game = byId('game');
+    const categoryTag = byId('categoryTag');
+    const questionText = byId('questionText');
+    const answers = byId('answers');
+    const hitsEl = byId('hits');
+    const missesEl = byId('misses');
+    const remainingEl = byId('remaining');
+    const poolInfo = byId('poolInfo');
+    const progressInfo = byId('progressInfo');
+    const skipBtn = byId('skipBtn');
+    const resetBtn = byId('resetBtn');
+
+    const win = byId('win');
+    const playAgain = byId('playAgain');
+
+    // ======= Load CSV =======
+    csvFile.addEventListener('change', async (e) => {
+      const file = e.target.files?.[0];
+      if(!file) return;
+      const text = await file.text();
+      const { header, rows } = parseCSV(text);
+
+      // Validação mínima
+      const must = ['Categoria','English','Portuguese','Spanish','French','German','Italian'];
+      const ok = must.every(m => header.includes(m));
+      if(!ok){
+        alert('Cabeçalhos inválidos. Use: ' + must.join(', '));
+        return;
+      }
+
+      state.header = header;
+      state.rawRows = rows.filter(r => r.Categoria && must.slice(1).some(k => (r[k]||'').trim().length));
+      state.categories = new Set(state.rawRows.map(r => r.Categoria));
+
+      // Pool por categoria
+      state.poolByCategory = new Map();
+      for(const cat of state.categories){
+        state.poolByCategory.set(cat, state.rawRows
+          .map((item, idx) => ({...item, __index: idx}))
+          .filter(item => item.Categoria === cat));
+      }
+
+      // Preenche selects
+      categorySelect.innerHTML = Array.from(state.categories)
+        .sort((a,b)=>a.localeCompare(b))
+        .map(cat => `<option value="${cat}">${cat}</option>`)
+        .join('');
+
+      const langHeaders = header.filter(h => h !== 'Categoria');
+      const opts = langHeaders.map(h => `<option value="${h}">${state.langHeaderToLabel[h]||h}</option>`).join('');
+      sourceLang.innerHTML = opts;
+      targetLang.innerHTML = opts;
+
+      // Defaults
+      sourceLang.value = 'English';
+      targetLang.value = 'Portuguese';
+
+      // Habilita UI
+      [categorySelect, sourceLang, targetLang, optionCount, startBtn].forEach(el => el.disabled = false);
+
+      poolInfo.textContent = `${state.rawRows.length} linhas · ${state.categories.size} categorias`;
+      progressInfo.textContent = `0/0`;
+
+      showToast('CSV carregado!');
+    });
+
+    // ======= Controls =======
+    sourceLang.addEventListener('change', () => state.source = sourceLang.value);
+    targetLang.addEventListener('change', () => state.target = targetLang.value);
+    categorySelect.addEventListener('change', () => state.currentCategory = categorySelect.value);
+    optionCount.addEventListener('change', () => state.optionCount = Number(optionCount.value));
+
+    startBtn.addEventListener('click', startGame);
+    skipBtn.addEventListener('click', nextQuestion);
+    resetBtn.addEventListener('click', () => startGame(true));
+    playAgain.addEventListener('click', () => { win.classList.add('hidden'); startGame(true); });
+
+    function startGame(reset=false){
+      state.currentCategory = categorySelect.value;
+      if(!state.currentCategory){ alert('Selecione uma categoria.'); return; }
+      if(state.source === state.target){ alert('Escolha idiomas diferentes para pergunta e resposta.'); return; }
+
+      // Pool da categoria + filtro de itens válidos
+      const pool = state.poolByCategory.get(state.currentCategory) || [];
+      const valid = pool.filter(item => (item[state.source]||'').trim() && (item[state.target]||'').trim());
+
+      // Conjunto de restantes (recria se reset ou se esgotou)
+      if(reset || !state.remainingSet.size){
+        state.remainingSet = new Set(valid.map(v => v.__index));
+        state.hits = 0; state.misses = 0;
+      } else {
+        // Limpa índices que não existem mais
+        const validIdx = new Set(valid.map(v=>v.__index));
+        state.remainingSet = new Set([...state.remainingSet].filter(i => validIdx.has(i)));
+      }
+
+      hitsEl.textContent = state.hits;
+      missesEl.textContent = state.misses;
+
+      updateProgress();
+      game.classList.remove('hidden');
+      win.classList.add('hidden');
+
+      nextQuestion();
+    }
+
+    function updateProgress(){
+      const total = (state.poolByCategory.get(state.currentCategory)||[])
+        .filter(item => (item[state.source]||'').trim() && (item[state.target]||'').trim())
+        .length;
+      const remaining = state.remainingSet.size;
+      remainingEl.textContent = remaining;
+      progressInfo.textContent = `${total - remaining}/${total}`;
+      categoryTag.textContent = `${state.currentCategory} · ${labelOf(state.source)} → ${labelOf(state.target)}`;
+      answers.classList.toggle('three', state.optionCount === 3);
+    }
+
+    function labelOf(h){ return state.langHeaderToLabel[h] || h; }
+
+    function nextQuestion(){
+      // Checa vitória
+      if(state.remainingSet.size === 0){
+        game.classList.add('hidden');
+        win.classList.remove('hidden');
+        return;
+      }
+
+      // Escolhe um índice qualquer do conjunto restante
+      const remainingIdx = Array.from(state.remainingSet);
+      const idx = choice(remainingIdx);
+      const item = state.rawRows[idx];
+      state.currentItem = item;
+
+      // Enunciado
+      const question = item[state.source];
+      questionText.textContent = String(question||'').split(';')[0].trim();
+
+      // Opções
+      const correctVariants = splitVariants(item[state.target]);
+      const correct = correctVariants[0] || item[state.target];
+
+      const poolSameCat = (state.poolByCategory.get(state.currentCategory) || [])
+        .filter(it => it.__index !== item.__index && (it[state.target]||'').trim());
+
+      // Candidatos errados
+      let distractors = shuffle(poolSameCat.map(it => splitVariants(it[state.target])[0]))
+        .filter(v => normalize(v) && normalize(v) !== normalize(correct));
+
+      // Se não houver suficientes na categoria, pega do global
+      if(distractors.length < (state.optionCount-1)){
+        const global = state.rawRows
+          .filter(it => it.__index !== item.__index && (it[state.target]||'').trim())
+          .map(it => splitVariants(it[state.target])[0])
+          .filter(v => normalize(v) && normalize(v) !== normalize(correct));
+        distractors = shuffle([...new Set([...distractors, ...global])]);
+      }
+
+      const need = Math.max(1, state.optionCount - 1);
+      const pickedDistractors = [...new Set(distractors)].slice(0, need);
+      const options = shuffle([correct, ...pickedDistractors]);
+
+      renderAnswers(options, correct, correctVariants);
+      updateProgress();
+    }
+
+    function renderAnswers(opts, correct, correctVariants){
+      answers.innerHTML = '';
+      for(const opt of opts){
+        const btn = document.createElement('button');
+        btn.textContent = opt || '—';
+        btn.addEventListener('click', () => checkAnswer(opt, correct, correctVariants));
+        answers.appendChild(btn);
+      }
+    }
+
+    function checkAnswer(opt, correct, correctVariants){
+      const normalized = normalize(opt);
+      const okSet = new Set(correctVariants.map(v => normalize(v)));
+      const isCorrect = okSet.has(normalized) || normalized === normalize(correct);
+
+      for(const btn of answers.querySelectorAll('button')){
+        const isThis = normalize(btn.textContent) === normalized;
+        const isRight = okSet.has(normalize(btn.textContent));
+        btn.classList.toggle('correct', isRight);
+        btn.classList.toggle('wrong', isThis && !isRight);
+        btn.disabled = true;
+      }
+
+      if(isCorrect){
+        state.hits++;
+        hitsEl.textContent = state.hits;
+        // Remove do conjunto de restantes
+        state.remainingSet.delete(state.currentItem.__index);
+        showToast('Acertou! ✅');
+        setTimeout(nextQuestion, 450);
+      } else {
+        state.misses++;
+        missesEl.textContent = state.misses;
+        showToast('Quase! ❌');
+        setTimeout(()=>{
+          // Reabilita para tentar de novo ou pular
+          for(const btn of answers.querySelectorAll('button')) btn.disabled = false;
+        }, 350);
+      }
+    }
+  </script>
+</body>
+</html>

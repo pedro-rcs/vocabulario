@@ -34,7 +34,7 @@ if (!idioma_praticado) {
 
 
 
-function buildTables(data) {
+function buildTables (data) {
   const headers = data[0].slice(1);
   const grouped = {};
 
@@ -117,8 +117,13 @@ function buildTables(data) {
   container_idioma.appendChild(botao_pratica)
 
   const botao_multipla_escolha = cria_botoes_abas(traduzir_hud('botao_multipla_escolha', currentLanguage), "inativo")  
+  
   botao_multipla_escolha.addEventListener("click", () => {
     modo = 'multipla_escolha'
+    // Aqui, pode se chamar o buildTable, mas
+    // Precisamos ter apenas os enunciados das categorias (classes de palavras).
+    // Ao clicar na classe, abre-se uma nova janela, como jogo, talvez.
+
 
     carrega_csv()
   })
@@ -200,15 +205,14 @@ function buildTables(data) {
     const thead = document.createElement('thead');
     const trHead = document.createElement('tr');
 
-      const languages = [
-    { code: 'en', name: 'English', name_ingles: 'English' },
-    { code: 'pt', name: 'Português', name_ingles: 'Portuguese' },
-    { code: 'es', name: 'Español', name_ingles: 'Spanish' },
-    { code: 'fr', name: 'Français', name_ingles: 'French' },
-    { code: 'it', name: 'Italiano', name_ingles: 'Italian' },
-    { code: 'de', name: 'Deutsch', name_ingles: 'German' }
-    
-  ];
+    const languages = [
+      { code: 'en', name: 'English', name_ingles: 'English' },
+      { code: 'pt', name: 'Português', name_ingles: 'Portuguese' },
+      { code: 'es', name: 'Español', name_ingles: 'Spanish' },
+      { code: 'fr', name: 'Français', name_ingles: 'French' },
+      { code: 'it', name: 'Italiano', name_ingles: 'Italian' },
+      { code: 'de', name: 'Deutsch', name_ingles: 'German' }  
+    ]
 
 
     headers.forEach((h, idx) => {
@@ -230,15 +234,45 @@ function buildTables(data) {
       trHead.appendChild(th);
     });
 
-    thead.appendChild(trHead);
-    table.appendChild(thead);
+
+
+
+    if (modo != "multipla_escolha") {
+      thead.appendChild(trHead);
+      table.appendChild(thead);
+    }
+
+    if (modo === "multipla_escolha") {
+      const div_botao_joga = document.createElement("div")
+      div_botao_joga.className = "container_botao_joga"
+
+      const botao_joga = document.createElement("button")
+      botao_joga.className = "botao_terminei"
+      botao_joga.innerHTML = traduzir_hud("botao_joga", currentLanguage)
+
+      botao_joga.addEventListener("click", () => {
+
+        window.location.href = `multipla_escolha/index.html?classe=${categoria}&currentLanguage=${currentLanguage}&idioma_praticado=${idioma_praticado}`
+      })
+
+      div_botao_joga.appendChild(botao_joga)
+      table.appendChild(div_botao_joga)
+    }
+
 
     const tbody = document.createElement('tbody');
     frases.forEach((frase, fraseIndex) => {
       const tr = document.createElement('tr');
       
       frase.forEach((texto, idx) => {
+        if (modo === 'multipla_escolha') {
+            // td.textContent = 'do'
+
+        } else {
+
+
         const td = document.createElement('td');
+
 
         if (modo === 'pratica' && idx === 0) {
           td.style.textAlign = 'right'; // texto alinhado à direita
@@ -276,25 +310,29 @@ function buildTables(data) {
           td.appendChild(input);
         } else {
 
-          td.textContent = texto;
-          td.style.cursor = 'pointer';
-        
-          td.addEventListener('click', () => {
-            const idioma = headers[idx];
-            console.log(categoria)
-            const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
-            if (!arquivoAudio) {
-              alert('Áudio não encontrado para esta frase.');
-              return;
-            }
-            const audioPath = `${idioma}/${arquivoAudio}`;
-            const audio = new Audio(audioPath);
-            console.log(audioPath)
-            audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
-          });
+            td.textContent = texto;
+            td.style.cursor = 'pointer';
+          
+            td.addEventListener('click', () => {
+              const idioma = headers[idx];
+              console.log(categoria)
+              const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
+              if (!arquivoAudio) {
+                alert('Áudio não encontrado para esta frase.');
+                return;
+              }
+              const audioPath = `${idioma}/${arquivoAudio}`;
+              const audio = new Audio(audioPath);
+              console.log(audioPath)
+              audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
+            });
         }
 
         tr.appendChild(td);
+
+
+        }
+
       });
 
       tbody.appendChild(tr);
@@ -427,7 +465,7 @@ function carrega_csv () {
       buildTables(resultado_filtrado)
     }
     if (modo === 'multipla_escolha') {
-
+      buildTables(data)
     }
     // ...dentro de carrega_csv() ou logo após definir o modo...
     if (modo === 'pratica') {

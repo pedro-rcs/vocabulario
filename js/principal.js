@@ -98,16 +98,19 @@ function buildTables (data) {
   const container_idioma = document.createElement('div');
   container_idioma.className = 'container_idioma'
 
-  const botao_teoria = cria_botoes_abas(traduzir_hud('botao_teoria', currentLanguage), "ativo")
+  const atividade_botao_teoria = (modo === 'teoria') ? 'ativo' : 'inativo'
+  const botao_teoria = cria_botoes_abas(traduzir_hud('botao_teoria', currentLanguage), atividade_botao_teoria)
   botao_teoria.addEventListener("click", () => {
     modo = 'teoria'
 
     document.getElementById("botao_placeholder_palavra").style.display = 'none'
+    
     carrega_csv()
   })
   container_idioma.appendChild(botao_teoria)
 
-  const botao_pratica = cria_botoes_abas(traduzir_hud('botao_pratica', currentLanguage), "inativo")  
+  const atividade_botao_pratica = (modo === 'pratica') ? 'ativo' : 'inativo'
+  const botao_pratica = cria_botoes_abas(traduzir_hud('botao_pratica', currentLanguage), atividade_botao_pratica)
   botao_pratica.addEventListener("click", () => {
     modo = 'pratica'
     document.getElementById("language_selector_pratica").style.display = 'flex'
@@ -116,7 +119,8 @@ function buildTables (data) {
   })
   container_idioma.appendChild(botao_pratica)
 
-  const botao_multipla_escolha = cria_botoes_abas(traduzir_hud('botao_multipla_escolha', currentLanguage), "inativo")  
+  const atividade_botao_multipla_escolha = (modo === 'multipla_escolha') ? 'ativo' : 'inativo'
+  const botao_multipla_escolha = cria_botoes_abas(traduzir_hud('botao_multipla_escolha', currentLanguage), atividade_botao_multipla_escolha)
   
   botao_multipla_escolha.addEventListener("click", () => {
     modo = 'multipla_escolha'
@@ -124,9 +128,11 @@ function buildTables (data) {
     // Precisamos ter apenas os enunciados das categorias (classes de palavras).
     // Ao clicar na classe, abre-se uma nova janela, como jogo, talvez.
 
-
+    
     carrega_csv()
   })
+
+
   container_idioma.appendChild(botao_multipla_escolha)
 
   
@@ -151,13 +157,19 @@ function buildTables (data) {
     // window.location.reload()
   })
 
-  container_idioma.appendChild(botao_placeholder_palavra); // insere no container
+  const container_botao_placeholder = document.createElement('div') // Vai embaixo do container_idioma
+  container_botao_placeholder.id = 'container_botao_placeholder'
 
   
 
-  container.appendChild(container_botoes_modalidades);
+  container_botao_placeholder.style.display = 'none'
+  if (modo === 'pratica') container_botao_placeholder.style.display = 'flex'
+  container_botao_placeholder.appendChild(botao_placeholder_palavra);
 
   container.appendChild(container_idioma);
+  
+  container.appendChild(container_botao_placeholder); // insere no container
+
 
     language_selector_pratica.addEventListener("change", (e) => {
     idioma_praticado = e.target.value

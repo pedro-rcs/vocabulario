@@ -1,0 +1,90 @@
+modo,tempo,pessoa,aux,conjugado
+indicativo,presente,io,,amo
+indicativo,presente,tu,,ami
+indicativo,presente,lui/lei,,ama
+indicativo,presente,noi,,amiamo
+indicativo,presente,voi,,amate
+indicativo,presente,loro,,amano
+indicativo,imperfetto,io,,amavo
+indicativo,imperfetto,tu,,amavi
+indicativo,imperfetto,lui/lei,,amava
+indicativo,imperfetto,noi,,amavamo
+indicativo,imperfetto,voi,,amavate
+indicativo,imperfetto,loro,,amavano
+indicativo,passato remoto,io,,amai
+indicativo,passato remoto,tu,,amasti
+indicativo,passato remoto,lui/lei,,amò
+indicativo,passato remoto,noi,,amammo
+indicativo,passato remoto,voi,,amaste
+indicativo,passato remoto,loro,,amarono
+indicativo,futuro semplice,io,,amerò
+indicativo,futuro semplice,tu,,amerai
+indicativo,futuro semplice,lui/lei,,amerà
+indicativo,futuro semplice,noi,,ameremo
+indicativo,futuro semplice,voi,,amerete
+indicativo,futuro semplice,loro,,ameranno
+indicativo,passato prossimo,io,ho,amato
+indicativo,passato prossimo,tu,hai,amato
+indicativo,passato prossimo,lui/lei,ha,amato
+indicativo,passato prossimo,noi,abbiamo,amato
+indicativo,passato prossimo,voi,avete,amato
+indicativo,passato prossimo,loro,hanno,amato
+indicativo,trapassato prossimo,io,avevo,amato
+indicativo,trapassato prossimo,tu,avevi,amato
+indicativo,trapassato prossimo,lui/lei,aveva,amato
+indicativo,trapassato prossimo,noi,avevamo,amato
+indicativo,trapassato prossimo,voi,avevate,amato
+indicativo,trapassato prossimo,loro,avevano,amato
+indicativo,trapassato remoto,io,ebbi,amato
+indicativo,trapassato remoto,tu,avesti,amato
+indicativo,trapassato remoto,lui/lei,ebbe,amato
+indicativo,trapassato remoto,noi,avemmo,amato
+indicativo,trapassato remoto,voi,aveste,amato
+indicativo,trapassato remoto,loro,ebbero,amato
+indicativo,futuro anteriore,io,avrò,amato
+indicativo,futuro anteriore,tu,avrai,amato
+indicativo,futuro anteriore,lui/lei,avrà,amato
+indicativo,futuro anteriore,noi,avremo,amato
+indicativo,futuro anteriore,voi,avrete,amato
+indicativo,futuro anteriore,loro,avranno,amato
+congiuntivo,presente,io,,ami
+congiuntivo,presente,tu,,ami
+congiuntivo,presente,lui/lei,,ami
+congiuntivo,presente,noi,,amiamo
+congiuntivo,presente,voi,,amiate
+congiuntivo,presente,loro,,amino
+congiuntivo,imperfetto,io,,amassi
+congiuntivo,imperfetto,tu,,amassi
+congiuntivo,imperfetto,lui/lei,,amasse
+congiuntivo,imperfetto,noi,,amassimo
+congiuntivo,imperfetto,voi,,amaste
+congiuntivo,imperfetto,loro,,amassero
+congiuntivo,passato,io,abbia,amato
+congiuntivo,passato,tu,abbia,amato
+congiuntivo,passato,lui/lei,abbia,amato
+congiuntivo,passato,noi,abbiamo,amato
+congiuntivo,passato,voi,abbiate,amato
+congiuntivo,passato,loro,abbiano,amato
+congiuntivo,trapassato,io,avessi,amato
+congiuntivo,trapassato,tu,avessi,amato
+congiuntivo,trapassato,lui/lei,avesse,amato
+congiuntivo,trapassato,noi,avessimo,amato
+congiuntivo,trapassato,voi,aveste,amato
+congiuntivo,trapassato,loro,avessero,amato
+condizionale,presente,io,,amerei
+condizionale,presente,tu,,ameresti
+condizionale,presente,lui/lei,,amerebbe
+condizionale,presente,noi,,ameremmo
+condizionale,presente,voi,,amereste
+condizionale,presente,loro,,amerebbero
+condizionale,passato,io,avrei,amato
+condizionale,passato,tu,avresti,amato
+condizionale,passato,lui/lei,avrebbe,amato
+condizionale,passato,noi,avremmo,amato
+condizionale,passato,voi,avreste,amato
+condizionale,passato,loro,avrebbero,amato
+imperativo,imperativo,tu,,ama
+imperativo,imperativo,lui/lei,,ami
+imperativo,imperativo,noi,,amiamo
+imperativo,imperativo,voi,,amate
+imperativo,imperativo,loro,,amino

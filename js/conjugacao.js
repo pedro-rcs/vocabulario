@@ -73,9 +73,6 @@ const container = document.createElement('div');
 container.className = 'container_idioma';
 container.style.marginBottom = '2em';
 
-// Insere no body ou em outro lugar da página
-const container_escolha_idiomas = document.getElementById('container_escolha_idiomas')
-container_escolha_idiomas.appendChild(container)
 
 // Eventos de troca de idioma
 document.getElementById('h2_treino_conjugacao').innerHTML = traduzir_hud('treino_conjugacao', currentLanguage)

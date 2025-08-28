@@ -1,0 +1,110 @@
+modo,tempo,pessoa,aux,conjugado
+indicativo,presente,yo,,sonrío
+indicativo,presente,tú,,sonríes
+indicativo,presente,él/ella,,sonríe
+indicativo,presente,nosotros(as),,sonreímos
+indicativo,presente,vosotros(as),,sonreís
+indicativo,presente,ellos/ellas,,sonríen
+indicativo,pretérito perfecto compuesto,yo,he,sonreído
+indicativo,pretérito perfecto compuesto,tú,has,sonreído
+indicativo,pretérito perfecto compuesto,él/ella,ha,sonreído
+indicativo,pretérito perfecto compuesto,nosotros(as),hemos,sonreído
+indicativo,pretérito perfecto compuesto,vosotros(as),habéis,sonreído
+indicativo,pretérito perfecto compuesto,ellos/ellas,han,sonreído
+indicativo,pretérito imperfecto,yo,,sonreía
+indicativo,pretérito imperfecto,tú,,sonreías
+indicativo,pretérito imperfecto,él/ella,,sonreía
+indicativo,pretérito imperfecto,nosotros(as),,sonreíamos
+indicativo,pretérito imperfecto,vosotros(as),,sonreíais
+indicativo,pretérito imperfecto,ellos/ellas,,sonreían
+indicativo,pretérito pluscuamperfecto,yo,había,sonreído
+indicativo,pretérito pluscuamperfecto,tú,habías,sonreído
+indicativo,pretérito pluscuamperfecto,él/ella,había,sonreído
+indicativo,pretérito pluscuamperfecto,nosotros(as),habíamos,sonreído
+indicativo,pretérito pluscuamperfecto,vosotros(as),habíais,sonreído
+indicativo,pretérito pluscuamperfecto,ellos/ellas,habían,sonreído
+indicativo,pretérito perfecto simple,yo,,sonreí
+indicativo,pretérito perfecto simple,tú,,sonreíste
+indicativo,pretérito perfecto simple,él/ella,,sonrió
+indicativo,pretérito perfecto simple,nosotros(as),,sonreímos
+indicativo,pretérito perfecto simple,vosotros(as),,sonreísteis
+indicativo,pretérito perfecto simple,ellos/ellas,,sonrieron
+indicativo,pretérito anterior,yo,hube,sonreído
+indicativo,pretérito anterior,tú,hubiste,sonreído
+indicativo,pretérito anterior,él/ella,hubo,sonreído
+indicativo,pretérito anterior,nosotros(as),hubimos,sonreído
+indicativo,pretérito anterior,vosotros(as),hubisteis,sonreído
+indicativo,pretérito anterior,ellos/ellas,hubieron,sonreído
+indicativo,futuro,yo,,sonreiré
+indicativo,futuro,tú,,sonreirás
+indicativo,futuro,él/ella,,sonreirá
+indicativo,futuro,nosotros(as),,sonreiremos
+indicativo,futuro,vosotros(as),,sonreiréis
+indicativo,futuro,ellos/ellas,,sonreirán
+indicativo,futuro perfecto,yo,habré,sonreído
+indicativo,futuro perfecto,tú,habrás,sonreído
+indicativo,futuro perfecto,él/ella,habrá,sonreído
+indicativo,futuro perfecto,nosotros(as),habremos,sonreído
+indicativo,futuro perfecto,vosotros(as),habréis,sonreído
+indicativo,futuro perfecto,ellos/ellas,habrán,sonreído
+condicional,simple,yo,,sonreiría
+condicional,simple,tú,,sonreirías
+condicional,simple,él/ella,,sonreiría
+condicional,simple,nosotros(as),,sonreiríamos
+condicional,simple,vosotros(as),,sonreiríais
+condicional,simple,ellos/ellas,,sonreirían
+condicional,compuesto,yo,habría,sonreído
+condicional,compuesto,tú,habrías,sonreído
+condicional,compuesto,él/ella,habría,sonreído
+condicional,compuesto,nosotros(as),habríamos,sonreído
+condicional,compuesto,vosotros(as),habríais,sonreído
+condicional,composto,ellos/ellas,habrían,sonreído
+subjuntivo,presente,yo,,sonría
+subjuntivo,presente,tú,,sonrías
+subjuntivo,presente,él/ella,,sonría
+subjuntivo,presente,nosotros(as),,sonriamos
+subjuntivo,presente,vosotros(as),,sonriáis
+subjuntivo,presente,ellos/ellas,,sonrían
+subjuntivo,pretérito perfecto,yo,haya,sonreído
+subjuntivo,pretérito perfecto,tú,hayas,sonreído
+subjuntivo,pretérito perfecto,él/ella,haya,sonreído
+subjuntivo,pretérito perfecto,nosotros(as),hayamos,sonreído
+subjuntivo,pretérito perfecto,vosotros(as),hayáis,sonreído
+subjuntivo,pretérito perfecto,ellos/ellas,hayan,sonreído
+subjuntivo,pretérito imperfecto 1,yo,,sonriera
+subjuntivo,pretérito imperfecto 1,tú,,sonrieras
+subjuntivo,pretérito imperfecto 1,él/ella,,sonriera
+subjuntivo,pretérito imperfecto 1,nosotros(as),,sonriéramos
+subjuntivo,pretérito imperfecto 1,vosotros(as),,sonrierais
+subjuntivo,pretérito imperfecto 1,ellos/ellas,,sonrieran
+subjuntivo,pretérito imperfecto 2,yo,,sonriese
+subjuntivo,pretérito imperfecto 2,tú,,sonrieses
+subjuntivo,pretérito imperfecto 2,él/ella,,sonriese
+subjuntivo,pretérito imperfecto 2,nosotros(as),,sonriésemos
+subjuntivo,pretérito imperfecto 2,vosotros(as),,sonrieseis
+subjuntivo,pretérito imperfecto 2,ellos/ellas,,sonriesen
+subjuntivo,pretérito pluscuamperfecto 1,yo,hubiera,sonreído
+subjuntivo,pretérito pluscuamperfecto 1,tú,hubieras,sonreído
+subjuntivo,pretérito pluscuamperfecto 1,él/ella,hubiera,sonreído
+subjuntivo,pretérito pluscuamperfecto 1,nosotros(as),hubiéramos,sonreído
+subjuntivo,pretérito pluscuamperfecto 1,vosotros(as),hubierais,sonreído
+subjuntivo,pretérito pluscuamperfecto 1,ellos/ellas,hubieran,sonreído
+subjuntivo,pretérito pluscuamperfecto 2,yo,hubiese,sonreído
+subjuntivo,pretérito pluscuamperfecto 2,tú,hubieses,sonreído
+subjuntivo,pretérito pluscuamperfecto 2,él/ella,hubiese,sonreído
+subjuntivo,pretérito pluscuamperfecto 2,nosotros(as),hubiésemos,sonreído
+subjuntivo,pretérito pluscuamperfecto 2,vosotros(as),hubieseis,sonreído
+subjuntivo,pretérito pluscuamperfecto 2,ellos/ellas,hubiesen,sonreído
+subjuntivo,futuro,yo,,sonriere
+subjuntivo,futuro,tú,,sonrieres
+subjuntivo,futuro,él/ella,,sonriere
+subjuntivo,futuro,nosotros(as),,sonriéremos
+subjuntivo,futuro,vosotros(as),,sonriereis
+subjuntivo,futuro,ellos/ellas,,sonrieren
+subjuntivo,futuro perfecto,yo,hubiere,sonreído
+subjuntivo,futuro perfecto,tú,hubieres,sonreído
+subjuntivo,futuro perfecto,él/ella,hubiere,sonreído
+subjuntivo,futuro perfecto,nosotros(as),hubiéremos,sonreído
+subjuntivo,futuro perfecto,vosotros(as),hubiereis,sonreído
+subjuntivo,futuro perfecto,ellos/ellas,hubieren,sonreído
+imperativo,imperativo,tú

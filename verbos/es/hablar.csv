@@ -1,0 +1,114 @@
+modo,tempo,pessoa,aux,conjugado
+indicativo,presente,yo,,hablo
+indicativo,presente,tú,,hablas
+indicativo,presente,él/ella,,habla
+indicativo,presente,nosotros(as),,hablamos
+indicativo,presente,vosotros(as),,habláis
+indicativo,presente,ellos/ellas,,hablan
+indicativo,pretérito perfecto compuesto,yo,he,hablado
+indicativo,pretérito perfecto compuesto,tú,has,hablado
+indicativo,pretérito perfecto compuesto,él/ella,ha,hablado
+indicativo,pretérito perfecto compuesto,nosotros(as),hemos,hablado
+indicativo,pretérito perfecto compuesto,vosotros(as),habéis,hablado
+indicativo,pretérito perfecto compuesto,ellos/ellas,han,hablado
+indicativo,pretérito imperfecto,yo,,hablaba
+indicativo,pretérito imperfecto,tú,,hablabas
+indicativo,pretérito imperfecto,él/ella,,hablaba
+indicativo,pretérito imperfecto,nosotros(as),,hablábamos
+indicativo,pretérito imperfecto,vosotros(as),,hablabais
+indicativo,pretérito imperfecto,ellos/ellas,,hablaban
+indicativo,pretérito pluscuamperfecto,yo,había,hablado
+indicativo,pretérito pluscuamperfecto,tú,habías,hablado
+indicativo,pretérito pluscuamperfecto,él/ella,había,hablado
+indicativo,pretérito pluscuamperfecto,nosotros(as),habíamos,hablado
+indicativo,pretérito pluscuamperfecto,vosotros(as),habíais,hablado
+indicativo,pretérito pluscuamperfecto,ellos/ellas,habían,hablado
+indicativo,pretérito perfecto simple,yo,,hablé
+indicativo,pretérito perfecto simple,tú,,hablaste
+indicativo,pretérito perfecto simple,él/ella,,habló
+indicativo,pretérito perfecto simple,nosotros(as),,hablamos
+indicativo,pretérito perfecto simple,vosotros(as),,hablasteis
+indicativo,pretérito perfecto simple,ellos/ellas,,hablaron
+indicativo,pretérito anterior,yo,hube,hablado
+indicativo,pretérito anterior,tú,hubiste,hablado
+indicativo,pretérito anterior,él/ella,hubo,hablado
+indicativo,pretérito anterior,nosotros(as),hubimos,hablado
+indicativo,pretérito anterior,vosotros(as),hubisteis,hablado
+indicativo,pretérito anterior,ellos/ellas,hubieron,hablado
+indicativo,futuro,yo,,hablaré
+indicativo,futuro,tú,,hablarás
+indicativo,futuro,él/ella,,hablará
+indicativo,futuro,nosotros(as),,hablaremos
+indicativo,futuro,vosotros(as),,hablaréis
+indicativo,futuro,ellos/ellas,,hablarán
+indicativo,futuro perfecto,yo,habré,hablado
+indicativo,futuro perfecto,tú,habrás,hablado
+indicativo,futuro perfecto,él/ella,habrá,hablado
+indicativo,futuro perfecto,nosotros(as),habremos,hablado
+indicativo,futuro perfecto,vosotros(as),habréis,hablado
+indicativo,futuro perfecto,ellos/ellas,habrán,hablado
+condicional,simple,yo,,hablaría
+condicional,simple,tú,,hablarías
+condicional,simple,él/ella,,hablaría
+condicional,simple,nosotros(as),,hablaríamos
+condicional,simple,vosotros(as),,hablaríais
+condicional,simple,ellos/ellas,,hablarían
+condicional,compuesto,yo,habría,hablado
+condicional,compuesto,tú,habrías,hablado
+condicional,compuesto,él/ella,habría,hablado
+condicional,compuesto,nosotros(as),habríamos,hablado
+condicional,compuesto,vosotros(as),habríais,hablado
+condicional,compuesto,ellos/ellas,habrían,hablado
+subjuntivo,presente,yo,,hable
+subjuntivo,presente,tú,,hables
+subjuntivo,presente,él/ella,,hable
+subjuntivo,presente,nosotros(as),,hablemos
+subjuntivo,presente,vosotros(as),,habléis
+subjuntivo,presente,ellos/ellas,,hablen
+subjuntivo,pretérito perfecto,yo,haya,hablado
+subjuntivo,pretérito perfecto,tú,hayas,hablado
+subjuntivo,pretérito perfecto,él/ella,haya,hablado
+subjuntivo,pretérito perfecto,nosotros(as),hayamos,hablado
+subjuntivo,pretérito perfecto,vosotros(as),hayáis,hablado
+subjuntivo,pretérito perfecto,ellos/ellas,hayan,hablado
+subjuntivo,pretérito imperfecto 1,yo,,hablara
+subjuntivo,pretérito imperfecto 1,tú,,hablaras
+subjuntivo,pretérito imperfecto 1,él/ella,,hablara
+subjuntivo,pretérito imperfecto 1,nosotros(as),,habláramos
+subjuntivo,pretérito imperfecto 1,vosotros(as),,hablarais
+subjuntivo,pretérito imperfecto 1,ellos/ellas,,hablaran
+subjuntivo,pretérito imperfecto 2,yo,,hablase
+subjuntivo,pretérito imperfecto 2,tú,,hablases
+subjuntivo,pretérito imperfecto 2,él/ella,,hablase
+subjuntivo,pretérito imperfecto 2,nosotros(as),,hablásemos
+subjuntivo,pretérito imperfecto 2,vosotros(as),,hablaseis
+subjuntivo,pretérito imperfecto 2,ellos/ellas,,hablasen
+subjuntivo,pretérito pluscuamperfecto 1,yo,hubiera,hablado
+subjuntivo,pretérito pluscuamperfecto 1,tú,hubieras,hablado
+subjuntivo,pretérito pluscuamperfecto 1,él/ella,hubiera,hablado
+subjuntivo,pretérito pluscuamperfecto 1,nosotros(as),hubiéramos,hablado
+subjuntivo,pretérito pluscuamperfecto 1,vosotros(as),hubierais,hablado
+subjuntivo,pretérito pluscuamperfecto 1,ellos/ellas,hubieran,hablado
+subjuntivo,pretérito pluscuamperfecto 2,yo,hubiese,hablado
+subjuntivo,pretérito pluscuamperfecto 2,tú,hubieses,hablado
+subjuntivo,pretérito pluscuamperfecto 2,él/ella,hubiese,hablado
+subjuntivo,pretérito pluscuamperfecto 2,nosotros(as),hubiésemos,hablado
+subjuntivo,pretérito pluscuamperfecto 2,vosotros(as),hubieseis,hablado
+subjuntivo,pretérito pluscuamperfecto 2,ellos/ellas,hubiesen,hablado
+subjuntivo,futuro,yo,,hablare
+subjuntivo,futuro,tú,,hablares
+subjuntivo,futuro,él/ella,,hablare
+subjuntivo,futuro,nosotros(as),,habláremos
+subjuntivo,futuro,vosotros(as),,hablareis
+subjuntivo,futuro,ellos/ellas,,hablaren
+subjuntivo,futuro perfecto,yo,hubiere,hablado
+subjuntivo,futuro perfecto,tú,hubieres,hablado
+subjuntivo,futuro perfecto,él/ella,hubiere,hablado
+subjuntivo,futuro perfecto,nosotros(as),hubiéremos,hablado
+subjuntivo,futuro perfecto,vosotros(as),hubiereis,hablado
+subjuntivo,futuro perfecto,ellos/ellas,hubieren,hablado
+imperativo,imperativo,tú,,habla
+imperativo,imperativo,usted,,hable
+imperativo,imperativo,nosotros(as),,hablemos
+imperativo,imperativo,vosotros(as),,hablad
+imperativo,imperativo,ustedes,,hablen

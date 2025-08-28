@@ -1,0 +1,90 @@
+modo,tempo,pessoa,aux,conjugado
+indicativo,presente,io,,sorrido
+indicativo,presente,tu,,sorridi
+indicativo,presente,lui/lei,,sorride
+indicativo,presente,noi,,sorridiamo
+indicativo,presente,voi,,sorridete
+indicativo,presente,loro,,sorridono
+indicativo,imperfetto,io,,sorridevo
+indicativo,imperfetto,tu,,sorridevi
+indicativo,imperfetto,lui/lei,,sorrideva
+indicativo,imperfetto,noi,,sorridevamo
+indicativo,imperfetto,voi,,sorridevate
+indicativo,imperfetto,loro,,sorridevano
+indicativo,passato remoto,io,,sorrisi
+indicativo,passato remoto,tu,,sorridesti
+indicativo,passato remoto,lui/lei,,sorrise
+indicativo,passato remoto,noi,,sorridemmo
+indicativo,passato remoto,voi,,sorrideste
+indicativo,passato remoto,loro,,sorrisero
+indicativo,futuro semplice,io,,sorriderò
+indicativo,futuro semplice,tu,,sorriderai
+indicativo,futuro semplice,lui/lei,,sorriderà
+indicativo,futuro semplice,noi,,sorrideremo
+indicativo,futuro semplice,voi,,sorriderete
+indicativo,futuro semplice,loro,,sorrideranno
+indicativo,passato prossimo,io,ho,sorriso
+indicativo,passato prossimo,tu,hai,sorriso
+indicativo,passato prossimo,lui/lei,ha,sorriso
+indicativo,passato prossimo,noi,abbiamo,sorriso
+indicativo,passato prossimo,voi,avete,sorriso
+indicativo,passato prossimo,loro,hanno,sorriso
+indicativo,trapassato prossimo,io,avevo,sorriso
+indicativo,trapassato prossimo,tu,avevi,sorriso
+indicativo,trapassato prossimo,lui/lei,aveva,sorriso
+indicativo,trapassato prossimo,noi,avevamo,sorriso
+indicativo,trapassato prossimo,voi,avevate,sorriso
+indicativo,trapassato prossimo,loro,avevano,sorriso
+indicativo,trapassato remoto,io,ebbi,sorriso
+indicativo,trapassato remoto,tu,avesti,sorriso
+indicativo,trapassato remoto,lui/lei,ebbe,sorriso
+indicativo,trapassato remoto,noi,avemmo,sorriso
+indicativo,trapassato remoto,voi,aveste,sorriso
+indicativo,trapassato remoto,loro,ebbero,sorriso
+indicativo,futuro anteriore,io,avrò,sorriso
+indicativo,futuro anteriore,tu,avrai,sorriso
+indicativo,futuro anteriore,lui/lei,avrà,sorriso
+indicativo,futuro anteriore,noi,avremo,sorriso
+indicativo,futuro anteriore,voi,avrete,sorriso
+indicativo,futuro anteriore,loro,avranno,sorriso
+congiuntivo,presente,io,,sorrida
+congiuntivo,presente,tu,,sorrida
+congiuntivo,presente,lui/lei,,sorrida
+congiuntivo,presente,noi,,sorridiamo
+congiuntivo,presente,voi,,sorridiate
+congiuntivo,presente,loro,,sorridano
+congiuntivo,imperfetto,io,,sorridessi
+congiuntivo,imperfetto,tu,,sorridessi
+congiuntivo,imperfetto,lui/lei,,sorridesse
+congiuntivo,imperfetto,noi,,sorridessimo
+congiuntivo,imperfetto,voi,,sorrideste
+congiuntivo,imperfetto,loro,,sorridessero
+congiuntivo,passato,io,abbia,sorriso
+congiuntivo,passato,tu,abbia,sorriso
+congiuntivo,passato,lui/lei,abbia,sorriso
+congiuntivo,passato,noi,abbiamo,sorriso
+congiuntivo,passato,voi,abbiate,sorriso
+congiuntivo,passato,loro,abbiano,sorriso
+congiuntivo,trapassato,io,avessi,sorriso
+congiuntivo,trapassato,tu,avessi,sorriso
+congiuntivo,trapassato,lui/lei,avesse,sorriso
+congiuntivo,trapassato,noi,avessimo,sorriso
+congiuntivo,trapassato,voi,aveste,sorriso
+congiuntivo,trapassato,loro,avessero,sorriso
+condizionale,presente,io,,sorriderei
+condizionale,presente,tu,,sorrideresti
+condizionale,presente,lui/lei,,sorriderebbe
+condizionale,presente,noi,,sorrideremmo
+condizionale,presente,voi,,sorridereste
+condizionale,presente,loro,,sorriderebbero
+condizionale,passato,io,avrei,sorriso
+condizionale,passato,tu,avresti,sorriso
+condizionale,passato,lui/lei,avrebbe,sorriso
+condizionale,passato,noi,avremmo,sorriso
+condizionale,passato,voi,avreste,sorriso
+condizionale,passato,loro,avrebbero,sorriso
+imperativo,imperativo,tu,,sorridi
+imperativo,imperativo,lui/lei,,sorrida
+imperativo,imperativo,noi,,sorridiamo
+imperativo,imperativo,voi,,sorridete
+imperativo,imperativo,loro,,sorridano

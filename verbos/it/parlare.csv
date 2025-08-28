@@ -1,0 +1,90 @@
+modo,tempo,pessoa,aux,conjugado
+indicativo,presente,io,,parlo
+indicativo,presente,tu,,parli
+indicativo,presente,lui/lei,,parla
+indicativo,presente,noi,,parliamo
+indicativo,presente,voi,,parlate
+indicativo,presente,loro,,parlano
+indicativo,imperfetto,io,,parlavo
+indicativo,imperfetto,tu,,parlavi
+indicativo,imperfetto,lui/lei,,parlava
+indicativo,imperfetto,noi,,parlavamo
+indicativo,imperfetto,voi,,parlavate
+indicativo,imperfetto,loro,,parlavano
+indicativo,passato remoto,io,,parlai
+indicativo,passato remoto,tu,,parlasti
+indicativo,passato remoto,lui/lei,,parlò
+indicativo,passato remoto,noi,,parlammo
+indicativo,passato remoto,voi,,parlaste
+indicativo,passato remoto,loro,,parlarono
+indicativo,futuro semplice,io,,parlerò
+indicativo,futuro semplice,tu,,parlerai
+indicativo,futuro semplice,lui/lei,,parlerà
+indicativo,futuro semplice,noi,,parleremo
+indicativo,futuro semplice,voi,,parlerete
+indicativo,futuro semplice,loro,,parleranno
+indicativo,passato prossimo,io,ho,parlato
+indicativo,passato prossimo,tu,hai,parlato
+indicativo,passato prossimo,lui/lei,ha,parlato
+indicativo,passato prossimo,noi,abbiamo,parlato
+indicativo,passato prossimo,voi,avete,parlato
+indicativo,passato prossimo,loro,hanno,parlato
+indicativo,trapassato prossimo,io,avevo,parlato
+indicativo,trapassato prossimo,tu,avevi,parlato
+indicativo,trapassato prossimo,lui/lei,aveva,parlato
+indicativo,trapassato prossimo,noi,avevamo,parlato
+indicativo,trapassato prossimo,voi,avevate,parlato
+indicativo,trapassato prossimo,loro,avevano,parlato
+indicativo,trapassato remoto,io,ebbi,parlato
+indicativo,trapassato remoto,tu,avesti,parlato
+indicativo,trapassato remoto,lui/lei,ebbe,parlato
+indicativo,trapassato remoto,noi,avemmo,parlato
+indicativo,trapassato remoto,voi,aveste,parlato
+indicativo,trapassato remoto,loro,ebbero,parlato
+indicativo,futuro anteriore,io,avrò,parlato
+indicativo,futuro anteriore,tu,avrai,parlato
+indicativo,futuro anteriore,lui/lei,avrà,parlato
+indicativo,futuro anteriore,noi,avremo,parlato
+indicativo,futuro anteriore,voi,avrete,parlato
+indicativo,futuro anteriore,loro,avranno,parlato
+congiuntivo,presente,io,,parli
+congiuntivo,presente,tu,,parli
+congiuntivo,presente,lui/lei,,parli
+congiuntivo,presente,noi,,parliamo
+congiuntivo,presente,voi,,parliate
+congiuntivo,presente,loro,,parlino
+congiuntivo,imperfetto,io,,parlassi
+congiuntivo,imperfetto,tu,,parlassi
+congiuntivo,imperfetto,lui/lei,,parlasse
+congiuntivo,imperfetto,noi,,parlassimo
+congiuntivo,imperfetto,voi,,parlaste
+congiuntivo,imperfetto,loro,,parlassero
+congiuntivo,passato,io,abbia,parlato
+congiuntivo,passato,tu,abbia,parlato
+congiuntivo,passato,lui/lei,abbia,parlato
+congiuntivo,passato,noi,abbiamo,parlato
+congiuntivo,passato,voi,abbiate,parlato
+congiuntivo,passato,loro,abbiano,parlato
+congiuntivo,trapassato,io,avessi,parlato
+congiuntivo,trapassato,tu,avessi,parlato
+congiuntivo,trapassato,lui/lei,avesse,parlato
+congiuntivo,trapassato,noi,avessimo,parlato
+congiuntivo,trapassato,voi,aveste,parlato
+congiuntivo,trapassato,loro,avessero,parlato
+condizionale,presente,io,,parlerei
+condizionale,presente,tu,,parleresti
+condizionale,presente,lui/lei,,parlerebbe
+condizionale,presente,noi,,parleremmo
+condizionale,presente,voi,,parlereste
+condizionale,presente,loro,,parlerebbero
+condizionale,passato,io,avrei,parlato
+condizionale,passato,tu,avresti,parlato
+condizionale,passato,lui/lei,avrebbe,parlato
+condizionale,passato,noi,avremmo,parlato
+condizionale,passato,voi,avreste,parlato
+condizionale,passato,loro,avrebbero,parlato
+imperativo,imperativo,tu,,parla
+imperativo,imperativo,lui/lei,,parli
+imperativo,imperativo,noi,,parliamo
+imperativo,imperativo,voi,,parlate
+imperativo,imperativo,loro,,parlino

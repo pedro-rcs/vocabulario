@@ -462,6 +462,7 @@ export default [
 				}
 			]
 		},
+		
 		{
 			idioma_sigla: "de",
 			idioma: "alemão",

@@ -1,0 +1,70 @@
+modo,tempo,pessoa,aux,conjugado
+indikativ,präsens,ich,,spreche
+indikativ,präsens,du,,sprichst
+indikativ,präsens,er/sie/es,,spricht
+indikativ,präsens,wir,,sprechen
+indikativ,präsens,ihr,,sprecht
+indikativ,präsens,sie/Sie,,sprechen
+indikativ,präteritum,ich,,sprach
+indikativ,präteritum,du,,sprachst
+indikativ,präteritum,er/sie/es,,sprach
+indikativ,präteritum,wir,,sprachen
+indikativ,präteritum,ihr,,spracht
+indikativ,präteritum,sie/Sie,,sprachen
+indikativ,perfekt,ich,habe,gesprochen
+indikativ,perfekt,du,hast,gesprochen
+indikativ,perfekt,er/sie/es,hat,gesprochen
+indikativ,perfekt,wir,haben,gesprochen
+indikativ,perfekt,ihr,habt,gesprochen
+indikativ,perfekt,sie/Sie,haben,gesprochen
+indikativ,plusquamperfekt,ich,hatte,gesprochen
+indikativ,plusquamperfekt,du,hattest,gesprochen
+indikativ,plusquamperfekt,er/sie/es,hatte,gesprochen
+indikativ,plusquamperfekt,wir,hatten,gesprochen
+indikativ,plusquamperfekt,ihr,hattet,gesprochen
+indikativ,plusquamperfekt,sie/Sie,hatten,gesprochen
+indikativ,futur I,ich,werde,sprechen
+indikativ,futur I,du,wirst,sprechen
+indikativ,futur I,er/sie/es,wird,sprechen
+indikativ,futur I,wir,werden,sprechen
+indikativ,futur I,ihr,werdet,sprechen
+indikativ,futur I,sie/Sie,werden,sprechen
+indikativ,futur II,ich,werde,gesprochen haben
+indikativ,futur II,du,wirst,gesprochen haben
+indikativ,futur II,er/sie/es,wird,gesprochen haben
+indikativ,futur II,wir,werden,gesprochen haben
+indikativ,futur II,ihr,werdet,gesprochen haben
+indikativ,futur II,sie/Sie,werden,gesprochen haben
+konjunktiv I,präsens,ich,,spreche
+konjunktiv I,präsens,du,,sprechest
+konjunktiv I,präsens,er/sie/es,,spreche
+konjunktiv I,präsens,wir,,sprechen
+konjunktiv I,präsens,ihr,,sprechet
+konjunktiv I,präsens,sie/Sie,,sprechen
+konjunktiv I,perfekt,ich,habe,gesprochen
+konjunktiv I,perfekt,du,habest,gesprochen
+konjunktiv I,perfekt,er/sie/es,habe,gesprochen
+konjunktiv I,perfekt,wir,haben,gesprochen
+konjunktiv I,perfekt,ihr,habet,gesprochen
+konjunktiv I,perfekt,sie/Sie,haben,gesprochen
+konjunktiv II,präteritum,ich,,spräche
+konjunktiv II,präteritum,du,,sprächest
+konjunktiv II,präteritum,er/sie/es,,spräche
+konjunktiv II,präteritum,wir,,sprächen
+konjunktiv II,präteritum,ihr,,sprächet
+konjunktiv II,präteritum,sie/Sie,,sprächen
+konjunktiv II,perfekt,ich,hätte,gesprochen
+konjunktiv II,perfekt,du,hättest,gesprochen
+konjunktiv II,perfekt,er/sie/es,hätte,gesprochen
+konjunktiv II,perfekt,wir,hätten,gesprochen
+konjunktiv II,perfekt,ihr,hättet,gesprochen
+konjunktiv II,perfekt,sie/Sie,hätten,gesprochen
+konjunktiv II,futur I,ich,würde,sprechen
+konjunktiv II,futur I,du,würdest,sprechen
+konjunktiv II,futur I,er/sie/es,würde,sprechen
+konjunktiv II,futur I,wir,würden,sprechen
+konjunktiv II,futur I,ihr,würdet,sprechen
+konjunktiv II,futur I,sie/Sie,würden,sprechen
+imperativ,imperativ,du,,sprich!
+imperativ,imperativ,ihr,,sprecht!
+imperativ,imperativ,Sie,,sprechen Sie!

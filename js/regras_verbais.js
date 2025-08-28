@@ -462,22 +462,99 @@ export default [
 				}
 			]
 		},
-		
+
 		{
-			idioma_sigla: "de",
-			idioma: "alemão",
-			modos: [
-				{
-					modo: "indicative_active",
-					ordem_tempos: ["present", "imperfect", "perfect", "plusquamperfect", "future", "future_perfect"],
-					ordenacao: [
-						{
-							tempos: ["present", "imperfect"],
-							pessoas: ["ich", "du", "er", "wir", "ihr", "sie"],
-							elementos: ["pessoas", "conjugado"]
-						}
-					]
-				}
-			]
-		}
+			"idioma_sigla": "de",
+		  "idioma": "alemão",
+		  "modos": [
+    {
+      "modo": "indikativ",
+      "ordem_tempos": [
+        "präsens",
+        "präteritum",
+        "perfekt",
+        "plusquamperfekt",
+        "futur I",
+        "futur II"
+      ],
+      "ordenacao": [
+        {
+          "tempos": ["präsens", "präteritum"],
+          "pessoas": ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"],
+          "elementos": ["pessoas", "conjugado"]
+        },
+        {
+          "tempos": ["perfekt"],
+          "pessoas": ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"],
+          "elementos": ["pessoas", "aux", "conjugado"]
+        },
+        {
+          "tempos": ["plusquamperfekt"],
+          "pessoas": ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"],
+          "elementos": ["pessoas", "aux", "conjugado"]
+        },
+        {
+          "tempos": ["futur I"],
+          "pessoas": ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"],
+          "elementos": ["pessoas", "aux", "conjugado"]
+        },
+        {
+          "tempos": ["futur II"],
+          "pessoas": ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"],
+          "elementos": ["pessoas", "aux", "conjugado"]
+        }
+      ]
+    },
+    {
+      "modo": "konjunktiv I",
+      "ordem_tempos": ["präsens", "perfekt"],
+      "ordenacao": [
+        {
+          "tempos": ["präsens"],
+          "pessoas": ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"],
+          "elementos": ["pessoas", "conjugado"]
+        },
+        {
+          "tempos": ["perfekt"],
+          "pessoas": ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"],
+          "elementos": ["pessoas", "aux", "conjugado"]
+        }
+      ]
+    },
+    {
+      "modo": "konjunktiv II",
+      "ordem_tempos": ["präteritum", "perfekt", "futur I"],
+      "ordenacao": [
+        {
+          "tempos": ["präteritum"],
+          "pessoas": ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"],
+          "elementos": ["pessoas", "conjugado"]
+        },
+        {
+          "tempos": ["perfekt"],
+          "pessoas": ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"],
+          "elementos": ["pessoas", "aux", "conjugado"]
+        },
+        {
+          "tempos": ["futur I"],
+          "pessoas": ["ich", "du", "er/sie/es", "wir", "ihr", "sie/Sie"],
+          "elementos": ["pessoas", "aux", "conjugado"]
+        }
+      ]
+    },
+    {
+      "modo": "imperativ",
+      "ordem_tempos": ["imperativ"],
+      "ordenacao": [
+        {
+          "tempos": ["imperativ"],
+          "pessoas": ["du", "ihr", "Sie"],
+          "elementos": ["pessoas", "conjugado"]
+        }
+      ]
+    }
+  ]
+}
+
+
 ]

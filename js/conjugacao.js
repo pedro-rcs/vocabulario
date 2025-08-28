@@ -22,7 +22,6 @@ if (userName) {
   document.getElementById('user-info').textContent = `${traduzir_hud('ola', currentLanguage)}, ${userName}!`;
 }
 
-
 // Verbos para treinar
 const verbos = {
   pt: ['falar', 'comer', 'partir'],
@@ -32,8 +31,6 @@ const verbos = {
   it: ['parlare', 'mangiare', 'partire'],
   de: ['sprechen', 'essen', 'verlassen']
 };
-
-
 
 // Mostra o div de conjugação para o verbo escolhido
 function mostrarConjugacao(verbo, idioma) {
@@ -137,8 +134,6 @@ function cria_tabela_verbos () {
     });
     }
   }
-
-
 }
 
 
@@ -158,8 +153,8 @@ let conjDados = {};
 
 
 function carregarCSV(arquivo) {
-
-  Papa.parse(`../verbos/${idioma_praticado}/${arquivo}.csv`, {
+  const arquivo_sem_acentos = normalizarTexto(arquivo) // Também retira caractéres exóticos.
+  Papa.parse(`../verbos/${idioma_praticado}/${arquivo_sem_acentos}.csv`, {
   download: true, // <- importante!
     header: true,
     complete: function(results) {
@@ -334,6 +329,27 @@ const verbos_infinitivo = [
     verbos: ["lieben", "sprechen", "lächeln"]
   }
 ]
+
+
+function normalizarTexto(texto) {
+  return texto
+    // 1. Normaliza acentos (NFD separa letras de seus diacríticos)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    // 2. Substitui caracteres especiais específicos
+    .replace(/ß/g, "ss")     // alemão
+    .replace(/æ/g, "ae")     // francês, norueguês
+    .replace(/œ/g, "oe")     // francês
+    .replace(/ø/g, "o")      // escandinavo
+    .replace(/ñ/g, "n")      // espanhol
+    .replace(/ç/g, "c")      // português, francês
+    .replace(/đ/g, "d")      // croata
+    .replace(/ł/g, "l")      // polonês
+    .replace(/þ/g, "th")     // islandês
+    .replace(/ð/g, "d")      // islandês
+    // 3. Remove qualquer outro caractere não-ASCII opcionalmente
+    .replace(/[^\x00-\x7F]/g, "");
+}
 
 
 function faz_botoes_verbos () {

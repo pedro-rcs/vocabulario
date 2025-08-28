@@ -1,64 +1,70 @@
 modo,tempo,pessoa,aux,conjugado
-indikativ,present,ich,,liebe
-indikativ,present,du,,liebst
-indikativ,present,er/sie/es,,liebt
-indikativ,present,wir,,lieben
-indikativ,present,ihr,,liebt
-indikativ,present,sie/Sie,,lieben
-indikativ,preterite,ich,,liebte
-indikativ,preterite,du,,liebtest
-indikativ,preterite,er/sie/es,,liebte
-indikativ,preterite,wir,,liebten
-indikativ,preterite,ihr,,liebtet
-indikativ,preterite,sie/Sie,,liebten
-indikativ,perfect,ich,habe,geliebt
-indikativ,perfect,du,hast,geliebt
-indikativ,perfect,er/sie/es,hat,geliebt
-indikativ,perfect,wir,haben,geliebt
-indikativ,perfect,ihr,habt,geliebt
-indikativ,perfect,sie/Sie,haben,geliebt
-indikativ,plusquamperfect,ich,hatte,geliebt
-indikativ,plusquamperfect,du,hattest,geliebt
-indikativ,plusquamperfect,er/sie/es,hatte,geliebt
-indikativ,plusquamperfect,wir,hatten,geliebt
-indikativ,plusquamperfect,ihr,hattet,geliebt
-indikativ,plusquamperfect,sie/Sie,hatten,geliebt
-indikativ,future,ich,werde,lieben
-indikativ,future,du,wirst,lieben
-indikativ,future,er/sie/es,wird,lieben
-indikativ,future,wir,werden,lieben
-indikativ,future,ihr,werdet,lieben
-indikativ,future,sie/Sie,werden,lieben
-indikativ,future perfect,ich,werde,geliebt haben
-indikativ,future perfect,du,wirst,geliebt haben
-indikativ,future perfect,er/sie/es,wird,geliebt haben
-indikativ,future perfect,wir,werden,geliebt haben
-indikativ,future perfect,ihr,werdet,geliebt haben
-indikativ,future perfect,sie/Sie,werden,geliebt haben
-konjunktiv I,present,ich,,liebe
-konjunktiv I,present,du,,liebest
-konjunktiv I,present,er/sie/es,,liebe
-konjunktiv I,present,wir,,lieben
-konjunktiv I,present,ihr,,liebet
-konjunktiv I,present,sie/Sie,,lieben
-konjunktiv I,perfect,ich,habe,geliebt
-konjunktiv I,perfect,du,habest,geliebt
-konjunktiv I,perfect,er/sie/es,habe,geliebt
-konjunktiv I,perfect,wir,haben,geliebt
-konjunktiv I,perfect,ihr,habet,geliebt
-konjunktiv I,perfect,sie/Sie,haben,geliebt
-konjunktiv II,preterite,ich,,liebte
-konjunktiv II,preterite,du,,liebtest
-konjunktiv II,preterite,er/sie/es,,liebte
-konjunktiv II,preterite,wir,,liebten
-konjunktiv II,preterite,ihr,,liebtet
-konjunktiv II,preterite,sie/Sie,,liebten
-konjunktiv II,perfect,ich,hätte,geliebt
-konjunktiv II,perfect,du,hättest,geliebt
-konjunktiv II,perfect,er/sie/es,hätte,geliebt
-konjunktiv II,perfect,wir,hätten,geliebt
-konjunktiv II,perfect,ihr,hättet,geliebt
-konjunktiv II,perfect,sie/Sie,hätten,geliebt
+indikativ,präsens,ich,,liebe
+indikativ,präsens,du,,liebst
+indikativ,präsens,er/sie/es,,liebt
+indikativ,präsens,wir,,lieben
+indikativ,präsens,ihr,,liebt
+indikativ,präsens,sie/Sie,,lieben
+indikativ,präteritum,ich,,liebte
+indikativ,präteritum,du,,liebtest
+indikativ,präteritum,er/sie/es,,liebte
+indikativ,präteritum,wir,,liebten
+indikativ,präteritum,ihr,,liebtet
+indikativ,präteritum,sie/Sie,,liebten
+indikativ,perfekt,ich,habe,geliebt
+indikativ,perfekt,du,hast,geliebt
+indikativ,perfekt,er/sie/es,hat,geliebt
+indikativ,perfekt,wir,haben,geliebt
+indikativ,perfekt,ihr,habt,geliebt
+indikativ,perfekt,sie/Sie,haben,geliebt
+indikativ,plusquamperfekt,ich,hatte,geliebt
+indikativ,plusquamperfekt,du,hattest,geliebt
+indikativ,plusquamperfekt,er/sie/es,hatte,geliebt
+indikativ,plusquamperfekt,wir,hatten,geliebt
+indikativ,plusquamperfekt,ihr,hattet,geliebt
+indikativ,plusquamperfekt,sie/Sie,hatten,geliebt
+indikativ,futur I,ich,werde,lieben
+indikativ,futur I,du,wirst,lieben
+indikativ,futur I,er/sie/es,wird,lieben
+indikativ,futur I,wir,werden,lieben
+indikativ,futur I,ihr,werdet,lieben
+indikativ,futur I,sie/Sie,werden,lieben
+indikativ,futur II,ich,werde,geliebt haben
+indikativ,futur II,du,wirst,geliebt haben
+indikativ,futur II,er/sie/es,wird,geliebt haben
+indikativ,futur II,wir,werden,geliebt haben
+indikativ,futur II,ihr,werdet,geliebt haben
+indikativ,futur II,sie/Sie,werden,geliebt haben
+konjunktiv I,präsens,ich,,liebe
+konjunktiv I,präsens,du,,liebest
+konjunktiv I,präsens,er/sie/es,,liebe
+konjunktiv I,präsens,wir,,lieben
+konjunktiv I,präsens,ihr,,liebet
+konjunktiv I,präsens,sie/Sie,,lieben
+konjunktiv I,perfekt,ich,habe,geliebt
+konjunktiv I,perfekt,du,habest,geliebt
+konjunktiv I,perfekt,er/sie/es,habe,geliebt
+konjunktiv I,perfekt,wir,haben,geliebt
+konjunktiv I,perfekt,ihr,habet,geliebt
+konjunktiv I,perfekt,sie/Sie,haben,geliebt
+konjunktiv II,präteritum,ich,,liebte
+konjunktiv II,präteritum,du,,liebtest
+konjunktiv II,präteritum,er/sie/es,,liebte
+konjunktiv II,präteritum,wir,,liebten
+konjunktiv II,präteritum,ihr,,liebtet
+konjunktiv II,präteritum,sie/Sie,,liebten
+konjunktiv II,perfekt,ich,hätte,geliebt
+konjunktiv II,perfekt,du,hättest,geliebt
+konjunktiv II,perfekt,er/sie/es,hätte,geliebt
+konjunktiv II,perfekt,wir,hätten,geliebt
+konjunktiv II,perfekt,ihr,hättet,geliebt
+konjunktiv II,perfekt,sie/Sie,hätten,geliebt
+konjunktiv II,futur I,ich,würde,lieben
+konjunktiv II,futur I,du,würdest,lieben
+konjunktiv II,futur I,er/sie/es,würde,lieben
+konjunktiv II,futur I,wir,würden,lieben
+konjunktiv II,futur I,ihr,würdet,lieben
+konjunktiv II,futur I,sie/Sie,würden,lieben
 imperativ,imperativ,du,,liebe!
 imperativ,imperativ,ihr,,liebt!
 imperativ,imperativ,Sie,,lieben Sie!

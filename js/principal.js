@@ -72,15 +72,13 @@ function buildTables (data) {
   // container.appendChild(h1);
 
   const container_botoes_modalidades = document.createElement('div')
-  container_botoes_modalidades.className = 'container_idioma'
+  container_botoes_modalidades.className = 'container_bots_modalidades'
   container_botoes_modalidades.style.marginTop = '40px'
   container_botoes_modalidades.style.marginBottom = '40px'
 
 
   const botao_palavras = cria_botoes_abas_2(traduzir_hud('botao_palavras', currentLanguage), "ativo")
   container_botoes_modalidades.appendChild(botao_palavras)
-
-
 
   const botao_conjugacao = cria_botoes_abas_2(traduzir_hud('botao_conjugacao', currentLanguage), "inativo")
   botao_conjugacao.id = "botao_conjugacao";
@@ -89,7 +87,7 @@ function buildTables (data) {
     window.location.href = "conjugacao.html";
   });
   container_botoes_modalidades.appendChild(botao_conjugacao)
-
+  container.appendChild(container_botoes_modalidades)
 
 
 
@@ -141,7 +139,7 @@ function buildTables (data) {
   let botao_placeholder_palavra = document.createElement('button');
   botao_placeholder_palavra.id = 'botao_placeholder_palavra'
   botao_placeholder_palavra.style.display = 'flex'
-  botao_placeholder_palavra.className = (mostra_placeholder_palavras === 'sim') ? "botao_terminei botao_ativado" : 'botao_terminei'
+  botao_placeholder_palavra.className = (mostra_placeholder_palavras === 'sim') ? "bot_mostra_palavras active" : 'bot_mostra_palavras'
   botao_placeholder_palavra.innerHTML = traduzir_hud('placeholder_palavra', currentLanguage)
   
   botao_placeholder_palavra.addEventListener('click', () => {

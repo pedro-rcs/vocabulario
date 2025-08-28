@@ -131,6 +131,39 @@ h2.open::after {
   background: darkgreen;
 }
 
+
+.bot_mostra_palavras {
+  max-height: 50px;
+  padding: 12px 24px;
+  border: 1px solid rgba(158,158,158, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  background: rgba(255,255,155, 0.1); /* fundo translúcido */
+  backdrop-filter: blur(6px);
+  color: #222; /* texto escuro para contraste */
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  width: auto;
+  display: inline-block;
+}
+
+/* Hover */
+.bot_mostra_palavras:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Estado ativo */
+.bot_mostra_palavras.active {
+  background: rgba(120, 194, 93, 0.8);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+
+
   /* Container do seletor */
 
 .language-selector {
@@ -226,36 +259,37 @@ h2.open::after {
 }
 
 .tab-btn2 {
-  max-height: 70px;
-  padding: 16px 28px;
+  width: 300px;              /* largura fixa e idêntica */
+  padding: 14px 0;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  background-color: #6dd171; /* verde vibrante */
-  color: #ffffff;
-  font-size: 26px;
-  font-weight: 900;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  transition: background 0.3s, transform 0.15s, box-shadow 0.3s;
-  width: auto; /* padrão para desktop */
-  display: inline-block;
+  background-color: #e8f0e6;  /* verde musgo claro, suave */
+  color: #2f3e29;             /* verde musgo escuro para contraste */
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+  transition: background 0.3s, transform 0.1s;
 }
 
 /* Hover */
 .tab-btn2:hover {
-  background-color: #43a047;
-  transform: scale(1.05);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  background-color: #d6e4d2;  /* leve destaque */
+  transform: translateY(-1px);
 }
 
 /* Estado ativo */
 .tab-btn2.active {
-  background-color: #2e7d32;
-  box-shadow: 0 0 0 3px #c8e6c9;
+  background-color: #c5d6c0;  /* um tom a mais de escuro */
+  color: #1e2a1a;
 }
 
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
+  .container_bots_modalidades {
+    flex-direction: column;
+  }
   .tab-btn2 {
     width: 100%;
     font-size: 24px;
@@ -364,7 +398,14 @@ body.pratica .table-wrapper td {
   color: #222;
 }
 
-
+.container_bots_modalidades {
+  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 /* botãozinho de audio, no input */
 .audio-btn {
   margin-left: 8px;

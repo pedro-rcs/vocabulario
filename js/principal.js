@@ -11,7 +11,8 @@ import {
   setCookie,
   getCookie,
   apagaCookie,
-  showCustomModal
+  showCustomModal,
+  encontra_lang_ingles
 } from './auxiliar.js'
 
 // Definimos variáveis e contantes.
@@ -133,9 +134,6 @@ function buildTables (data) {
 
   container_idioma.appendChild(botao_multipla_escolha)
 
-  
-
-
   let botao_placeholder_palavra = document.createElement('button');
   botao_placeholder_palavra.id = 'botao_placeholder_palavra'
   botao_placeholder_palavra.style.display = 'flex'
@@ -158,17 +156,13 @@ function buildTables (data) {
   const container_botao_placeholder = document.createElement('div') // Vai embaixo do container_idioma
   container_botao_placeholder.id = 'container_botao_placeholder'
 
-  
-
   container_botao_placeholder.style.display = 'none'
   if (modo === 'pratica') container_botao_placeholder.style.display = 'flex'
-  container_botao_placeholder.appendChild(botao_placeholder_palavra);
+  container_botao_placeholder.appendChild(botao_placeholder_palavra)
 
   container.appendChild(container_idioma);
   
   container.appendChild(container_botao_placeholder); // insere no container
-
-
     language_selector_pratica.addEventListener("change", (e) => {
     idioma_praticado = e.target.value
     setCookie('idioma_praticado', idioma_praticado, 365)
@@ -271,7 +265,19 @@ function buildTables (data) {
 
 
     const tbody = document.createElement('tbody');
+    const palavrasAdicionadas = new Set();
+
     frases.forEach((frase, fraseIndex) => {
+        const idioma_teste = encontra_lang_ingles(currentLanguage).trim();
+
+      // const idioma_teste = 'English'; // ou 'English', 'Spanish', etc.
+      const textoReferencia = frase[headers.indexOf(idioma_teste)];
+      if (palavrasAdicionadas.has(textoReferencia)) {
+        return; // pula esta frase
+      }
+      palavrasAdicionadas.add(textoReferencia);
+
+
       const tr = document.createElement('tr');
       
       frase.forEach((texto, idx) => {

@@ -173,5 +173,6 @@ export {
   setCookie,
   getCookie,
   apagaCookie,
-  showCustomModal
+  showCustomModal,
+  encontra_lang_ingles
 }

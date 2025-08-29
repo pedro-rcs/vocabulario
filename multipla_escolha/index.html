@@ -148,14 +148,22 @@
         }
 
         .botao_voltar:hover {
-                        background: #e2e2e2;
+            background: #e2e2e2;
             transform: translateX(3px);
+        }
+        #progress-bar {
+            transition: width 0.3s ease-in-out;
         }
     </style>
 </head>
 <body style="display: flex; justify-content: center; align-items: center; height: 100vh;">
     <div>
       <h1 class="h1_titulo" style="display: none;">Jogo de Traduções</h1>
+        
+      <div id="progress-container" style="width: 100%; background-color: #ddd; border-radius: 8px; margin: 10px 0;">
+        <div id="progress-bar" style="width: 0%; height: 20px; background-color: #4caf50; border-radius: 8px;"></div>
+        </div>
+
       <div id="question" style="font-size: 40px;"></div>
       <div id="options" style="margin-top: 50px;"></div>
       <div id="feedback"></div>
@@ -229,8 +237,19 @@
                             word[lang] = values[j].trim();
                         }
                         words.push(word);
+                        
                     }
                 }
+
+                // Remove palavras duplicadas com base no idioma da pergunta
+                const seen = new Set();
+                words = words.filter(word => {
+                    const chave = word[idiomaPergunta]?.trim().toLowerCase();
+                    if (seen.has(chave)) return false;
+                    seen.add(chave);
+                    return true;
+                });
+
 
                 if (words.length === 0) {
                     alert('Nenhuma palavra encontrada na categoria.');
@@ -238,6 +257,7 @@
                 }
 
                 remainingWords = [...words];
+                console.log(`Total de palavras carregadas: ${words.length}`);
                 nextQuestion();
             } catch (error) {
                 console.error('Erro ao carregar CSV:', error);
@@ -319,12 +339,14 @@
 
             // Aplica animação com base na resposta
             if (selected === correta) {
+                
                 correct++;
                 button.classList.add('correct-animation');
                 // document.getElementById('feedback').innerText = 'Correto!';
                 correctSound.play();
                 // Remove da lista
                 remainingWords = remainingWords.filter(w => w[idiomaPergunta] !== currentWord[idiomaPergunta]);
+                updateProgressBar();
             } else {
                 wrong++;
                 button.classList.add('wrong-animation');
@@ -366,6 +388,15 @@
 
         // Inicia o jogo
         loadCSV();
+
+        function updateProgressBar() {
+            const total = words.length;
+            const acertos = correct;
+            const porcentagem = Math.round((acertos / total) * 100);
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = `${porcentagem}%`;
+        }
+
     </script>
 </body>
 </html>

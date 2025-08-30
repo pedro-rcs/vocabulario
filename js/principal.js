@@ -455,12 +455,30 @@ function buildTables (data) {
 
       const tr = document.createElement('tr')
       
+      const posicao_atual = frases[fraseIndex][0]
+      let frases_variantes = []
+
+      let i = fraseIndex + 1;
+      const codAtual = frases[fraseIndex][1]; // valor da primeira coluna da frase atual
+
+      if (posicao_atual === "1") {
+         while (i < frases.length && frases[i] && frases[i][1] === codAtual) {
+
+          const fraseRelacionada = frases[i]
+          frases_variantes.push(frases[i][headers.indexOf(idioma_em_ingles)]) // só o texto.
+
+          i++;
+        }
+      }
+
+
       frase.forEach((texto, idx) => {
 
         const td = document.createElement('td');
-
+td.style.position = "relative";
         if (modo === "teoria") {
-          if (idx != 0 & idx != 1) {
+          
+          if (idx != 0 & idx != 1 & posicao_atual === "1") {
 
             td.textContent = texto;
             td.style.cursor = 'pointer'
@@ -472,6 +490,52 @@ function buildTables (data) {
               audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
             })
 
+
+            if (frases_variantes.length > 0) {
+              const toggle = document.createElement("span");
+              toggle.innerHTML = "&#9660;"; // ▼
+              toggle.setAttribute('aria-label', 'Ver variantes');
+              toggle.style.cursor = "pointer";
+              toggle.style.fontSize = "0.8em";
+              toggle.style.position = "absolute";
+              toggle.style.right = "6px";
+              toggle.style.top = "50%";
+              toggle.style.transform = "translateY(-50%)";
+              toggle.style.userSelect = "none";
+
+              const popup = document.createElement("div");
+              popup.className = "popup-variantes";
+              popup.style.position = "absolute";
+              popup.style.top = "100%";
+              popup.style.right = "0";
+              popup.style.background = "#fff";
+              popup.style.border = "1px solid #ccc";
+              popup.style.padding = "6px 8px";
+              popup.style.borderRadius = "6px";
+              popup.style.boxShadow = "0 6px 16px rgba(0,0,0,0.15)";
+              popup.style.display = "none";
+              popup.style.zIndex = "50";
+              popup.style.minWidth = "140px";
+
+              frases_variantes.forEach(v => {
+                const item = document.createElement("div");
+                const textoVar = v || '';
+                item.textContent = `${textoVar}`;
+                item.style.padding = "4px 0";
+                popup.appendChild(item);
+              });
+
+              toggle.addEventListener("click", (e) => {
+                e.stopPropagation();
+                // esconde outros popups e alterna este
+                document.querySelectorAll('.popup-variantes').forEach(p => { if (p !== popup) p.style.display = 'none'; });
+                popup.style.display = popup.style.display === "none" ? "block" : "none";
+              });
+
+              td.appendChild(toggle);
+              td.appendChild(popup);
+            }
+            
             tr.appendChild(td)
           }
         }

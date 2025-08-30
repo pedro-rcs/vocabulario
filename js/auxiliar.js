@@ -26,6 +26,7 @@ function createLanguageSelector(container, idioma_selecionado, tipo, idioma_prat
   
   container.appendChild(label)
   container.appendChild(select)
+  return container
 }
 
 function idioma_select_padrao (idioma_selecionado, tipo, idioma_praticado) {
@@ -162,6 +163,27 @@ function showCustomModal(message, callback) {
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', outsideClick);
 }
+
+function cria_escolha_idiomas (tipo) {
+
+  if (tipo === 'geral') {
+    let language_selector = document.createElement('div');
+    language_selector.className = "language-selector";
+    language_selector.style.marginBottom = "10px"
+
+    return createLanguageSelector(language_selector, currentLanguage, 'padrao') // adiciona label
+  }
+
+  if (tipo === 'pratica') {
+    let language_selector_pratica = document.createElement('div');
+    language_selector_pratica.className = "language-selector";
+    language_selector_pratica.style.marginBottom = "10px"
+    language_selector_pratica.id = 'language_selector_pratica'
+
+    return createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica', idioma_praticado) // adiciona label + select dentro desse div
+  }
+}
+
 
 export {
   createLanguageSelector,

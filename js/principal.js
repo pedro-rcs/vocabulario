@@ -34,291 +34,477 @@ if (!idioma_praticado) {
 }
 
 
-function buildTables (data) {
-  // --- helpers e índices robustos ---
-  const rawHeaders = data[0].slice(1); // remove coluna categoria
-  const headers = rawHeaders.map(h => (h || '').trim());
-  const headerIndex = (name) => headers.findIndex(h => h && h.toLowerCase() === String(name).trim().toLowerCase());
+function cria_escolha_idiomas (tipo) {
 
-  const idxPosicao = headerIndex('Posicao');           // normalmente 0
-  const idxCod = headerIndex('Cod_dekoreba');         // normalmente 1
+  if (tipo === 'geral') {
+    let language_selector = document.createElement('div');
+    language_selector.className = "language-selector";
+    language_selector.style.marginBottom = "10px"
 
-  // languages mapping (para tradução dos th)
-  const languages = [
-    { code: 'en', name_ingles: 'English' },
-    { code: 'pt', name_ingles: 'Portuguese' },
-    { code: 'es', name_ingles: 'Spanish' },
-    { code: 'fr', name_ingles: 'French' },
-    { code: 'it', name_ingles: 'Italian' },
-    { code: 'de', name_ingles: 'German' }
-  ];
-
-  // --- agrupamento por categoria ---
-  const grouped = {};
-  for (let i = 1; i < data.length; i++) {
-    const row = data[i];
-    const categoria = row[0];
-    if (!grouped[categoria]) grouped[categoria] = [];
-    grouped[categoria].push(row.slice(1)); // linha sem a coluna categoria
+    return createLanguageSelector(language_selector, currentLanguage, 'padrao') // adiciona label
   }
 
-  // --- container ---
-  const container = document.getElementById('output');
-  container.innerHTML = '';
+  if (tipo === 'pratica') {
+    let language_selector_pratica = document.createElement('div');
+    language_selector_pratica.className = "language-selector";
+    language_selector_pratica.style.marginBottom = "10px"
+    language_selector_pratica.id = 'language_selector_pratica'
 
-  // --- cria seletores / botões (mantive sua lógica original) ---
-  let language_selector = document.createElement('div');
-  language_selector.className = "language-selector";
-  language_selector.style.marginBottom = "10px";
-  createLanguageSelector(language_selector, currentLanguage, 'padrao');
-  container.appendChild(language_selector);
+    language_selector_pratica.addEventListener("change", (e) => {
+      idioma_praticado = e.target.value
+      setCookie('idioma_praticado', idioma_praticado, 365)
+      carrega_csv()
+    })
+    return createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica', idioma_praticado) // adiciona label + select dentro desse div
+  }
+}
 
-  let language_selector_pratica = document.createElement('div');
-  language_selector_pratica.className = "language-selector";
-  language_selector_pratica.style.marginBottom = "10px";
-  language_selector_pratica.id = 'language_selector_pratica';
-  createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica', idioma_praticado);
-  container.appendChild(language_selector_pratica);
+function cria_modalidades () {
+  const container_botoes_modalidades = document.createElement('div')
+  container_botoes_modalidades.className = 'container_bots_modalidades'
+  container_botoes_modalidades.style.marginTop = '40px'
+  container_botoes_modalidades.style.marginBottom = '40px'
 
-  const container_botoes_modalidades = document.createElement('div');
-  container_botoes_modalidades.className = 'container_bots_modalidades';
-  container_botoes_modalidades.style.marginTop = '40px';
-  container_botoes_modalidades.style.marginBottom = '40px';
 
-  const botao_palavras = cria_botoes_abas_2(traduzir_hud('botao_palavras', currentLanguage), "ativo");
-  container_botoes_modalidades.appendChild(botao_palavras);
+  const botao_palavras = cria_botoes_abas_2(traduzir_hud('botao_palavras', currentLanguage), "ativo")
+  container_botoes_modalidades.appendChild(botao_palavras)
 
-  const botao_conjugacao = cria_botoes_abas_2(traduzir_hud('botao_conjugacao', currentLanguage), "inativo");
+  const botao_conjugacao = cria_botoes_abas_2(traduzir_hud('botao_conjugacao', currentLanguage), "inativo")
   botao_conjugacao.id = "botao_conjugacao";
-  botao_conjugacao.addEventListener("click", () => { window.location.href = "conjugacao.html"; });
-  container_botoes_modalidades.appendChild(botao_conjugacao);
-  container.appendChild(container_botoes_modalidades);
+  botao_conjugacao.addEventListener("click", () => {
+    // Redireciona para uma página de conjugação ou chama uma função/modal
+    window.location.href = "conjugacao.html";
+  });
+  container_botoes_modalidades.appendChild(botao_conjugacao)
 
-  const container_idioma = document.createElement('div');
-  container_idioma.className = 'container_idioma';
+  return container_botoes_modalidades
+}
 
-  const atividade_botao_teoria = (modo === 'teoria') ? 'ativo' : 'inativo';
-  const botao_teoria = cria_botoes_abas(traduzir_hud('botao_teoria', currentLanguage), atividade_botao_teoria);
-  botao_teoria.addEventListener("click", () => { modo = 'teoria'; document.getElementById("botao_placeholder_palavra").style.display = 'none'; carrega_csv(); });
-  container_idioma.appendChild(botao_teoria);
+function cria_botao_teoria () {
+  const atividade_botao_teoria = (modo === 'teoria') ? 'ativo' : 'inativo'
+  const botao_teoria = cria_botoes_abas(traduzir_hud('botao_teoria', currentLanguage), atividade_botao_teoria)
+  botao_teoria.addEventListener("click", () => {
+    modo = 'teoria'
 
-  const atividade_botao_pratica = (modo === 'pratica') ? 'ativo' : 'inativo';
-  const botao_pratica = cria_botoes_abas(traduzir_hud('botao_pratica', currentLanguage), atividade_botao_pratica);
-  botao_pratica.addEventListener("click", () => { modo = 'pratica'; document.getElementById("language_selector_pratica").style.display = 'flex'; document.getElementById("botao_placeholder_palavra").style.display = 'flex'; carrega_csv(); });
-  container_idioma.appendChild(botao_pratica);
+    document.getElementById("botao_placeholder_palavra").style.display = 'none'
+    carrega_csv()
+  })
 
-  const atividade_botao_multipla_escolha = (modo === 'multipla_escolha') ? 'ativo' : 'inativo';
-  const botao_multipla_escolha = cria_botoes_abas(traduzir_hud('botao_multipla_escolha', currentLanguage), atividade_botao_multipla_escolha);
-  botao_multipla_escolha.addEventListener("click", () => { modo = 'multipla_escolha'; carrega_csv(); });
-  container_idioma.appendChild(botao_multipla_escolha);
+  return botao_teoria
+}
+
+function cria_botao_pratica () {
+  const atividade_botao_pratica = (modo === 'pratica') ? 'ativo' : 'inativo'
+  const botao_pratica = cria_botoes_abas(traduzir_hud('botao_pratica', currentLanguage), atividade_botao_pratica)
+  botao_pratica.addEventListener("click", () => {
+    modo = 'pratica'
+    document.getElementById("language_selector_pratica").style.display = 'flex'
+    document.getElementById("botao_placeholder_palavra").style.display = 'flex'
+    carrega_csv()
+  })
+
+  return botao_pratica
+}
+
+function cria_botao_multipla_escolha () {
+  const atividade_botao_multipla_escolha = (modo === 'multipla_escolha') ? 'ativo' : 'inativo'
+  const botao_multipla_escolha = cria_botoes_abas(traduzir_hud('botao_multipla_escolha', currentLanguage), atividade_botao_multipla_escolha)
+  
+  botao_multipla_escolha.addEventListener("click", () => {
+    modo = 'multipla_escolha'
+    // Aqui, pode se chamar o buildTable, mas
+    // Precisamos ter apenas os enunciados das categorias (classes de palavras).
+    // Ao clicar na classe, abre-se uma nova janela, como jogo, talvez.
+    
+    carrega_csv()
+  })
+
+  return botao_multipla_escolha
+}
+
+function cria_botao_placeholder_palavra () {
 
   let botao_placeholder_palavra = document.createElement('button');
-  botao_placeholder_palavra.id = 'botao_placeholder_palavra';
-  botao_placeholder_palavra.style.display = 'flex';
-  botao_placeholder_palavra.className = (mostra_placeholder_palavras === 'sim') ? "bot_mostra_palavras active" : 'bot_mostra_palavras';
-  botao_placeholder_palavra.innerHTML = traduzir_hud('placeholder_palavra', currentLanguage);
+  botao_placeholder_palavra.id = 'botao_placeholder_palavra'
+  botao_placeholder_palavra.style.display = 'flex'
+  botao_placeholder_palavra.className = (mostra_placeholder_palavras === 'sim') ? "bot_mostra_palavras active" : 'bot_mostra_palavras'
+  botao_placeholder_palavra.innerHTML = traduzir_hud('placeholder_palavra', currentLanguage)
+  
   botao_placeholder_palavra.addEventListener('click', () => {
-    mostra_placeholder_palavras = (mostra_placeholder_palavras === 'sim') ? 'nao' : 'sim';
-    carrega_csv();
-  });
 
-  const container_botao_placeholder = document.createElement('div');
-  container_botao_placeholder.id = 'container_botao_placeholder';
-  container_botao_placeholder.style.display = (modo === 'pratica') ? 'flex' : 'none';
-  container_botao_placeholder.appendChild(botao_placeholder_palavra);
+    if (mostra_placeholder_palavras === 'sim') {
+      mostra_placeholder_palavras = 'nao'
+      botao_placeholder_palavra.classList.remove('botao_ativado')
+    } else {
+      mostra_placeholder_palavras = 'sim'
+      botao_placeholder_palavra.classList.remove('botao_ativado')
+    }
+    carrega_csv()
+    // window.location.reload()
+  })
 
-  container.appendChild(container_idioma);
-  container.appendChild(container_botao_placeholder);
+  return botao_placeholder_palavra
+}
 
-  language_selector_pratica.addEventListener("change", (e) => {
-    idioma_praticado = e.target.value;
-    setCookie('idioma_praticado', idioma_praticado, 365);
-    carrega_csv();
-  });
+function cria_container_placeholder_palavra () {
+  // Vai embaixo do container_idioma
+  const container_botao_placeholder = document.createElement('div') 
+  container_botao_placeholder.id = 'container_botao_placeholder'
+
+  container_botao_placeholder.style.display = 'none'
+  if (modo === 'pratica') container_botao_placeholder.style.display = 'flex'
+  return container_botao_placeholder
+}
+
+function ativa_e_desativa_botoes_tab_btn () {
 
   document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); });
-    if (modo === 'pratica') {
-      if (btn.textContent === traduzir_hud('botao_pratica', currentLanguage)) btn.classList.add('active'); else btn.classList.remove('active');
-      document.getElementById("language_selector_pratica").value = idioma_praticado;
-    }
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // aqui você pode trocar o conteúdo da interface baseado no btn.dataset.tab
   });
 
-  // adiciona um handler global único para fechar popups (evita múltiplas attaches)
-  if (!window._popupHandlerAdded) {
-    window.addEventListener('click', () => {
-      document.querySelectorAll('.popup-variantes').forEach(p => p.style.display = 'none');
-    });
-    window._popupHandlerAdded = true;
-  }
-
-  // índice da coluna do idioma praticado (nome em inglês)
-  const idiomaPraticadoIngles = (encontra_lang_ingles && typeof encontra_lang_ingles === 'function') ? String(encontra_lang_ingles(idioma_praticado) || '').trim() : '';
-  let idxLangPraticado = idiomaPraticadoIngles ? headerIndex(idiomaPraticadoIngles) : -1;
-
-  // --- loop por categoria ---
-  for (const categoria in grouped) {
-    const frases = grouped[categoria];
-    const categoriaTraduzida = traduzirCategoria(categoria, currentLanguage);
-
-    const h2 = document.createElement('h2');
-    h2.textContent = categoriaTraduzida;
-    h2.style.cursor = 'pointer';
-    h2.style.userSelect = 'none';
-    container.appendChild(h2);
-
-    const wrapper = document.createElement('div');
-    wrapper.className = 'table-wrapper';
-    wrapper.style.display = 'none';
-
-    const table = document.createElement('table');
-
-    // cabeçalho (pulando Posicao e Cod_dekoreba)
-    if (modo !== "multipla_escolha") {
-      const thead = document.createElement('thead');
-      const trHead = document.createElement('tr');
-      headers.forEach((h, idx) => {
-        if (h !== "Posicao" && h !== "Cod_dekoreba") {
-          const th = document.createElement('th');
-          let codigo_idioma_h = languages.find(l => l.name_ingles.trim().toLowerCase() === h.trim().toLowerCase())?.code || null;
-          th.textContent = traduzir_idioma_ingles ? traduzir_idioma_ingles(codigo_idioma_h, currentLanguage) : h;
-          trHead.appendChild(th);
-        }
-      });
-      thead.appendChild(trHead);
-      table.appendChild(thead);
-    } else {
-      const div_botao_joga = document.createElement("div");
-      div_botao_joga.className = "container_botao_joga";
-      const botao_joga = document.createElement("button");
-      botao_joga.className = "botao_terminei";
-      botao_joga.innerHTML = traduzir_hud("botao_joga", currentLanguage);
-      botao_joga.addEventListener("click", () => {
-        window.location.href = `multipla_escolha/index.html?classe=${categoria}&currentLanguage=${currentLanguage}&idioma_praticado=${idioma_praticado}`;
-      });
-      div_botao_joga.appendChild(botao_joga);
-      table.appendChild(div_botao_joga);
-    }
-
-    const tbody = document.createElement('tbody');
-
-    // dedupe por texto do idioma praticado (apenas para evitar linhas idênticas na listagem principal)
-    const palavrasAdicionadas = new Set();
-    const indicesVisiveis = []; // armazena índices (fraseIndex) das linhas mostradas (Posicao === 1)
-
-    frases.forEach((frase, fraseIndex) => {
-      // garante índices válidos
-      if (idxPosicao === -1 || idxCod === -1) return;
-
-      // só mostramos as linhas com Posicao === "1"
-      if (String(frase[idxPosicao]) !== "1") return;
-
-      // se houver idioma praticado, evita duplicatas idênticas
-      if (idxLangPraticado > -1) {
-        const textoRef = String(frase[idxLangPraticado] || '').trim();
-        if (palavrasAdicionadas.has(textoRef)) return;
-        palavrasAdicionadas.add(textoRef);
+    // Acho que é aqui.
+    if (modo === 'pratica') {
+      if (btn.textContent === traduzir_hud('botao_pratica', currentLanguage)) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
       }
+      
+      // document.getElementById("language_selector_pratica").style.display = 'flex'
+      document.getElementById("language_selector_pratica").value = idioma_praticado
+    }
+  });
+}
 
-      indicesVisiveis.push(fraseIndex);
-      const tr = document.createElement('tr');
+function cria_h2_categoria (categoria, wrapper) {
+  const categoriaTraduzida = traduzirCategoria(categoria, currentLanguage)
 
-      for (let idx = 0; idx < frase.length; idx++) {
-        if (idx === idxPosicao || idx === idxCod) continue; // pula metadados
+  const h2 = document.createElement('h2');
+  h2.textContent = categoriaTraduzida;
+  h2.style.cursor = 'pointer';
+  h2.style.userSelect = 'none';
 
-        const td = document.createElement('td');
-        td.style.position = "relative";
+    // Toggle de exibição
+    h2.addEventListener('click', () => {
+      wrapper.style.display = wrapper.style.display === 'none' ? 'block' : 'none';
+      h2.classList.toggle('open');
+    });
+  return h2
+}
 
-        const texto = frase[idx] || '';
+function cria_div_botao_joga (categoria) {
+  const div_botao_joga = document.createElement("div")
+  div_botao_joga.className = "container_botao_joga"
 
-        const ehColunaPraticada = (modo === 'pratica' && idx === idxLangPraticado);
+  const botao_joga = document.createElement("button")
+  botao_joga.className = "botao_terminei"
+  botao_joga.innerHTML = traduzir_hud("botao_joga", currentLanguage)
 
-        if (ehColunaPraticada) {
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.id = `input_${categoria}_${fraseIndex}`;
-          input.name = `input_${categoria}_${fraseIndex}`;
-          if (mostra_placeholder_palavras === 'sim') input.placeholder = String(frase[idxLangPraticado] || '');
-          const acertadas = getProgress ? getProgress(userName, idioma_praticado, categoria) : [];
-          if (Array.isArray(acertadas) && acertadas.includes(fraseIndex)) {
-            input.value = String(frase[idxLangPraticado] || '');
+  botao_joga.addEventListener("click", () => {
+    window.location.href = `multipla_escolha/index.html?classe=${categoria}&currentLanguage=${currentLanguage}&idioma_praticado=${idioma_praticado}`
+  })
+
+  div_botao_joga.appendChild(botao_joga)
+  return div_botao_joga
+}
+
+function cria_input_pratica (categoria, fraseIndex, frase, headers) {
+  const input = document.createElement('input');
+              input.type = 'text';
+              input.id = `input_${categoria}_${fraseIndex}`;
+              input.name = `input_${categoria}_${fraseIndex}`;
+              if (mostra_placeholder_palavras === 'sim') input.placeholder = `${frase[1]}`
+
+              const acertadas = getProgress(userName, idioma_praticado, categoria);
+              if (acertadas.includes(fraseIndex)) {
+                input.value = frase[1];
+
+                input.readOnly = true;
+                input.classList.add('input-audio');
+                input.title = 'Clique para ouvir o áudio';
+                input.onclick = () => {
+                  const idioma = headers[1];
+                  const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
+                  if (!arquivoAudio) {
+                    showCustomModal('Áudio não encontrado para esta palavra.');
+                    return;
+                  }
+                  const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
+                  const audio = new Audio(audioPath);
+                  audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
+                };
+              }
+
+              
+  return input
+}
+
+function cria_botao_terminei (categoria, headers, frases) {
+  const botao_terminei = document.createElement('button')
+  botao_terminei.textContent = "Terminei!"
+  botao_terminei.className = "botao_terminei"
+
+
+        botao_terminei.addEventListener('click', () => {
+        let acertos = 0;
+        let total = frases.length;
+        frases.forEach((frase, fraseIndex) => {
+          const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
+          if (!input) return;
+          // Remove botão de som antigo, se existir
+          const oldBtn = document.getElementById(`audio-btn-${categoria}-${fraseIndex}`);
+          if (oldBtn) oldBtn.remove();
+
+          // Remove event listener antigo, se houver
+          input.onclick = null;
+          input.classList.remove('input-audio');
+
+          if (input.value.trim().toLowerCase() === frase[1].trim().toLowerCase()) {
             input.readOnly = true;
+            acertos++;
+
+            // Adiciona classe visual e evento de áudio ao input
             input.classList.add('input-audio');
             input.title = 'Clique para ouvir o áudio';
+
             input.onclick = () => {
-              const idioma = headers[idxLangPraticado];
+              const idioma = headers[1]; // coluna do input praticado
               const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
-              if (!arquivoAudio) { showCustomModal('Áudio não encontrado para esta palavra.'); return; }
+              if (!arquivoAudio) {
+                showCustomModal('Áudio não encontrado para esta palavra.');
+                return;
+              }
               const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
               const audio = new Audio(audioPath);
               audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
             };
+
+            // Salva progresso aqui:
+            saveProgress(userName, idioma_praticado, categoria, fraseIndex);
+          } else {
+            input.value = '';
           }
-          td.appendChild(input);
+        });
+
+        // Mostra popup estilizado
+        let msg;
+        if (acertos === total) {
+          msg = `<b>${acertos}/${total}</b> 🎉<br>Parabéns, você acertou tudo!`;
         } else {
-          td.textContent = texto;
-          td.style.cursor = 'pointer';
-          td.addEventListener('click', () => {
-            const idioma = headers[idx];
-            const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
-            if (!arquivoAudio) { alert('Áudio não encontrado para esta frase.'); return; }
-            const audioPath = `${idioma}/${arquivoAudio}`;
-            const audio = new Audio(audioPath);
-            audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
-          });
+          msg = `<b>${acertos}/${total}</b> acertos.<br>Tente novamente!`;
         }
+        showCustomModal(msg, () => {
+          // Após fechar o modal, foca no primeiro input vazio e habilitado
+          for (let fraseIndex = 0; fraseIndex < frases.length; fraseIndex++) {
+            const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
+            if (input && !input.readOnly && input.value === '') {
+              input.focus();
+              break;
+            }
+          }
+        });
+      });
+  return botao_terminei
+}
 
-        // --- variantes: procurar por MESMO Cod_dekoreba, mas outras posições ---
-        const currentCod = frase[idxCod];
-        const variantes = frases.filter(f => String(f[idxCod]) === String(currentCod) && String(f[idxPosicao]) !== "1");
+function cria_audio (categoria, fraseIndex, idioma) {
+        const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
+                if (!arquivoAudio) {
+                  alert('Áudio não encontrado para esta frase.');
+                  return;
+                }
+                const audioPath = `${idioma}/${arquivoAudio}`;
+                const audio = new Audio(audioPath);
+                console.log(audioPath)
+  return audio
+}
 
-        if (variantes.length > 0) {
-          const toggle = document.createElement("span");
-          toggle.innerHTML = "&#9660;"; // ▼
-          toggle.setAttribute('aria-label', 'Ver variantes');
-          toggle.style.cursor = "pointer";
-          toggle.style.fontSize = "0.8em";
-          toggle.style.position = "absolute";
-          toggle.style.right = "6px";
-          toggle.style.top = "50%";
-          toggle.style.transform = "translateY(-50%)";
-          toggle.style.userSelect = "none";
+function buildTables (data) {
 
-          const popup = document.createElement("div");
-          popup.className = "popup-variantes";
-          popup.style.position = "absolute";
-          popup.style.top = "100%";
-          popup.style.right = "0";
-          popup.style.background = "#fff";
-          popup.style.border = "1px solid #ccc";
-          popup.style.padding = "6px 8px";
-          popup.style.borderRadius = "6px";
-          popup.style.boxShadow = "0 6px 16px rgba(0,0,0,0.15)";
-          popup.style.display = "none";
-          popup.style.zIndex = "50";
-          popup.style.minWidth = "140px";
 
-          variantes.forEach(v => {
-            const item = document.createElement("div");
-            const textoVar = v[idx] || '';
-            item.textContent = `${textoVar}`;
-            item.style.padding = "4px 0";
-            popup.appendChild(item);
-          });
+  const container = document.getElementById('output');
+  container.innerHTML = ''
 
-          toggle.addEventListener("click", (e) => {
-            e.stopPropagation();
-            // esconde outros popups e alterna este
-            document.querySelectorAll('.popup-variantes').forEach(p => { if (p !== popup) p.style.display = 'none'; });
-            popup.style.display = popup.style.display === "none" ? "block" : "none";
-          });
+  let language_selector = cria_escolha_idiomas('geral')
+  container.appendChild(language_selector)  // insere no container
+ 
+  let language_selector_pratica = cria_escolha_idiomas('pratica')
+  container.appendChild(language_selector_pratica) // insere no container
 
-          td.appendChild(toggle);
-          td.appendChild(popup);
+  const modalidades = cria_modalidades()
+  container.appendChild(modalidades)
+
+
+
+  // Criar botão "Teoria" e "Prática" e "Múltipla Escolha"
+  const container_idioma = document.createElement('div');
+  container_idioma.className = 'container_idioma'
+
+  // Teoria.
+  const botao_teoria = cria_botao_teoria()
+  container_idioma.appendChild(botao_teoria)
+
+  // Múltipla Escolha.
+  const botao_multipla_escolha = cria_botao_multipla_escolha()
+  container_idioma.appendChild(botao_multipla_escolha)
+
+  // Prática.
+  const botao_pratica = cria_botao_pratica()
+  container_idioma.appendChild(botao_pratica)
+
+  // Botão e container do placeholder palavra, do Prática.
+  const botao_placeholder_palavra = cria_botao_placeholder_palavra()
+  const container_placeholder_palavra = cria_container_placeholder_palavra()
+  container_placeholder_palavra.appendChild(botao_placeholder_palavra)
+
+  container.appendChild(container_idioma)
+  container.appendChild(container_placeholder_palavra)
+
+  ativa_e_desativa_botoes_tab_btn()
+
+
+  const headers = data[0].slice(1)
+
+  // Aqui, nessa const grouped, agrupamos todas as linhas do .csv por categorias (classes).
+  const grouped = {};
+
+  for (let i = 1; i < data.length; i++) {
+    const row = data[i];
+    const categoria = row[0];
+    if (!grouped[categoria]) grouped[categoria] = [];
+    grouped[categoria].push(row.slice(1));
+  }
+
+  
+  for (const categoria in grouped) {
+    const frases = grouped[categoria]
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'table-wrapper';
+    wrapper.style.display = 'none'; // inicia escondido
+
+    const h2 = cria_h2_categoria(categoria, wrapper)
+    container.appendChild(h2)
+
+
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const trHead = document.createElement('tr');
+
+    const languages = [
+      { code: 'en', name: 'English', name_ingles: 'English' },
+      { code: 'pt', name: 'Português', name_ingles: 'Portuguese' },
+      { code: 'es', name: 'Español', name_ingles: 'Spanish' },
+      { code: 'fr', name: 'Français', name_ingles: 'French' },
+      { code: 'it', name: 'Italiano', name_ingles: 'Italian' },
+      { code: 'de', name: 'Deutsch', name_ingles: 'German' }  
+    ]
+
+
+    headers.forEach((h, idx) => {
+      if (idx != 0 & idx != 1 || modo === "pratica") {
+
+
+      const th = document.createElement('th');
+      let codigo_idioma_h
+      for (let i = 0; i < languages.length; i++) {
+        // Aqui, precisa desses trim e toLowerCase para evitar problemas com espaços ou maiúsculas/minúsculas
+        if (languages[i].name_ingles.trim().toLowerCase() === h.trim().toLowerCase()) {
+          codigo_idioma_h = languages[i].code;
+          break;
         }
-
-        tr.appendChild(td);
       }
+
+      th.textContent = traduzir_idioma_ingles(codigo_idioma_h, currentLanguage);
+      // th.textContent = h;
+      if (modo === 'pratica' && idx === 0) {
+        th.style.textAlign = 'right'; // só a primeira coluna
+      }
+      trHead.appendChild(th);
+      }
+    });
+
+    if (modo != "multipla_escolha") {
+      thead.appendChild(trHead)
+      table.appendChild(thead)
+    }
+
+    if (modo === "multipla_escolha") {
+
+      const div_botao_joga = cria_div_botao_joga(categoria)
+      table.appendChild(div_botao_joga)
+    }
+
+    const tbody = document.createElement('tbody');
+    const palavrasAdicionadas = new Set();
+
+    frases.forEach((frase, fraseIndex) => {
+      
+      const idioma_em_ingles = encontra_lang_ingles(currentLanguage).trim()
+      const textoReferencia = frase[headers.indexOf(idioma_em_ingles)]
+
+      if (palavrasAdicionadas.has(textoReferencia)) {
+        return; // pula esta frase
+      }
+      palavrasAdicionadas.add(textoReferencia);
+
+
+      const tr = document.createElement('tr')
+      
+      frase.forEach((texto, idx) => {
+
+        const td = document.createElement('td');
+
+        if (modo === "teoria") {
+          if (idx != 0 & idx != 1) {
+
+            td.textContent = texto;
+            td.style.cursor = 'pointer'
+              
+            td.addEventListener('click', () => {
+              const idioma = headers[idx];
+              const audio = cria_audio(categoria, fraseIndex, idioma)
+            
+              audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
+            })
+
+            tr.appendChild(td)
+          }
+        }
+
+        if (modo === "pratica") {
+          if (idx === 0) {
+
+            td.style.textAlign = 'right'; // texto alinhado à direita
+            td.textContent = texto;
+            td.style.cursor = 'pointer'
+              
+            td.addEventListener('click', () => {
+              const idioma = headers[idx];
+              const audio = cria_audio(categoria, fraseIndex, idioma)
+            
+              audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
+            })
+          }
+
+          else if (idx === 1) {
+            const input = cria_input_pratica(categoria, fraseIndex, frase, headers)
+            td.appendChild(input)
+          } else {
+                        
+          }
+          tr.appendChild(td)
+        }
+
+        if (modo === "multipla_escolha") {
+
+        }
+
+      })
 
       tbody.appendChild(tr);
     });
@@ -327,79 +513,42 @@ function buildTables (data) {
     wrapper.appendChild(table);
     container.appendChild(wrapper);
 
-    // --- botão "Terminei!" (prática) contando apenas os índicesVisiveis (Posicao===1) ---
+    // Botão Terminei!
     if (modo === 'pratica') {
+
       const container_bot_terminei = document.createElement('div');
       container_bot_terminei.className = 'container_bot_terminei';
-      const botao_terminei = document.createElement('button');
-      botao_terminei.textContent = "Terminei!";
-      botao_terminei.className = "botao_terminei";
-      container_bot_terminei.appendChild(botao_terminei);
-      wrapper.appendChild(container_bot_terminei);
 
-      botao_terminei.addEventListener('click', () => {
-        let acertos = 0;
-        const total = indicesVisiveis.length;
-        indicesVisiveis.forEach((fraseIndex) => {
-          const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
-          if (!input) return;
-          input.onclick = null;
-          input.classList.remove('input-audio');
+      const botao_terminei = cria_botao_terminei(categoria, headers, frases)
+      container_bot_terminei.appendChild(botao_terminei)
 
-          const resposta = (grouped[categoria][fraseIndex] || [])[idxLangPraticado] || '';
-          if (input.value.trim().toLowerCase() === String(resposta).trim().toLowerCase()) {
-            input.readOnly = true;
-            acertos++;
-            input.classList.add('input-audio');
-            input.title = 'Clique para ouvir o áudio';
-            input.onclick = () => {
-              const idioma = headers[idxLangPraticado];
-              const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
-              if (!arquivoAudio) { showCustomModal('Áudio não encontrado para esta palavra.'); return; }
-              const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
-              const audio = new Audio(audioPath);
-              audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
-            };
-            saveProgress && saveProgress(userName, idioma_praticado, categoria, fraseIndex);
-          } else {
-            input.value = '';
-          }
-        });
+      wrapper.appendChild(container_bot_terminei)
 
-        const msg = (acertos === total)
-          ? `<b>${acertos}/${total}</b> 🎉<br>Parabéns, você acertou tudo!`
-          : `<b>${acertos}/${total}</b> acertos.<br>Tente novamente!`;
-
-        showCustomModal(msg, () => {
-          for (let k = 0; k < indicesVisiveis.length; k++) {
-            const fraseIndex = indicesVisiveis[k];
-            const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
-            if (input && !input.readOnly && input.value === '') { input.focus(); break; }
-          }
-        });
-      });
-
-      // Enter => Terminei (aplica apenas aos inputs visíveis)
-      indicesVisiveis.forEach((fraseIndex) => {
+      // Permite Enter para simular clique no Terminei
+      for (let fraseIndex = 0; fraseIndex < frases.length; fraseIndex++) {
         const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
         if (input) {
           input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') { e.preventDefault(); botao_terminei.click(); }
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              botao_terminei.click();
+            }
           });
         }
-      });
+      }
     }
-
-    // toggle da categoria
-    h2.addEventListener('click', () => {
-      wrapper.style.display = wrapper.style.display === 'none' ? 'block' : 'none';
-      h2.classList.toggle('open');
-    });
   }
 
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // aqui você pode trocar o conteúdo da interface baseado no btn.dataset.tab
+    });
+  });
+  
   window.groupedCategorias = grouped;
 }
-
 
 function carrega_csv () {
 

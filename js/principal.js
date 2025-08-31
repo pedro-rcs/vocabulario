@@ -323,6 +323,39 @@ function cria_audio (categoria, fraseIndex, idioma) {
   return audio
 }
 
+function cria_toggle () {
+                const toggle = document.createElement("span");
+              toggle.innerHTML = "&#9660;"; // ▼
+              toggle.setAttribute('aria-label', 'Ver variantes');
+              toggle.style.cursor = "pointer";
+              toggle.style.fontSize = "0.8em";
+              toggle.style.position = "absolute";
+              toggle.style.right = "6px";
+              toggle.style.top = "50%";
+              toggle.style.transform = "translateY(-50%)";
+              toggle.style.userSelect = "none";
+  return toggle
+}
+
+function cria_popup_variantes () {
+   const popup = document.createElement("div");
+              popup.className = "popup-variantes";
+              popup.style.position = "absolute";
+              popup.style.top = "100%";
+              popup.style.right = "0";
+              popup.style.background = "#fff";
+              popup.style.border = "1px solid #ccc";
+              popup.style.padding = "6px 8px";
+              popup.style.borderRadius = "6px";
+              popup.style.boxShadow = "0 6px 16px rgba(0,0,0,0.15)";
+              popup.style.display = "none";
+              popup.style.zIndex = "50";
+              popup.style.minWidth = "140px";
+
+  return popup
+}
+
+
 function buildTables (data) {
 
 
@@ -465,7 +498,12 @@ function buildTables (data) {
          while (i < frases.length && frases[i] && frases[i][1] === codAtual) {
 
           const fraseRelacionada = frases[i]
-          frases_variantes.push(frases[i][headers.indexOf(idioma_em_ingles)]) // só o texto.
+
+          for (let j = 0; j < fraseRelacionada.length; j++) {
+            if (j != 0 & j != 1) {
+              frases_variantes.push({idx: j, texto: fraseRelacionada[j]})
+            }
+          }
 
           i++;
         }
@@ -473,9 +511,10 @@ function buildTables (data) {
 
 
       frase.forEach((texto, idx) => {
-
+        // alert(frase)
         const td = document.createElement('td');
-td.style.position = "relative";
+        td.style.position = "relative";
+
         if (modo === "teoria") {
           
           if (idx != 0 & idx != 1 & posicao_atual === "1") {
@@ -492,38 +531,21 @@ td.style.position = "relative";
 
 
             if (frases_variantes.length > 0) {
-              const toggle = document.createElement("span");
-              toggle.innerHTML = "&#9660;"; // ▼
-              toggle.setAttribute('aria-label', 'Ver variantes');
-              toggle.style.cursor = "pointer";
-              toggle.style.fontSize = "0.8em";
-              toggle.style.position = "absolute";
-              toggle.style.right = "6px";
-              toggle.style.top = "50%";
-              toggle.style.transform = "translateY(-50%)";
-              toggle.style.userSelect = "none";
 
-              const popup = document.createElement("div");
-              popup.className = "popup-variantes";
-              popup.style.position = "absolute";
-              popup.style.top = "100%";
-              popup.style.right = "0";
-              popup.style.background = "#fff";
-              popup.style.border = "1px solid #ccc";
-              popup.style.padding = "6px 8px";
-              popup.style.borderRadius = "6px";
-              popup.style.boxShadow = "0 6px 16px rgba(0,0,0,0.15)";
-              popup.style.display = "none";
-              popup.style.zIndex = "50";
-              popup.style.minWidth = "140px";
+              const toggle = cria_toggle()
 
-              frases_variantes.forEach(v => {
-                const item = document.createElement("div");
-                const textoVar = v || '';
-                item.textContent = `${textoVar}`;
-                item.style.padding = "4px 0";
-                popup.appendChild(item);
-              });
+              const popup = cria_popup_variantes()
+
+              
+              for (let j = 0; j < frases_variantes.length; j++) {
+                if (frases_variantes[j].idx === idx) {
+                  const item = document.createElement("div");
+                  const textoVar = frases_variantes[j].texto || '';
+                  item.textContent = `${textoVar}`;
+                  item.style.padding = "4px 0";
+                  popup.appendChild(item);
+                }
+              }
 
               toggle.addEventListener("click", (e) => {
                 e.stopPropagation();

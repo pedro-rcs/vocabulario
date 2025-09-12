@@ -1,6 +1,8 @@
 :root {
   --bg-color: #fbfbfb;
   --bg-color_h2: #eaeaea;
+  --bg-color_h2_hover: #e2e2e2;
+
   --text-color: #264d26;
 
   --texto_botoes: #ffffff;
@@ -19,7 +21,8 @@ body {
 
 .dark-mode {
   --bg-color: #6c6c6c;
-  --bg-color_h2: #525252;
+  --bg-color_h2: #5e5e5e;
+  --bg-color_h2_hover: #525252;
   --text-color: #f5f5f5;
   --text-color_h2: #c6c6c6;
 }
@@ -48,7 +51,7 @@ body {
   }
 
 h2:hover {
-  background: #e2e2e2;
+  background: var(--bg-color_h2_hover);
   transform: translateX(3px);
 }
 
@@ -88,8 +91,8 @@ h2.open::after {
   }
 
   th {
-    background-color: #c9eacc; /* verde clarinho */
-    color: #1b4516;
+    background-color: var(--cor_botao);
+    color: var(--texto_botoes);
     font-weight: 600;
     user-select: none;
   }
@@ -98,7 +101,7 @@ h2.open::after {
 
     cursor: pointer;
     transition: background-color 0.3s ease;
-    background-color: #ffffff; /* fundo branco */
+    background-color: var(--bg-color);
   }
 
   td:hover {
@@ -455,16 +458,19 @@ body.pratica .table-wrapper td {
 .input-audio:hover {
   background-color: #e0e0e0;
 }
-
+#user-info {
+  font-size: 25px;
+}
 .stats-btn {
-  background: linear-gradient(90deg, #a4d4ae 0%, #5ea43b 100%);
+
+  background: linear-gradient(90deg, var(--cor_botao_claro) 0%, var(--cor_botao) 100%);
   border: none;
   border-radius: 8px;
   padding: 0.5em 1.3em;
   cursor: pointer;
-  font-size: 1.08em;
+  font-size: 18px;
   font-weight: 600;
-  color: #fff;
+  color: var(--texto_botoes);
   box-shadow: 0 2px 6px rgba(58, 125, 68, 0.13);
   margin-left: 1em;
   transition: background 0.2s, transform 0.1s;
@@ -473,7 +479,8 @@ body.pratica .table-wrapper td {
   gap: 0.5em;
 }
 .stats-btn:hover {
-  background: linear-gradient(90deg, #8acb68 0%, #4c8c32 100%);
+   background: linear-gradient(90deg, var(--cor_botao_claro) 0%, var(--cor_botao) 100%);
+
   transform: scale(1.04);
 }
 

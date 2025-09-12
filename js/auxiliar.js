@@ -184,6 +184,43 @@ function cria_escolha_idiomas (tipo) {
   }
 }
 
+function hexToRgb(hex) {
+  hex = hex.replace(/^#/, "");
+  if (hex.length === 3) {
+    hex = hex.split("").map(c => c + c).join("");
+  }
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return [r, g, b];
+}
+
+function rgbToHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0, l = (max + min) / 2;
+
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h /= 6;
+  }
+
+  return [h * 360, s * 100, l * 100];
+}
+
+function lightenColor(hexColor, percent) {
+  const [r, g, b] = hexToRgb(hexColor);
+  let [h, s, l] = rgbToHsl(r, g, b);
+  l = Math.min(100, l + percent);
+  return `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
+}
+
 function altera_cores_idioma(idioma) {
   const root = document.documentElement;
 
@@ -200,31 +237,38 @@ function altera_cores_idioma(idioma) {
 
 */
 
-
+  let cor_original
   if (idioma === 'en') {
-    root.style.setProperty('--bg-color', '#B22234');
+    cor_original = '#B22234'
+
     root.style.setProperty('--text-color', '#ffffff');
   }
   if (idioma === 'pt') {
-    root.style.setProperty('--bg-color', '#009739');
+cor_original
     root.style.setProperty('--text-color', '#ffffff');
   }
   if (idioma === 'es') {
-    root.style.setProperty('--bg-color', '#FFC400');
+    root.style.setProperty('--cor_botao', '#FFC400');
     root.style.setProperty('--text-color', '#000000');
   }
   if (idioma === 'fr') {
-    root.style.setProperty('--bg-color', '#0055A4');
+    root.style.setProperty('--cor_botao', '#0055A4');
     root.style.setProperty('--text-color', '#ffffff');
   }
   if (idioma === 'de') {
-    root.style.setProperty('--bg-color', '#FFCE00');
+    root.style.setProperty('--cor_botao', '#FFCE00');
     root.style.setProperty('--text-color', '#000000');
   }
   if (idioma === 'it') {
-    root.style.setProperty('--bg-color', '#009246');
+    root.style.setProperty('--cor_botao', '#009246');
     root.style.setProperty('--text-color', '#ffffff');
   }
+
+      root.style.setProperty('--cor_botao',cor_original)
+
+    const corOriginal = "#B22234";
+    const corClara = lightenColor(corOriginal, 20); // 20% mais clara
+    root.style.setProperty('--cor_botao_claro', corClara);
 }
 
 export {

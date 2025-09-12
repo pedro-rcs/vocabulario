@@ -184,6 +184,48 @@ function cria_escolha_idiomas (tipo) {
   }
 }
 
+function altera_cores_idioma(idioma) {
+  const root = document.documentElement;
+
+  /*
+  - Verde italiano: #009246
+- Vermelho americano: #B22234
+- Verde brasileiro: #009739
+
+- Amarelo alemão (dourado): #FFCE00
+
+- Azul francês: #0055A4
+
+- Amarelo espanhol: #FFC400
+
+*/
+
+
+  if (idioma === 'en') {
+    root.style.setProperty('--bg-color', '#B22234');
+    root.style.setProperty('--text-color', '#ffffff');
+  }
+  if (idioma === 'pt') {
+    root.style.setProperty('--bg-color', '#009739');
+    root.style.setProperty('--text-color', '#ffffff');
+  }
+  if (idioma === 'es') {
+    root.style.setProperty('--bg-color', '#FFC400');
+    root.style.setProperty('--text-color', '#000000');
+  }
+  if (idioma === 'fr') {
+    root.style.setProperty('--bg-color', '#0055A4');
+    root.style.setProperty('--text-color', '#ffffff');
+  }
+  if (idioma === 'de') {
+    root.style.setProperty('--bg-color', '#FFCE00');
+    root.style.setProperty('--text-color', '#000000');
+  }
+  if (idioma === 'it') {
+    root.style.setProperty('--bg-color', '#009246');
+    root.style.setProperty('--text-color', '#ffffff');
+  }
+}
 
 export {
   createLanguageSelector,
@@ -196,5 +238,6 @@ export {
   getCookie,
   apagaCookie,
   showCustomModal,
-  encontra_lang_ingles
+  encontra_lang_ingles,
+  altera_cores_idioma
 }

@@ -12,7 +12,8 @@ import {
   getCookie,
   apagaCookie,
   showCustomModal,
-  encontra_lang_ingles
+  encontra_lang_ingles,
+  altera_cores_idioma
 } from './auxiliar.js'
 
 // Definimos variáveis e contantes.
@@ -20,6 +21,8 @@ const caminho = location.hostname === "127.0.0.1" ? "../" : "./"
 
 let modo = 'teoria'
 let mostra_placeholder_palavras = 'nao'
+
+getCookie('darkMode') === 'sim' ? document.body.classList.add('dark-mode') : document.body.classList.remove('dark-mode')
 
 let currentLanguage = getCookie("currentLanguage")
 if (!currentLanguage) {
@@ -53,6 +56,9 @@ function cria_escolha_idiomas (tipo) {
     language_selector_pratica.addEventListener("change", (e) => {
       idioma_praticado = e.target.value
       setCookie('idioma_praticado', idioma_praticado, 365)
+
+      // Aqui, colocar algo que altera o esquema de cores do site.
+      altera_cores_idioma(idioma_praticado)
       carrega_csv()
     })
     return createLanguageSelector(language_selector_pratica, currentLanguage, 'pratica', idioma_praticado) // adiciona label + select dentro desse div
@@ -214,8 +220,8 @@ function cria_div_botao_joga (categoria) {
 
 function cria_input_pratica (categoria, fraseIndex, frase, headers) {
   const input = document.createElement('input');
-              input.type = 'text';
-              input.id = `input_${categoria}_${fraseIndex}`;
+  input.type = 'text';
+  input.id = `input_${categoria}_${fraseIndex}`;
               input.name = `input_${categoria}_${fraseIndex}`;
               if (mostra_placeholder_palavras === 'sim') input.placeholder = `${frase[1]}`
 
@@ -248,66 +254,68 @@ function cria_botao_terminei (categoria, headers, frases) {
   botao_terminei.textContent = "Terminei!"
   botao_terminei.className = "botao_terminei"
 
+  botao_terminei.addEventListener('click', () => {
+    let acertos = 0;
+    let total = frases.length;
+    console.log(frases)
+    frases.forEach((frase, fraseIndex) => {
+      const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
+      if (!input) return;
+      
+      // Remove botão de som antigo, se existir
+      const oldBtn = document.getElementById(`audio-btn-${categoria}-${fraseIndex}`);
+      if (oldBtn) oldBtn.remove();
 
-        botao_terminei.addEventListener('click', () => {
-        let acertos = 0;
-        let total = frases.length;
-        frases.forEach((frase, fraseIndex) => {
-          const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
-          if (!input) return;
-          // Remove botão de som antigo, se existir
-          const oldBtn = document.getElementById(`audio-btn-${categoria}-${fraseIndex}`);
-          if (oldBtn) oldBtn.remove();
+      // Remove event listener antigo, se houver
+      input.onclick = null;
+      input.classList.remove('input-audio');
+          
+      if (input.value.trim().toLowerCase() === frase[1].trim().toLowerCase()) {
+        input.readOnly = true;
+        acertos++;
 
-          // Remove event listener antigo, se houver
-          input.onclick = null;
-          input.classList.remove('input-audio');
+        // Adiciona classe visual e evento de áudio ao input
+        input.classList.add('input-audio');
+        input.title = 'Clique para ouvir o áudio';
 
-          if (input.value.trim().toLowerCase() === frase[1].trim().toLowerCase()) {
-            input.readOnly = true;
-            acertos++;
-
-            // Adiciona classe visual e evento de áudio ao input
-            input.classList.add('input-audio');
-            input.title = 'Clique para ouvir o áudio';
-
-            input.onclick = () => {
-              const idioma = headers[1]; // coluna do input praticado
-              const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
-              if (!arquivoAudio) {
-                showCustomModal('Áudio não encontrado para esta palavra.');
-                return;
-              }
-              const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
-              const audio = new Audio(audioPath);
-              audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
-            };
-
-            // Salva progresso aqui:
-            saveProgress(userName, idioma_praticado, categoria, fraseIndex);
-          } else {
-            input.value = '';
+        input.onclick = () => {
+          const idioma = headers[1]; // coluna do input praticado
+          const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
+          if (!arquivoAudio) {
+            showCustomModal('Áudio não encontrado para esta palavra.');
+            return;
           }
-        });
+          const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
+          const audio = new Audio(audioPath);
+          audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
+        };
 
-        // Mostra popup estilizado
-        let msg;
-        if (acertos === total) {
-          msg = `<b>${acertos}/${total}</b> 🎉<br>Parabéns, você acertou tudo!`;
-        } else {
-          msg = `<b>${acertos}/${total}</b> acertos.<br>Tente novamente!`;
+        // Salva progresso aqui:
+        saveProgress(userName, idioma_praticado, categoria, fraseIndex);
+      } else {
+        input.value = '';
+      }
+    });
+
+    // Mostra popup estilizado
+    let msg;
+    if (acertos === total) {
+      msg = `<b>${acertos}/${total}</b> 🎉<br>Parabéns, você acertou tudo!`;
+    } else {
+      msg = `<b>${acertos}/${total}</b> acertos.<br>Tente novamente!`;
+    }
+    showCustomModal(msg, () => {
+      // Após fechar o modal, foca no primeiro input vazio e habilitado
+      for (let fraseIndex = 0; fraseIndex < frases.length; fraseIndex++) {
+        const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
+        if (input && !input.readOnly && input.value === '') {
+          input.focus();
+          break;
         }
-        showCustomModal(msg, () => {
-          // Após fechar o modal, foca no primeiro input vazio e habilitado
-          for (let fraseIndex = 0; fraseIndex < frases.length; fraseIndex++) {
-            const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
-            if (input && !input.readOnly && input.value === '') {
-              input.focus();
-              break;
-            }
-          }
-        });
-      });
+      }
+    });
+  });
+
   return botao_terminei
 }
 
@@ -705,10 +713,14 @@ if (!userName) {
   if (userName) setCookie('userName', userName, 365);
 }
 
+
+
+
 function updateUserInfo() {
   const ola = traduzir_hud('ola', currentLanguage);
   const statsLabel = traduzir_hud('estatisticas', currentLanguage) || 'Estatísticas';
   const userInfoDiv = document.getElementById('user-info');
+  
   if (userInfoDiv && userName) {
     userInfoDiv.innerHTML = `${ola}, ${userName}!`;
 
@@ -724,6 +736,29 @@ function updateUserInfo() {
     statsBtn.type = 'button';
     statsBtn.style.marginLeft = '1em';
     userInfoDiv.appendChild(statsBtn);
+
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    const div_noturno = document.createElement('div')
+    div_noturno.innerHTML = `
+    <i class="fa-solid  ${isDarkMode ? 'fa-sun' : 'fa-moon'}"
+    style="
+      margin-left: 6px;
+      font-size: 25px;
+      cursor: pointer;
+    "></i>`
+
+    div_noturno.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDarkMod_2 = document.body.classList.contains('dark-mode');
+      setCookie('darkMode', isDarkMod_2 ? 'sim' : 'nao', 365);
+      div_noturno.innerHTML = `<i class="fa-solid ${isDarkMod_2 ? 'fa-sun' : 'fa-moon'}"
+      style="
+        margin-left: 6px;
+        font-size: 25px;
+        cursor: pointer;
+        "></i>`
+    })
+    userInfoDiv.appendChild(div_noturno)
 
     statsBtn.addEventListener('click', showStatsModal);
   }

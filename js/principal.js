@@ -36,7 +36,7 @@ if (!idioma_praticado) {
   setCookie('idioma_praticado', idioma_praticado, 365)
 }
 
-
+altera_cores_idioma(idioma_praticado)
 function cria_escolha_idiomas (tipo) {
 
   if (tipo === 'geral') {

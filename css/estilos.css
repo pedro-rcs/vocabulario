@@ -2,6 +2,8 @@
   --bg-color: #fbfbfb;
   --bg-color_h2: #eaeaea;
   --text-color: #264d26;
+
+  --texto_botoes: #ffffff;
   --text-color_h2: #565656;
 
   --cor_botao: #5ea43b;
@@ -262,14 +264,14 @@ h2.open::after {
   cursor: pointer;
   
   background-color: var(--cor_botao_claro);
-  color: #fff;
+  color: var(--texto_botoes);
   font-size: 20px;
   font-weight: bold;
   transition: background 0.2s, transform 0.1s;
 }
 
 .tab-btn:hover {
-  background-color: #8acb68;
+  background-color: var(--cor_botao);
   transform: scale(1.03);
 }
 
@@ -283,8 +285,8 @@ h2.open::after {
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  background-color: #e8f0e6;  /* verde musgo claro, suave */
-  color: #2f3e29;             /* verde musgo escuro para contraste */
+  background-color: var(--cor_botao_claro);
+  color: var(--texto_botoes);
   font-size: 24px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -294,14 +296,13 @@ h2.open::after {
 
 /* Hover */
 .tab-btn2:hover {
-  background-color: #d6e4d2;  /* leve destaque */
+ background-color: var(--cor_botao);
   transform: translateY(-1px);
 }
 
 /* Estado ativo */
 .tab-btn2.active {
-  background-color: #c5d6c0;  /* um tom a mais de escuro */
-  color: #1e2a1a;
+  background-color: var(--cor_botao);
 }
 
 /* Responsividade para telas menores */

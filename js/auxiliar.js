@@ -214,61 +214,63 @@ function rgbToHsl(r, g, b) {
   return [h * 360, s * 100, l * 100];
 }
 
+/*
 function lightenColor(hexColor, percent) {
   const [r, g, b] = hexToRgb(hexColor);
   let [h, s, l] = rgbToHsl(r, g, b);
   l = Math.min(100, l + percent);
   return `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
 }
-
-function altera_cores_idioma(idioma) {
-  const root = document.documentElement;
-
-  /*
-  - Verde italiano: #009246
-- Vermelho americano: #B22234
-- Verde brasileiro: #009739
-
-- Amarelo alemão (dourado): #FFCE00
-
-- Azul francês: #0055A4
-
-- Amarelo espanhol: #FFC400
-
 */
 
+
+
+function softenColor(hexColor, percent) {
+  const [r1, g1, b1] = hexToRgb(hexColor);
+  const [r2, g2, b2] = [255, 255, 255]; // branco
+
+  // Mistura RGB com branco
+  const mix = (c1, c2) => Math.round(c1 + (c2 - c1) * (percent / 100));
+  const r = mix(r1, r2);
+  const g = mix(g1, g2);
+  const b = mix(b1, b2);
+
+  // Converte para HSL e reduz saturação
+  let [h, s, l] = rgbToHsl(r, g, b);
+  s = Math.max(0, s - percent * 0.5); // reduz saturação suavemente
+
+  return `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;
+}
+
+function getTextColor(hexColor) {
+  const [r, g, b] = hexToRgb(hexColor).map(c => {
+    c /= 255;
+    return c <= 0.03928
+      ? c / 12.92
+      : Math.pow((c + 0.055) / 1.055, 2.4);
+  });
+
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+  return luminance > 0.5 ? "#000000" : "#ffffff"; // fundo claro → texto preto, fundo escuro → texto branco
+}
+
+
+function altera_cores_idioma(idioma) {
+  
+  const root = document.documentElement
+
   let cor_original
-  if (idioma === 'en') {
-    cor_original = '#B22234'
+  if (idioma === 'en') cor_original = '#B22234'
+  if (idioma === 'pt') cor_original = '#009739'
+  if (idioma === 'es') cor_original = '#FFC400'
+  if (idioma === 'fr') cor_original = '#0055A4'
+  if (idioma === 'de') cor_original = '#FFCE00'
+  if (idioma === 'it') cor_original = '#009246'
 
-    root.style.setProperty('--text-color', '#ffffff');
-  }
-  if (idioma === 'pt') {
-cor_original
-    root.style.setProperty('--text-color', '#ffffff');
-  }
-  if (idioma === 'es') {
-    root.style.setProperty('--cor_botao', '#FFC400');
-    root.style.setProperty('--text-color', '#000000');
-  }
-  if (idioma === 'fr') {
-    root.style.setProperty('--cor_botao', '#0055A4');
-    root.style.setProperty('--text-color', '#ffffff');
-  }
-  if (idioma === 'de') {
-    root.style.setProperty('--cor_botao', '#FFCE00');
-    root.style.setProperty('--text-color', '#000000');
-  }
-  if (idioma === 'it') {
-    root.style.setProperty('--cor_botao', '#009246');
-    root.style.setProperty('--text-color', '#ffffff');
-  }
-
-      root.style.setProperty('--cor_botao',cor_original)
-
-    const corOriginal = "#B22234";
-    const corClara = lightenColor(corOriginal, 20); // 20% mais clara
-    root.style.setProperty('--cor_botao_claro', corClara);
+  root.style.setProperty('--cor_botao',cor_original)
+  root.style.setProperty('--texto_botoes', getTextColor(cor_original)) // cor do texto dos botões
+  root.style.setProperty('--cor_botao_claro', softenColor(cor_original, 40))
 }
 
 export {

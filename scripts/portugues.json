@@ -1,0 +1,178 @@
+{
+  "index": {
+    "idioma": "pt",
+    "frase_principal": "Expanda seu vocabulário e memorize palavras brincando",
+    "aviso_beta": "Versão beta",
+    "idioma_da_pagina": "Idioma da Página:",
+    "termos_uso": "Termos de Uso",
+    "politica_privacidade": "Política de Privacidade",
+
+    "login": "Login",
+    "cadastro": "Cadastro"
+  },
+  
+  "cadastro": {
+    "cadastro": "Cadastro",
+    "nome": "Nome",
+    "email": "E-mail",
+    "digite_senha": "Digite sua senha",
+    "fraca": "Senha fraca",
+    "media": "Senha média",
+    "forte": "Senha forte",
+
+    "condicao_1": "Letra maiúscula",
+    "condicao_2": "Letra minúscula",
+    "condicao_3": "Número",
+    "condicao_4": "Caractere especial",
+    "condicao_5": "Mínimo de 6 caracteres",
+
+    "repita_senha": "Repita a senha",
+
+    "cadastrar": "Cadastrar",
+    
+    "sem_nome": "Por favor, insira um nome",
+    "email_invalido": "Por favor, insira um e-mail válido",
+    "senha_fraca": "Por favor, insira uma senha forte",
+    "senhas_diferentes": "A senha e sua repetição devem ser iguais"
+  },
+
+  "login": {
+    "login": "Login",
+    "email": "E-mail",
+    "senha": "Digite sua senha",
+    "esqueceu_senha": "Esqueceu sua senha?",
+    "entrar": "Entrar",
+    "usuario_nao_encontrado": "Usuário não encontrado",
+    "senha_incorreta": "Senha incorreta",
+    "digite_email_recup": "Digite seu e-mail para a recuperação de senha:",
+    "te_enviamos": "Te enviamos um e-mail para você criar uma nova senha"
+  },
+
+  "home": {
+    "slogan": "Qual idioma você quer aprender hoje?",
+    "select_escolha": "Escolha um idioma",
+    "select_de": "Alemão",
+    "select_es": "Espanhol",
+    "select_fr": "Francês",
+    "select_en": "Inglês",
+    "select_it": "Italiano",
+    "select_pt": "Português",
+
+    "ajuda_1_a": "Este é o Dekoreba!",
+    "ajuda_1_b": "Treinamento para memorização de palavras e conjugação verbal em vários idiomas.",
+    "ajuda_1_c": "Você pode clicar nesse botão, para entender um pouco mais sobre como esse treinamento funciona.",
+    "ajuda_1_d": "Mas, se quiser pular logo para a ação, feche essa janela e clique em ESCOLHA UM IDIOMA, e então, escolha um idioma.",
+    "ajuda_1_e": "Precisando de ajuda, é só clicar na interrogação, que estará no cantinho da tela.",
+    "ajuda_1_f": "Bons estudos/treinos.",
+
+    "ajuda_1_clicar_aqui": "clicar aqui",
+    "ajuda_1_fechar": "Fechar",
+
+
+    "ajuda_2_a": "Você pode até achar que decorar é coisa do passado, e na verdade é mesmo, mas convenhamos que, antigamente, o estudo era bem mais eficaz.",
+    "ajuda_2_b": "Decorar faz parte do nosso aprendizado. É assim que aprendemos as coisas como, por exemplo, algum novo golpe de artes marciais. Para aprendê-lo, você deverá executar o movimento correto inúmeras vezes até o seu cérebro <b>decorar</b> como se se faz, somente assim você será capaz de aplicar este golpe instantaneamente, no mesmo momento em que pensar nele.",
+    "ajuda_2_c": "Um outro bom exemplo de como aprendemos é o ato de digirir um carro. No começo, você troca as marchas movimentando a embreagem, aciona os freios e acelera, tudo com o máximo de atenção possível. Uma vez que você <b>decora</b> esses movimentos, o ato de dirigir se torna automático. Você simplesmente se senta em frente ao volante, liga o carro e vai. Quando menos perceber, você já vai estar estacionando em seu destino.",
+
+    "legenda_img_2": "Dirigindo...",
+
+    "ajuda_2_d": "Isso acontece por que somos assim. Nosso cérebro aprende coisas novas ligando uns neurônios nos outros. Estas ligações nós chamamos de <b>sinapses</b>.",
+    "ajuda_2_e": "E toda vez que nós repetimos cada nova habilidade aprendida, nós reforçamos esta sinapse, automatizando ainda mais esta ação.",
+
+    "legenda_img_3": "Ferramenta fantástica, capaz de coisas do arco da véia.",
+
+    "ajuda_2_f": "Monges budistas utilizam muito esta técnica da decoreba para gravar na mente livros inteiros. Antigamente, em nossas escolas, nós decorávamos a tabuada, o que facilitava absurdamente nossa vida durante toda a futura trajetória pela matemática. Quem aí se lembra da datilografia? Pois é, quem passou por este método de <b>decorar</b> a posição dos dedos na máquina de escrever, hoje tecla com a velocidade de uma lebre (e a força bruta de um cavalo, mas enfim).",
+
+    "legenda_img_4": "O hábito faz o monge.",
+
+    "ajuda_2_g": "Talvez hoje, <b>decorar</b> inúmeras datas e dados menores não seja realmente de grande proveito, dado a quantidade absurda de informações que temos ao alcance imediato dos dedos, mas tem coisas que ainda vale muito a pena <b>decorar</b>, e o vocabulário de novos idiomas é uma delas. Quando aprendemos uma nova língua, desculpem o trocadilho, a gente precisa ter as palavras na ponta da língua.",
+    "ajuda_2_h": ">Resumindo, a decoreba não é um método completo de aprendizado, ela é apenas uma <b>ferramenta</b>. E convenhamos, uma baita de uma ferramenta. Então, se quiser <b>decorar</b> algum vocabulário de alguma língua extrangeira, é só clicar neste menuzinho no meio da tela e ser feliz.",
+
+    "ajuda_2_i": "A repetição é a mãe dos estudos."
+
+
+  },
+
+  "perfil": {
+
+    "buscar_usuario": "Buscar usuário",
+
+    "perfil_span_diurno": "Modo Diurno",
+    "perfil_span_noturno": "Modo Noturno",
+
+    "perfil_span_nome": "Nome",
+    "perfil_span_email": "E-mail",
+
+    "botao_alterar_email": "Alterar E-mail",
+    "botao_alterar_senha": "Alterar Senha",
+
+    "span_idioma_interface": "Idioma da Interface",
+    "span_idioma_padrao": "Idioma padrão das dekorebas",
+
+    "placeholder_usuario": "usuario",
+
+    "label_carregar_foto": "Carregar Foto",
+    "botao_salvar_opc": "Salvar Opções",
+    "span_bot_sair": "Sair / logout",
+
+    "ajuda_3_a": "Eu sei, eu sei. Essa página de perfil está mais vazia que minha carteira.",
+    "ajuda_3_b": "Mas em breve, se tudo correr bem, deverá ter bem mais coisas, como um sistema de recompensas, busca por outros usuários e diversas outras paradinhas da hora.",
+    "ajuda_3_c": "Na verdade eu pensei só nessas duas mesmo, mas se você tiver alguma sugestão, falai."
+
+  },
+
+  "busca_usuario": {
+    "buscar_usuario": "Buscar usuário",
+    "nao_ha_usuarios": "Nosso incrível sistema não encontrou nenhum usuário relacionado à sua busca."
+  },
+
+  "mostra": {
+
+    "msg_primeiro_acesso": "Estamos preparando tudo para seu primeiro acesso <br>à dekoreba do idioma: ",
+
+    "palavras": "Palavras",
+    "frases": "Frases",
+
+    "liberadas": "Liberadas",
+    "dekoradas": "Dekoradas",
+
+    "ao_menos_tres": "Você precisa de ao menos 3 palavras dekoradas, para treinar a formação de frases.",
+
+    "botao_cola_frase": "Escreva uma frase para traduzir",
+    "botao_gera_frase": "Gerar uma frase para traduzir",
+
+    "span_insira_frase": "Insira a frase no campo abaixo.",
+    "span_frase_traduzida_cola": "Frase em português, totalmente traduzida e top das galáxias.",
+
+    "botao_gera_traducao": "Traduzir",
+    "span_traduza_a_seguir": "Traduza a frase a seguir.",
+    "bot_cria_frase_start": "Iniciar a prática",
+
+    "pra_valer": "Pra Valer",
+    "treinar": "Treinar",
+    "multipla_escolha": "Múltipla Escolha",
+    "escrita": "Escrita",
+
+    "pergunta_resposta": "Pergunta / Resposta",
+    "aleatoria": "Aleatória",
+
+    "ajuda_4_a": "Essa é a tela de uma dekoreba. Não tem mistério, aqui você poderá praticar o vocabulário de vários idiomas diferentes até ficar craque.",
+    "ajuda_4_b": "Temos abaixo duas modalidades, <b>Palavras</b> e <b>Conjugação Verbal</b>.",
+    "ajuda_4_c": "Na modalidade, <b>Palavras</b>, você tem o modo <b>Múltipla Escolha</b>, que é onde você libera novas palavras para praticar, e também o modo <b>Escrita</b>, que é onde você pratica escrevendo. Detalhe, você pode treinar aqui utilizando a tela do celular, mas um teclado é super recomendado. No múltipla escolha, você também pode utilizar as teclas 8, 5 e 2 do teclado.",
+    "ajuda_4_d": "Essas duas modalidades estão presentes nas opções <b>Pra Valer</b> e <b>Treino</b>. Em Pra Valer, você libera novas palavras no Múltipla Escolha para praticá-las também no modo Escrita. Na opção Treino, você apenas treina as palavras já liberadas.",
+    "ajuda_4_e": "Temos também uma modalidade de <b>Conjugação Verbal</b>. Aqui. ainda não temos um sistema de pontuação, para liberar novas conjugações, sendo apenas uma modalidade para treino. Temos lá um campo para você imprimir a conjugação que desejar, para praticas offline.",
+    "ajuda_4_f": "Naquele botão de pergaminho, você encontra uma lista com as palavras liberadas, um botão para <b>imprimir</b> sua lista, e um outro que te leva à um <b>teste</b>, onde você pode marcar coo decoradas, palavras que você já saiba, dependendo do seu nível de fluência no idioma praticado.",
+    "ajuda_4_g": "Basicamente é isso aí mesmo! Qualquer coisa, tamo junto."
+  },
+
+  "jogo": {
+    "enviar": "Enviar",
+    "voltar": "Voltar",
+    "cancelar_teste": "Cancelar Teste"
+  },
+
+  "pagina_404": {
+    "pagina_404_msg_1": "Não fazemos idéia do que você colocou ali na barra de endereço.",
+    "pagina_404_msg_2": "Mas não se desespere. Clique no botão abaixo e volte para sua página inicial.",
+    "pagina_404_voltar": "Voltar"
+  }
+}

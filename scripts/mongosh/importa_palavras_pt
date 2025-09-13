@@ -1,0 +1,26 @@
+// Importamos ao banco as palavras_pt do json.
+
+mongoimport --db panlex --collection classes_pt --file classe_palavras.js --jsonArray
+
+
+// O código abaixo pega o 
+
+const classes = db.classes_pt.find().toArray();
+
+const resultado = classes.map(item => {
+  const novaLista = item.palavras.map(p => {
+    const expr = db.expr_por_2.findOne({ txt: p });
+    return {
+      palavra: p,
+      meaning: expr ? expr.meaning : null
+    };
+  });
+
+  return {
+    classe: item.classe,
+    palavras: novaLista
+  };
+});
+
+// Salva o resultado em uma nova collection
+db.panlex_por.insertMany(resultado);

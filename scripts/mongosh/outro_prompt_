@@ -1,0 +1,119 @@
+Muito que bem, agora, preciso do seguinte.
+
+Trabalhar no banco de dados "panlex".
+A collection "artigos_por" têm um documento.
+Esse documento é assim: {
+	classe: "artigos",
+	palavras: [array com vários itens diferentes, todos strings]
+}
+
+Pois bem, preciso buscar cada um desses itens da array "palavras" na collection "expr_por" no campo "txt".
+Quando achar a correspondência, preciso trabalhar com o campo array "meanings" desse documento.
+Nesse array "meanings" há diversos itens numéricos.
+
+Preciso buscar cada um desses itens, primeiramente, na collection "expr_eng" no campo array "meanings" de lá.
+Quando achar uma correspondência, preciso então trabalhar agora o campo "txt" desse objeto recém encontrado, indo na collection "artigos_eng" e ir na array "palavras" de lá para ver se encontro o "txt" encontrado anteriormente.
+
+Se encontrado, preciso que printe na tela algo assim: "EN - O txt encontrado - o meaning utilizado nessa busca".
+Logo após isso, preciso fazer a mesma coisa, mas ao invés de ser na collection "expr_eng" e "artigos_eng", ser na "expr_spa" e "artigos_spa", printando logo abaixo da mensagem anterior, algo assim: "ES - O txt encontrado - o meaning utilizado nessa busca".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Muito que bem, agora, preciso do seguinte.
+
+Trabalhar no banco de dados "panlex".
+A collection "artigos_por" têm um documento.
+Esse documento é assim: {
+	classe: "artigos",
+	palavras: [array com vários itens diferentes, todos strings]
+}
+
+Pois bem, preciso buscar cada um desses itens da array "palavras" na collection "expr_por" no campo "txt".
+Quando achar a correspondência, preciso trabalhar com o campo array "meanings" desse documento.
+Nesse array "meanings" há diversos itens numéricos.
+
+Preciso buscar cada um desses itens numéricos em uma outra collection "expr_spa", nos itens da array "meanings", presente em cada documento. Cada documento da collection "expr_spa", além da array "meanings", com valores numéricos, ainda tem um campo "txt", de valor string.
+
+Depois disso, preciso elencar os 3 documentos, correspondentes à pesquisa, de valor "txt" mais frequentes. Após isso, printar na tela algo assim: `${palavra da "artigos_por" buscada} - ${posicao no ranking de frequencia das encontradas (1, 2 ou 3) - ${"txt" encontrado}`.
+
+
+
+
+
+
+
+
+
+
+
+
+Perfeito. Agora, preciso de algumas mudancas.
+
+Ao invés da collection ser a "artigos_por", será a "classes_pt". O formato de arquivos é idêntico da anterior, mas agora não há apenas 1 documento, serão vários, cada um com um valor de "classe" diferente.
+
+Ao invés de printar uma mensagem na tela, preciso gravar os resultados em uma outra collection "cursos".
+
+A cada nova palavra buscada da "classes_pt", teremos um número sequencial, comecando do 1 e subindo.
+
+O formato desse novo documento será algo assim:
+
+const novoCurso = {
+  _id: ObjectId(),
+  idioma: "Espanhol",
+  cor: "#FFF000",
+  sistemas_escrita: ["latino"],
+  imagem_fundo: 3,
+  capitulos: [
+  	{	
+  	  	_id: ObjectId(),
+  		classe: `${será a classe que a busca foi feita}`,
+  		vocabulario: [
+  			{
+  				  _id: ObjectId(),
+  				cod_dekoreba: O codigo numerado,
+  				palavra: [
+  					{
+  						latino: "o txt da palavra em espanhol"
+  					}
+  				],
+  				posicao: A posição de frequencia da palavra. 1, 2 ou 3.
+  			}
+  		]
+  	}
+  ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

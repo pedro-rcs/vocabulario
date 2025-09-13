@@ -1,0 +1,1 @@
+mongoimport --db panlex --collection source_license --type csv --headerline --file source_license.csv

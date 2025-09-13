@@ -1,0 +1,87 @@
+Agora, preciso montar um novo item na collection "cursos", nesse modelo:
+
+{
+	idioma: "Português",
+	cor: "#FFF000",
+	sistemas_de_escrita: ["latino"],
+	imagem_fundo: 3,
+	capitulos: []
+}
+
+Preencheremos a array "capitulos" com dados da collection "panlex_por".
+"panlex_por" tem 8 itens. Cada um deles é mais ou menos assim:
+
+{
+	classe: "pronome ou artigo, etc.",
+	palavras: [
+		{
+			palavra: "alguma palavra",
+			meaning: valor numérico
+		},
+		{
+			palavra: "alguma palavra",
+			meaning: valor numérico
+		},
+
+	]
+}
+
+Para cada item da "panlex_por", criaremos um item na array "capitulos", da nova collection, nesse formato:
+
+{
+	classe: "A mesma classe do item da panlex_por".
+	vocabulario: []
+}
+
+Serão 8 itens como esse acima, tal qual na collection "panlex_por". Já a array vocabulario, preencheremos da seguinte maneira:
+
+Cada item da array "palavras" contem dois campos, palavra (string) e meaning (number). Devemos, para cada meaning, buscar valores idênticos na collection "expr_por", dentre os valores do array "meanings"
+
+Agora, por exemplo. Se o sistema buscou um item do array palavras e buscou pelo valor do campo "meaning" na collection "expr_por", entre os valores do array "meanings" de cada um dos itens dessa collection, e achou uns 10 itens, o sistema deve ver quantos tipos de itens com o valor "txt" temos de diferentes e quantas vezes cada valor diferente ocorre, para sabermos quais sãos os 3 valores mais populares. Sabendo quais são os 3 mais populares (pode ser que seja apenas 1 mais popular, tranquilo), devemos gravar um item, mais ou menos assim: 
+
+{
+	dok_dekoreba: valor numérico do meaning,
+	palavra: [
+		latino: valor "txt" da palavra, que seria a palavra escrita em si.
+	],
+	posicao: se for o mais popular, 1. Se for o segundo mais comum, 2. O terceiro, 3. 
+}
+
+Lembrando que pode haver apenas uma única incidência de um item na collection "expr_por" que coincida, em seu array "meanings" com o valor "meaning" buscado, nesse caso, haverá apenas uma única posição, 1. Se houverem 2, será 1 e 2. Se houver empate, pegar o valor que aparecer antes.
+
+
+
+
+
+
+{
+	idioma: "Português",
+	cor: "#FFF000",
+	sistemas_de_escrita: ["latino"],
+	imagem_fundo: 3,
+	capitulos: [
+		{
+			classe: panlex_por[i].classe,
+			vocabulario: [
+				{
+					cod_dekoreba: panlex_por[i].palavras[j].meaning,
+					palavra: [
+						latino: panlex_por[i].palavras[j].palavra
+					],
+					posicao: panlex_por[i].palavras[j].palavra que mais se repete na collection panlex_por
+				}
+			]
+		}
+	]
+}
+
+
+
+		{
+			cod_dekoreba: valor numérico do meaning,
+			palavra: [
+				{
+					latino: "alguma palavra"
+				}
+			]
+		}

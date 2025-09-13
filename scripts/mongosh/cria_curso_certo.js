@@ -1,5 +1,5 @@
 db.expr_por.createIndex({ txt: 1 });
-db.expr_spa.createIndex({ meanings: 1 });
+// db.expr_eng.createIndex({ meanings: 1 });
 db.expr_por.createIndex({ meanings: 1 });
 
 
@@ -20,7 +20,7 @@ db.classes_pt.find({}).forEach(docClasse => {
       const freqMap = {};
 
         docExprPor.meanings.forEach(meaning => {
-          db.expr_spa.find({ meanings: meaning }).forEach(docIta => {
+          db.expr_por.find({ meanings: meaning }).forEach(docIta => {
             const txt = docIta.txt;
             if (!freqMap[txt]) {
               freqMap[txt] = { count: 0, meaning: meaning };
@@ -65,7 +65,7 @@ db.classes_pt.find({}).forEach(docClasse => {
 if (capitulos.length > 0) {
   db.cursos.insertOne({
     _id: ObjectId(),
-    idioma: "Espanhol",
+    idioma: "Português",
     cor: "#FFF000",
     sistemas_escrita: ["latino"],
     imagem_fundo: 3,

@@ -107,6 +107,12 @@ function encontra_lang_ingles (codigo) {
   }
 }
 
+function encontra_sigla_do_ingles (name_ingles) {
+  for (let i = 0; i < languages.length; i++) {
+    if (languages[i].name_ingles == name_ingles) return languages[i].code
+  }
+}
+
 function separar_idiomas_pratica(dados, selecionado, praticado) {
   const idioma_padrao_ingles = encontra_lang_ingles(selecionado).trim();
   const idioma_pratica_ingles = encontra_lang_ingles(praticado).trim();
@@ -285,5 +291,6 @@ export {
   apagaCookie,
   showCustomModal,
   encontra_lang_ingles,
+  encontra_sigla_do_ingles,
   altera_cores_idioma
 }

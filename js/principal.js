@@ -1,4 +1,4 @@
-import { audioMap } from './audio_map.js'
+// import { audioMap } from './audio_map.js'
 import { traducoesCategoria } from './traducoes_categorias.js'
 import { parseCSV } from './csv_utils.js'
 import {
@@ -13,6 +13,7 @@ import {
   apagaCookie,
   showCustomModal,
   encontra_lang_ingles,
+  encontra_sigla_do_ingles,
   altera_cores_idioma
 } from './auxiliar.js'
 
@@ -218,33 +219,41 @@ function cria_div_botao_joga (categoria) {
   return div_botao_joga
 }
 
+async function carregarAudioMap(codigoIdioma) {
+  const modulo = await import(`./mapas_audios/${codigoIdioma}.js`);
+  console.log(codigoIdioma)
+  const audioMap = modulo.default;
+
+
+  return audioMap;
+}
+
+
 function cria_input_pratica (categoria, fraseIndex, frase, headers) {
   const input = document.createElement('input');
   input.type = 'text';
   input.id = `input_${categoria}_${fraseIndex}`;
-              input.name = `input_${categoria}_${fraseIndex}`;
-              if (mostra_placeholder_palavras === 'sim') input.placeholder = `${frase[1]}`
+  input.name = `input_${categoria}_${fraseIndex}`;
+  if (mostra_placeholder_palavras === 'sim') input.placeholder = `${frase[1]}`
 
-              const acertadas = getProgress(userName, idioma_praticado, categoria);
-              if (acertadas.includes(fraseIndex)) {
-                input.value = frase[1];
+  const acertadas = getProgress(userName, idioma_praticado, categoria);
+  if (acertadas.includes(fraseIndex)) {
+    input.value = frase[1];
 
-                input.readOnly = true;
-                input.classList.add('input-audio');
-                input.title = 'Clique para ouvir o áudio';
-                input.onclick = () => {
-                  const idioma = headers[1];
-                  const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
-                  if (!arquivoAudio) {
-                    showCustomModal('Áudio não encontrado para esta palavra.');
-                    return;
-                  }
-                  const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
-                  const audio = new Audio(audioPath);
-                  audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
-                };
-              }
+    input.readOnly = true;
+    input.classList.add('input-audio');
+    input.title = 'Clique para ouvir o áudio';
 
+    input.onclick = async () => {
+      const idioma = headers[1];
+      const idioma_corrigido = idioma.trim()
+      const sigla_idioma = encontra_sigla_do_ingles(idioma_corrigido)
+
+      const audio = await cria_audio(categoria, fraseIndex, sigla_idioma)
+      audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
+    
+    };
+  }
               
   return input
 }
@@ -285,6 +294,7 @@ function cria_botao_terminei (categoria, headers, frases) {
             showCustomModal('Áudio não encontrado para esta palavra.');
             return;
           }
+          alert("ek")
           const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
           const audio = new Audio(audioPath);
           audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
@@ -319,16 +329,18 @@ function cria_botao_terminei (categoria, headers, frases) {
   return botao_terminei
 }
 
-function cria_audio (categoria, fraseIndex, idioma) {
-        const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
-                if (!arquivoAudio) {
-                  alert('Áudio não encontrado para esta frase.');
-                  return;
-                }
-                const audioPath = `${idioma}/${arquivoAudio}`;
-                const audio = new Audio(audioPath);
-                console.log(audioPath)
-  return audio
+async function cria_audio (categoria, fraseIndex, idioma) {
+  const audioMap = await carregarAudioMap(idioma);
+
+  const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
+  if (!arquivoAudio) {
+    alert('Áudio não encontrado para esta frase.');
+    return null;
+  }
+
+  const audioPath = `${caminho}/audios/${idioma}/${categoria}/${arquivoAudio}`;
+  const audio = new Audio(audioPath);
+  return audio;
 }
 
 function cria_toggle () {
@@ -530,9 +542,12 @@ function buildTables (data) {
             td.textContent = texto;
             td.style.cursor = 'pointer'
               
-            td.addEventListener('click', () => {
+            td.addEventListener('click', async () => {
               const idioma = headers[idx];
-              const audio = cria_audio(categoria, fraseIndex, idioma)
+              const idioma_corrigido = idioma.trim()
+              const sigla_idioma = encontra_sigla_do_ingles(idioma_corrigido)
+
+              const audio = await cria_audio(categoria, fraseIndex, sigla_idioma)
             
               audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
             })
@@ -577,9 +592,12 @@ function buildTables (data) {
             td.textContent = texto;
             td.style.cursor = 'pointer'
               
-            td.addEventListener('click', () => {
+            td.addEventListener('click', async () => {
               const idioma = headers[idx];
-              const audio = cria_audio(categoria, fraseIndex, idioma)
+              const idioma_corrigido = idioma.trim()
+              const sigla_idioma = encontra_sigla_do_ingles(idioma_corrigido)
+
+              const audio = await cria_audio(categoria, fraseIndex, sigla_idioma)
             
               audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
             })

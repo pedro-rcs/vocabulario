@@ -127,10 +127,18 @@ function separar_idiomas_pratica(dados, selecionado, praticado) {
 
   const indicesParaManter = [0, idx_padrao, idx_pratica];
 
-  const resultadoFiltrado = dados.map(row =>
-    indicesParaManter.map(index => row[index])
-  );
+  const resultadoFiltrado = [];
 
+  for (let i = 0; i < dados.length; i++) {
+    const row = dados[i];
+
+    // Sempre mantém a primeira linha (cabeçalho)
+    if (i === 0 || row[1] === "1") {
+      const novaLinha = indicesParaManter.map(index => row[index]);
+      resultadoFiltrado.push(novaLinha);
+    }
+  }
+  
   return resultadoFiltrado;
 }
 

@@ -1,4 +1,3 @@
-// import { audioMap } from './audio_map.js'
 import { traducoesCategoria } from './traducoes_categorias.js'
 import { parseCSV } from './csv_utils.js'
 import {
@@ -38,6 +37,7 @@ if (!idioma_praticado) {
 }
 
 altera_cores_idioma(idioma_praticado)
+
 function cria_escolha_idiomas (tipo) {
 
   if (tipo === 'geral') {
@@ -266,7 +266,7 @@ function cria_botao_terminei (categoria, headers, frases) {
   botao_terminei.addEventListener('click', () => {
     let acertos = 0;
     let total = frases.length;
-    console.log(frases)
+
     frases.forEach((frase, fraseIndex) => {
       const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
       if (!input) return;
@@ -278,8 +278,9 @@ function cria_botao_terminei (categoria, headers, frases) {
       // Remove event listener antigo, se houver
       input.onclick = null;
       input.classList.remove('input-audio');
-          
+
       if (input.value.trim().toLowerCase() === frase[1].trim().toLowerCase()) {
+
         input.readOnly = true;
         acertos++;
 
@@ -288,13 +289,14 @@ function cria_botao_terminei (categoria, headers, frases) {
         input.title = 'Clique para ouvir o áudio';
 
         input.onclick = () => {
+
           const idioma = headers[1]; // coluna do input praticado
           const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
           if (!arquivoAudio) {
             showCustomModal('Áudio não encontrado para esta palavra.');
             return;
           }
-          alert("ek")
+
           const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
           const audio = new Audio(audioPath);
           audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
@@ -359,10 +361,10 @@ function cria_toggle () {
 
 function cria_popup_variantes () {
    const popup = document.createElement("div");
-              popup.className = "popup-variantes";
-              popup.style.position = "absolute";
-              popup.style.top = "100%";
-              popup.style.right = "0";
+    popup.className = "popup-variantes";
+    popup.style.position = "absolute";
+    popup.style.top = "100%";
+    popup.style.right = "0";
               popup.style.background = "#fff";
               popup.style.border = "1px solid #ccc";
               popup.style.padding = "6px 8px";
@@ -377,7 +379,6 @@ function cria_popup_variantes () {
 
 
 function buildTables (data) {
-
 
   const container = document.getElementById('output');
   container.innerHTML = ''
@@ -461,7 +462,6 @@ function buildTables (data) {
     headers.forEach((h, idx) => {
       if (idx != 0 & idx != 1 || modo === "pratica") {
 
-
       const th = document.createElement('th');
       let codigo_idioma_h
       for (let i = 0; i < languages.length; i++) {
@@ -500,15 +500,22 @@ function buildTables (data) {
       const idioma_em_ingles = encontra_lang_ingles(currentLanguage).trim()
       const textoReferencia = frase[headers.indexOf(idioma_em_ingles)]
 
+      // Esse if (palavrasAdicionadas.has(textoReferencia)) { funciona, mas precisa ajustar melhor.
+      /*
       if (palavrasAdicionadas.has(textoReferencia)) {
         return; // pula esta frase
       }
+      */
       palavrasAdicionadas.add(textoReferencia);
 
 
       const tr = document.createElement('tr')
       
+
       const posicao_atual = frases[fraseIndex][0]
+
+
+      // alert(posicao_atual)
       let frases_variantes = []
 
       let i = fraseIndex + 1;
@@ -586,6 +593,7 @@ function buildTables (data) {
         }
 
         if (modo === "pratica") {
+
           if (idx === 0) {
 
             td.style.textAlign = 'right'; // texto alinhado à direita

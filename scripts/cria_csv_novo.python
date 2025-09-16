@@ -1,0 +1,51 @@
+import json
+import csv
+from collections import defaultdict
+
+# arquivos de entrada e saída
+json_file = "dados.json"
+csv_file = "saida.csv"
+
+# carregar JSON
+with open(json_file, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+# dicionário: meaning -> {idioma: palavra}
+meanings_dict = defaultdict(lambda: {
+    "Categoria": "",
+    "Posicao": "",
+    "Cod_dekoreba": "",
+    "English": "",
+    "Portuguese": "",
+    "Spanish": "",
+    "French": "",
+    "German": "",
+    "Italian": ""
+})
+
+# percorrer documentos
+for doc in data:
+    idioma = doc["idioma"]
+    for cap in doc["capitulos"]:
+        categoria = cap["classe"]
+        for vocab in cap["vocabulario"]:
+            meaning = vocab["meaning"]
+            palavra = vocab["palavra"]["latino"]
+
+            # preencher estrutura
+            meanings_dict[meaning]["Categoria"] = categoria
+            meanings_dict[meaning]["Posicao"] = vocab["posicao"]
+            meanings_dict[meaning]["Cod_dekoreba"] = vocab["cod_dekoreba"]
+            meanings_dict[meaning][idioma] = palavra
+
+# salvar CSV
+campos = ["Categoria", "Posicao", "Cod_dekoreba",
+          "English", "Portuguese", "Spanish", "French", "German", "Italian"]
+
+with open(csv_file, "w", newline="", encoding="utf-8") as f:
+    writer = csv.DictWriter(f, fieldnames=campos)
+    writer.writeheader()
+    for row in meanings_dict.values():
+        writer.writerow(row)
+
+print(f"✅ Arquivo {csv_file} gerado com sucesso!")

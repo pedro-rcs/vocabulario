@@ -1,3 +1,4 @@
+// Exporta o mapa de áudios
 export default {
   'artigos': {
     0: 'i47rgjp.mp3',

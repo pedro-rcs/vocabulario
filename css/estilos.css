@@ -98,14 +98,13 @@ h2.open::after {
   }
 
   td {
-
     cursor: pointer;
     transition: background-color 0.3s ease;
     background-color: var(--bg-color);
   }
 
   td:hover {
-    background-color: #d9f1d9; /* verde suave no hover */
+    background-color: var(--bg-color_h2_hover);
   }
 
   tr:last-child td {
@@ -642,4 +641,9 @@ body {
 .tab-btn_verificar:hover {
   background-color: #8acb68;
   transform: scale(1.03);
+}
+
+
+.popup-variantes:hover {
+  background: var(--bg-color_h2_hover);
 }

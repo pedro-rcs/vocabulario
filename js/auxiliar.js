@@ -114,6 +114,8 @@ function encontra_sigla_do_ingles (name_ingles) {
 }
 
 function separar_idiomas_pratica(dados, selecionado, praticado) {
+  console.log(dados)
+  console.log("acima é o dados completo dentro da função separar_idiomas_pratica()")
   const idioma_padrao_ingles = encontra_lang_ingles(selecionado).trim();
   const idioma_pratica_ingles = encontra_lang_ingles(praticado).trim();
 
@@ -125,7 +127,7 @@ function separar_idiomas_pratica(dados, selecionado, praticado) {
   console.log('Procurando:', idioma_padrao_ingles, idioma_pratica_ingles);
   console.log('Índices:', idx_padrao, idx_pratica);
 
-  const indicesParaManter = [0, idx_padrao, idx_pratica];
+  const indicesParaManter = [0, idx_padrao, idx_pratica, 2];
 
   const resultadoFiltrado = [];
 
@@ -133,7 +135,8 @@ function separar_idiomas_pratica(dados, selecionado, praticado) {
     const row = dados[i];
 
     // Sempre mantém a primeira linha (cabeçalho)
-    if (i === 0 || row[1] === "1") {
+    // if (i === 0 || row[1] === "1") {
+    if (i === 0 || row[1] === "1" || row[1] === "2" || row[1] === "3") {
       const novaLinha = indicesParaManter.map(index => row[index]);
       resultadoFiltrado.push(novaLinha);
     }

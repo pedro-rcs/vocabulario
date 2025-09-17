@@ -267,7 +267,20 @@ function cria_botao_terminei (categoria, headers, frases) {
     let acertos = 0;
     let total = frases.length;
 
+    const agrupadasPorDekoreba = {};
+    console.log(frases)
+    frases.forEach((frase) => {
+      const cod = frase[1]; // índice 1 = cod_dekoreba
+      if (!agrupadasPorDekoreba[cod]) {
+        agrupadasPorDekoreba[cod] = [];
+      }
+      agrupadasPorDekoreba[cod].push(frase);
+    });
+
+    console.log(agrupadasPorDekoreba)
+
     frases.forEach((frase, fraseIndex) => {
+     // console.log(frase)
       const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
       if (!input) return;
       
@@ -360,19 +373,19 @@ function cria_toggle () {
 }
 
 function cria_popup_variantes () {
-   const popup = document.createElement("div");
-    popup.className = "popup-variantes";
-    popup.style.position = "absolute";
-    popup.style.top = "100%";
-    popup.style.right = "0";
-              popup.style.background = "#fff";
-              popup.style.border = "1px solid #ccc";
-              popup.style.padding = "6px 8px";
-              popup.style.borderRadius = "6px";
-              popup.style.boxShadow = "0 6px 16px rgba(0,0,0,0.15)";
-              popup.style.display = "none";
-              popup.style.zIndex = "50";
-              popup.style.minWidth = "140px";
+  const popup = document.createElement("div");
+  popup.className = "popup-variantes";
+  popup.style.position = "absolute";
+  popup.style.top = "100%";
+  popup.style.right = "0";
+  popup.style.background = "var(--bg-color)";
+  popup.style.border = "1px solid var(--text-color)";
+  popup.style.padding = "6px 8px";
+  popup.style.borderRadius = "6px";
+  popup.style.boxShadow = "0 6px 16px rgba(0,0,0,0.15)";
+  popup.style.display = "none";
+  popup.style.zIndex = "50";
+  popup.style.minWidth = "140px";
 
   return popup
 }
@@ -462,23 +475,30 @@ function buildTables (data) {
     headers.forEach((h, idx) => {
       if (idx != 0 & idx != 1 || modo === "pratica") {
 
-      const th = document.createElement('th');
-      let codigo_idioma_h
-      for (let i = 0; i < languages.length; i++) {
-        // Aqui, precisa desses trim e toLowerCase para evitar problemas com espaços ou maiúsculas/minúsculas
-        if (languages[i].name_ingles.trim().toLowerCase() === h.trim().toLowerCase()) {
-          codigo_idioma_h = languages[i].code;
-          break;
-        }
-      }
+        // Essa gambiarra abaixo é para não mostrar a coluna dos cod_dekoreba na prática.
+        // Pois, se mostrar, o código vai achar que tem mais um idioma, o que não é verdade.
+        if (modo === "pratica" && idx === 2) {
 
-      th.textContent = traduzir_idioma_ingles(codigo_idioma_h, currentLanguage);
-      // th.textContent = h;
-      if (modo === 'pratica' && idx === 0) {
-        th.style.textAlign = 'right'; // só a primeira coluna
-      }
-      trHead.appendChild(th);
-      }
+        } else {
+          const th = document.createElement('th');
+          let codigo_idioma_h
+          for (let i = 0; i < languages.length; i++) {
+            // Aqui, precisa desses trim e toLowerCase para evitar problemas com espaços ou maiúsculas/minúsculas
+            if (languages[i].name_ingles.trim().toLowerCase() === h.trim().toLowerCase()) {
+              codigo_idioma_h = languages[i].code;
+              break;
+            }
+          }
+
+          th.textContent = traduzir_idioma_ingles(codigo_idioma_h, currentLanguage);
+          // th.textContent = h;
+          if (modo === 'pratica' && idx === 0) {
+            th.style.textAlign = 'right'; // só a primeira coluna
+          }
+          trHead.appendChild(th);
+          }
+        }
+     
     });
 
     if (modo != "multipla_escolha") {
@@ -681,10 +701,16 @@ function carrega_csv () {
   .then(csvText => {
     const data = parseCSV(csvText);
     
-    if (modo === 'teoria') buildTables(data)
+    if (modo === 'teoria') {
+      buildTables(data)
+      console.log(data)
+      console.log("acima é o data completo")
+    }
     if (modo === 'pratica') {
 
       const resultado_filtrado = separar_idiomas_pratica(data, currentLanguage, idioma_praticado)
+      console.log(resultado_filtrado)
+      console.log("acima é o resultado filtrado")
       buildTables(resultado_filtrado)
     }
     if (modo === 'multipla_escolha') {

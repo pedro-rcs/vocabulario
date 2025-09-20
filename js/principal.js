@@ -229,7 +229,7 @@ async function carregarAudioMap(codigoIdioma) {
 }
 
 
-function cria_input_pratica (categoria, fraseIndex, frase, headers) {
+function cria_input_pratica (categoria, fraseIndex, frase, headers, frases, frases_e_variantes) {
   const input = document.createElement('input');
   input.type = 'text';
   input.id = `input_${categoria}_${fraseIndex}`;
@@ -237,8 +237,36 @@ function cria_input_pratica (categoria, fraseIndex, frase, headers) {
   if (mostra_placeholder_palavras === 'sim') input.placeholder = `${frase[1]}`
 
   const acertadas = getProgress(userName, idioma_praticado, categoria);
-  if (acertadas.includes(fraseIndex)) {
-    input.value = frase[1];
+  console.log(acertadas)
+  let acertadas_indice_mais_correto = []
+  let i_variante = 0
+  
+  for (let i = 0; i < acertadas.length; i++) {
+    const soma = acertadas[i][0] + acertadas[i][1]
+    acertadas_indice_mais_correto.push(soma)
+    // console.log(`soma: ${soma}, fraseIndex: ${fraseIndex}`)
+    if (acertadas[i][0] == fraseIndex) {
+      i_variante = acertadas[i][1];
+      break
+    }
+  }
+
+  console.log(`i_variante: ${i_variante}`)
+
+ // console.log(acertadas)
+  // alert("acertadas acima")
+
+   // alert(i_variante)
+   //console.log(frases_e_variantes)
+   //alert("frases_e_variantes acima")
+
+  if (acertadas_indice_mais_correto.includes(fraseIndex + i_variante)) {
+    console.log(frases)
+    console.log(acertadas_indice_mais_correto)
+    console.log(`fraseIndex: ${fraseIndex}, i_variante: ${i_variante}`)
+    console.log(frases[fraseIndex + i_variante][1])
+    // alert("pare")
+    input.value = frases[fraseIndex + i_variante][1];
 
     input.readOnly = true;
     input.classList.add('input-audio');
@@ -249,7 +277,7 @@ function cria_input_pratica (categoria, fraseIndex, frase, headers) {
       const idioma_corrigido = idioma.trim()
       const sigla_idioma = encontra_sigla_do_ingles(idioma_corrigido)
 
-      const audio = await cria_audio(categoria, fraseIndex, sigla_idioma)
+      const audio = await cria_audio(categoria, fraseIndex + i_variante, sigla_idioma)
       audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
     
     };
@@ -279,8 +307,28 @@ function cria_botao_terminei (categoria, headers, frases) {
 
     console.log(agrupadasPorDekoreba)
 
+    let grupos = {};
+
+    for (let i = 0; i < frases.length; i++) {
+      let chave = frases[i][2]; // o número
+      if (!grupos[chave]) {
+        grupos[chave] = [];
+      }
+      grupos[chave].push(frases[i]);
+    }
+
+    let agrupado = Object.values(grupos);
+
+    console.log(frases)
+    console.log("acima frases")
+
+    console.log(agrupado)
+    console.log("agrupado acima")
+
+
     frases.forEach((frase, fraseIndex) => {
-     // console.log(frase)
+      console.log(frase)
+     // alert("oja oa jrafel")
       const input = document.getElementById(`input_${categoria}_${fraseIndex}`);
       if (!input) return;
       
@@ -292,7 +340,30 @@ function cria_botao_terminei (categoria, headers, frases) {
       input.onclick = null;
       input.classList.remove('input-audio');
 
-      if (input.value.trim().toLowerCase() === frase[1].trim().toLowerCase()) {
+      let i_agrupado
+      for (let i = 0; i < agrupado.length; i++) {
+        if (agrupado[i][0][2] === frase[2]) {
+          i_agrupado = i
+          break
+        }
+      }
+
+     // alert(i_agrupado)
+
+      const valorDigitado = input.value.trim().toLowerCase();
+
+
+      const indiceCorreto = [0, 1, 2].findIndex(indice => {
+        return agrupado[i_agrupado][indice] && agrupado[i_agrupado][indice][1] === valorDigitado;
+      });
+
+      if (indiceCorreto !== -1) {
+    
+
+
+
+
+      // if (input.value.trim().toLowerCase() === frase[1].trim().toLowerCase()) {
 
         input.readOnly = true;
         acertos++;
@@ -301,22 +372,29 @@ function cria_botao_terminei (categoria, headers, frases) {
         input.classList.add('input-audio');
         input.title = 'Clique para ouvir o áudio';
 
-        input.onclick = () => {
+        input.onclick = async () => {
+
 
           const idioma = headers[1]; // coluna do input praticado
-          const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex];
+          const idioma_corrigido = idioma.trim()
+          const sigla_idioma = encontra_sigla_do_ingles(idioma_corrigido)
+          const audioMap = await carregarAudioMap(sigla_idioma);
+
+          const arquivoAudio = audioMap[categoria] && audioMap[categoria][fraseIndex + indiceCorreto];
           if (!arquivoAudio) {
             showCustomModal('Áudio não encontrado para esta palavra.');
             return;
           }
 
-          const audioPath = `${caminho}/${idioma}/${arquivoAudio}`;
+         // const audioPath = `${caminho}/audios/${idioma}/${arquivoAudio}`;
+            const audioPath = `${caminho}/audios/${sigla_idioma}/${categoria}/${arquivoAudio}`;
+
           const audio = new Audio(audioPath);
           audio.play().catch(err => console.error('Erro ao tocar áudio:', err));
         };
 
         // Salva progresso aqui:
-        saveProgress(userName, idioma_praticado, categoria, fraseIndex);
+        saveProgress(userName, idioma_praticado, categoria, fraseIndex, indiceCorreto);
       } else {
         input.value = '';
       }
@@ -556,6 +634,30 @@ function buildTables (data) {
         }
       }
 
+      let eh_primeiro = "nao"
+      if (modo === "pratica") {
+        if (frases[fraseIndex - 1]) {
+          if (frases[fraseIndex][2] != frases[fraseIndex - 1][2]) {
+            eh_primeiro = "sim"
+          }
+        } else {
+          eh_primeiro = "sim"
+        }
+      }
+
+
+    let grupos = {};
+
+    for (let i = 0; i < frases.length; i++) {
+      let chave = frases[i][2]; // o número
+      if (!grupos[chave]) {
+        grupos[chave] = [];
+      }
+      grupos[chave].push(frases[i]);
+    }
+
+    let agrupado = Object.values(grupos);
+
 
       frase.forEach((texto, idx) => {
         // alert(frase)
@@ -614,7 +716,7 @@ function buildTables (data) {
 
         if (modo === "pratica") {
 
-          if (idx === 0) {
+          if (idx === 0 && eh_primeiro === "sim") {
 
             td.style.textAlign = 'right'; // texto alinhado à direita
             td.textContent = texto;
@@ -631,13 +733,27 @@ function buildTables (data) {
             })
           }
 
-          else if (idx === 1) {
-            const input = cria_input_pratica(categoria, fraseIndex, frase, headers)
+          else if (idx === 1 && eh_primeiro === "sim") {
+           // console.log(frase)
+
+           // alert("df")
+            
+           let i_agrupado
+            for (let i = 0; i < agrupado.length; i++) {
+              if (agrupado[i][0][2] === frase[2]) {
+                i_agrupado = i
+                break
+              }
+            }
+                
+            const input = cria_input_pratica(categoria, fraseIndex, frase, headers, frases, agrupado[i_agrupado])
             td.appendChild(input)
           } else {
                         
           }
-          tr.appendChild(td)
+
+          if (eh_primeiro === "sim") tr.appendChild(td)
+          
         }
 
         if (modo === "multipla_escolha") {
@@ -823,7 +939,7 @@ if (userName) {
 
 
 
-function saveProgress(user, idioma, categoria, fraseIndex) {
+function saveProgress(user, idioma, categoria, fraseIndex, indiceCorreto) {
   let progresso = {};
   const cookie = getCookie('progresso');
   if (cookie) progresso = JSON.parse(cookie);
@@ -832,7 +948,7 @@ function saveProgress(user, idioma, categoria, fraseIndex) {
   if (!progresso[user][idioma]) progresso[user][idioma] = {};
   if (!progresso[user][idioma][categoria]) progresso[user][idioma][categoria] = [];
   if (!progresso[user][idioma][categoria].includes(fraseIndex)) {
-    progresso[user][idioma][categoria].push(fraseIndex);
+    progresso[user][idioma][categoria].push([fraseIndex, indiceCorreto]);
   }
   setCookie('progresso', JSON.stringify(progresso), 365);
 }
